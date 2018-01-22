@@ -12,10 +12,10 @@ if nargin<2, M=1e6; end
 if nargin<3, nudist=1; end
 if nargin<4, multithreaded=1; end
 
+setuppaths
 nfft_single_thread = ~multithreaded;
 finufft_nthreads = nfft_single_thread;  % 0 means use all threads
-addpath ~/numerics/finufft/matlab/
-addnfftpath(multithreaded)
+
 N1=NN; N2=NN; N3=NN;  % mode cube
 % FFTW opts for everybody...
 fftw_meas=1;   % 0 for ESTIMATE, 1 for MEASURE, in all algs that use FFTW
@@ -106,11 +106,10 @@ for im=1:length(m_s)
     ALGS{end+1}=ALG;
 end;
 
-if multithreaded==0
 %cmcl
-addpath('/home/alex/numerics/nufftall-1.33/')
-cmcl_algopts.isign=1;
-for ieps=1:length(epsilons)
+if multithreaded==0
+  cmcl_algopts.isign=1;
+  for ieps=1:length(epsilons)
     eps=epsilons(ieps);
     ALG=struct;
     ALG.algtype=3;
@@ -119,7 +118,7 @@ for ieps=1:length(epsilons)
     ALG.algopts.eps=eps;
     ALG.init=@dummy_init; ALG.run=@run_nufft3d1;
     ALGS{end+1}=ALG;
-end;
+  end
 end
 
 

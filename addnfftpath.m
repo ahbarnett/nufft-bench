@@ -20,7 +20,7 @@ function addnfftpath(multithreaded)
 % Then change that directory name to nfft-3.3.2-single-thread
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-base = '~/SCDA/nufft';     % dir that nfft is installed from
+base = '~/numerics/nufft';     % dir that nfft is installed from
 mul = [base '/nfft-3.3.2/matlab/nfft'];
 sng = [base '/nfft-3.3.2-single-thread/matlab/nfft'];
 

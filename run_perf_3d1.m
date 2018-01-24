@@ -1,76 +1,68 @@
-function fig_perf_3d1(NN,M,nudist,multithreaded)
+function outfile = run_perf_3d1(NN,M,nudist,multithreaded,nfftpre,cpuname)
 % FIG_PERF_3D1.  compare NUFFT 3D type-1 performance of various codes
 %
-% fig_perf_3d1(NN,M,nudist,multithreaded)
-%  NN = # modes in each direction. M = # NU pts.
-%  nudist = 0 (quasi-unif), 1 (radial, ie 1/r^2 dist in 3D), ...
+% fig_perf_3d1(NN,M,nudist,multithreaded,nfftpre,cpuname), with each input
+%  argument optional, prints summary data, plots a figure, and writes
+%  a results file.
 %
-% Magland; Barnett edit of 11/7/17
+% Inputs:
+%  NN = # modes in each direction. M = # NU pts.
+%  nudist = 0 (quasi-unif), 1 (radial, ie 1/r^2 dist in 3D),
+%  multithreaded = 0 (single core) or 1 (all cores; user should control ahead
+%                  of time).
+%  nfftpre = 0 (no pre psi), 1 (pre psi), or 2 (full pre psi)
+%  cpuname = text string giving cpu name (used to name the output file) 
+% Output:
+%  outfile = file name written to (without .mat suffix)
+%
+% Magland; Barnett edit of 1/23/18
 
-if nargin<1, NN=64; end    % defaults
-if nargin<2, M=1e6; end
-if nargin<3, nudist=1; end
-if nargin<4, multithreaded=1; end
+if nargin<1 || isempty(NN), NN=64; end    % defaults
+if nargin<2 || isempty(M), M=1e5; end
+if nargin<3 || isempty(nudist), nudist=0; end
+if nargin<4 || isempty(multithreaded), multithreaded=1; end
+if nargin<5 || isempty(nfftpre), nfftpre = 1; end
+if nargin<6, cpuname='unknowncpu'; end
 
-setuppaths
-nfft_single_thread = ~multithreaded;
-finufft_nthreads = nfft_single_thread;  % 0 means use all threads
 
-N1=NN; N2=NN; N3=NN;  % mode cube
+setuppaths(multithreaded);
+nthreads = java.lang.Runtime.getRuntime().availableProcessors;
+%https://stackoverflow.com/questions/8311426/how-can-i-query-the-number-of-physical-cores-from-matlab
+if ~multithreaded, nthreads=0; end
+N1=NN; N2=NN; N3=NN;  % the output mode cube
+
 % FFTW opts for everybody...
 fftw_meas=1;   % 0 for ESTIMATE, 1 for MEASURE, in all algs that use FFTW
 
-[data_in x y z] = nudata(nudist,M);
+rng(1); [data_in x y z] = nudata(nudist,M);  % gen data
 
-% finufft opts...
-spread_sort=1;
+title0=sprintf('Type 1, %dx%dx%d, %g sources, %d threads',NN,NN,NN,M,nthreads);
+if multithreaded, thrstr='multi'; else thrstr='single'; end
+if nudist, nudstr='sph'; else nudstr='unif'; end
+nfftstr=''; if nfftpre==0, nfftstr='_nopre'; elseif nfftpre==2, nfftstr='_full';end
 
-%  NFFT opts.....................
-nfft_algopts.fftw_measure=fftw_meas;
-nfft_algopts.reshape=0;
-nfft_algopts.precompute_phi=1;
-nfft_algopts.precompute_psi=1;
+outfile=sprintf('%s_%s_3d1_N%d_M%d%s%s',cpuname,thrstr,NN,M,nudstr,nfftstr);
 
+ALGS={};  % build the ALGS struct encoding all runs ========================
 
-% ------------- gen data
-rng(1);
-if (radial_sampling)
-    theta=rand(1,M)*2*pi;
-    phi=rand(1,M)*2*pi;
-    rad=rand(1,M)*pi;
-    x=rad.*cos(theta).*cos(phi);
-    y=rad.*sin(theta).*cos(phi);
-    z=rad.*sin(phi);
-else
-    x=rand(1,M)*2*pi-pi;
-    y=rand(1,M)*2*pi-pi;
-    z=rand(1,M)*2*pi-pi;
-end;
-data_in=randn(1,M);
-
-title0=sprintf('Type 1, %dx%dx%d, %g sources, %d threads',NN,NN,NN,M,finufft_nthreads);
-
-ALGS={};
-
-%truth
+%"truth"
 eps=1e-14;
 ALG=struct;
 ALG.algtype=0;
 ALG.name=sprintf('truth',eps);
 ALG.algopts.eps=eps;
-ALG.algopts.opts.nthreads=max_nthreads;
+ALG.algopts.opts.nthreads=0;  % all threads 
 ALG.algopts.opts.spread_sort=1;
 ALG.algopts.isign=1;
 ALG.algopts.opts.fftw=fftw_meas;   % serves to precompute FFTW for finufft tests
 ALG.init=@dummy_init; ALG.run=@run_finufft3d1;
 ALGS{end+1}=ALG;
 
-%finufft
-addpath('..');
+% finufft
 epsilons=10.^(-(2:12));      % range of accuracies
-finufft_algopts.opts.nthreads=finufft_nthreads;
-finufft_algopts.opts.spread_sort=spread_sort;
-finufft_algopts.opts.fftw=fftw_meas;    % FFTW_MEASURE
+finufft_algopts.opts.nthreads=nthreads;
+finufft_algopts.opts.spread_sort=1;               % whether to sort
+finufft_algopts.opts.fftw=fftw_meas;
 finufft_algopts.isign=1;
 finufft_algopts.opts.debug=0;
 for ieps=1:length(epsilons)
@@ -84,9 +76,12 @@ for ieps=1:length(epsilons)
     ALGS{end+1}=ALG;
 end;
 
-m_s=1:6;   % NFFT range of accuracies
-if 1
-    % create nfft dummy run to initialize with fftw_measure
+% nfft
+nfft_algopts.fftw_measure=fftw_meas;  % opts for all accs
+nfft_algopts.reshape=0;
+nfft_algopts.precompute_phi=1;  % 0 or 1.
+nfft_algopts.precompute_psi=nfftpre;
+if 1 % create nfft dummy run to initialize with fftw_measure
     ALG=struct;
     ALG.algtype=0;
     ALG.name=sprintf('nfft(1) - dummy');
@@ -95,8 +90,8 @@ if 1
     ALG.init=@init_nfft; ALG.run=@run_nfft;
     ALGS{end+1}=ALG;
 end;
+m_s=1:6;   % NFFT range of accuracies (kernel integer half-widths)
 for im=1:length(m_s)
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     ALG=struct;
     ALG.algtype=2;
     ALG.name=sprintf('nfft(%d)',m_s(im));
@@ -106,7 +101,7 @@ for im=1:length(m_s)
     ALGS{end+1}=ALG;
 end;
 
-%cmcl
+% cmcl
 if multithreaded==0
   cmcl_algopts.isign=1;
   for ieps=1:length(epsilons)
@@ -120,8 +115,9 @@ if multithreaded==0
     ALGS{end+1}=ALG;
   end
 end
+% ========================================================================
 
-
+% do all expts
 results=run_algs(ALGS,x,y,z,data_in,N1,N2,N3);
 %print_accuracy_comparison_and_timings(ALGS,results);
 
@@ -132,7 +128,7 @@ total_times=[];
 algtypes=[];
 X0=results{1}.data_out;
 fprintf('\n\n%15s %15s %15s %15s %15s\n','name','init_time(s)','run_time(s)','tot_time(s)','err');
-for j=1:length(ALGS)
+for j=1:length(ALGS)            % generate error values, text output
     X1=results{j}.data_out;
     %m0=(max(abs(X0(:)))+max(abs(X0(:))))/2;
     %max_diff0=max(abs(X0(:)-X1(:)))/m0;
@@ -144,34 +140,34 @@ for j=1:length(ALGS)
     run_times(j)=results{j}.run_time;
     total_times(j)=results{j}.tot_time;
     algtypes(j)=ALGS{j}.algtype;
-    
     fprintf('%15s %15g %15g %15g %15g\n',ALGS{j}.name,init_times(j),run_times(j),total_times(j),errors(j));
-end;
-
-
+end
 ii1=find(algtypes==1);  % finufft
 ii2=find(algtypes==2);  % nfft
-ii3=find(algtypes==3);  % cmcl
-figure;
+ii3=find(algtypes==3);  % cmc
+clear x y z data_in X0 X1; save(outfile);  % save just errors to disk (small)
+
+figure;  % just for checking
 semilogx(errors(ii1),run_times(ii1),'b.-');
 hold on;
 semilogx(errors(ii2),run_times(ii2),'r.-');
+semilogx(errors(ii2),init_times(ii2),'r.--');
 if ~isempty(ii3), semilogx(errors(ii3),run_times(ii3),'g.-'); end
+set(gca,'fontsize',22);
 v=axis; axis([1e-12 1e-1 0 v(4)])
-xlabel('Error');
-ylabel('Run time (s)');
-legend({'finufft','NFFT','CMCL'});
-title(title0);
+xlabel('Error'); ylabel('Run time (s)');
+legend({'finufft','NFFT','NFFT init','CMCL'}); % ignores unused ones
+title(title0); drawnow
 
 %keyboard
 %axis([1e-12 1e-2 0 60])
 %axis([1e-12 1e-2 0 28])
 %set(gcf,'paperposition',[0 0 4 4]); print -depsc2 talk/multitime.eps
-
-%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% done
 
 
 function results=run_algs(ALGS,x,y,z,data_in,N1,N2,N3)
+% run list of expts specified in ALGS struct
 results={};
 for j=1:length(ALGS)
     ALG=ALGS{j};
@@ -248,30 +244,37 @@ fprintf('\n');
 function init_data=dummy_init(algopts,x,y,z,N1,N2,N3)
 init_data=struct;
 
+
+
+%%%%%%%%%%%% WRAPPERS FOR THE VARIOUS NUFFT ALGORITHMS: %%%%%%%%%%%%%%%%%%%
+
+% finufft
 function data_out=run_finufft3d1(algopts,x,y,z,data_in,N1,N2,N3,init_data)
 data_out=finufft3d1(x,y,z,data_in,algopts.isign,algopts.eps,N1,N2,N3,algopts.opts);
 
+% cmcl
 function data_out=run_nufft3d1(algopts,x,y,z,data_in,N1,N2,N3,init_data)
 M=length(x);
 data_out=nufft3d1(M,x,y,z,data_in,algopts.isign,algopts.eps,N1,N2,N3);
 data_out = M*data_out;    % cmcl normalization
 
 
+% nfft
 function init_data=init_nfft(algopts,x,y,z,N1,N2,N3)
-
 M=length(x);
 N=[N1;N2;N3];
-%plan=nfft(3,N,M); 
-n=2^(ceil(log(max(N))/log(2))+1);
+%plan=nfft(3,N,M);
+n=2^(ceil(log(max(N))/log(2))+1); % choose next biggest power of 2 to help FFTW?
 
 ticA=tic;
 flags=NFFT_OMP_BLOCKWISE_ADJOINT;         % choose more NFFT flags
 flags=bitor(FFT_OUT_OF_PLACE,flags);
 flags=bitor(bitshift(uint32(1),11),flags); % NFFT_SORT_NODES
-if (algopts.precompute_psi)
+if algopts.precompute_psi==1
    flags=bitor(PRE_PSI,flags);
-%    flags=bitor(PRE_FULL_PSI,flags);   % uses 35 GB for M=1e6, m=6 !!
-end;
+elseif algopts.precompute_psi==2
+  flags=bitor(PRE_FULL_PSI,flags);   % uses 35 GB for M=1e6, m=6 !!
+end
 if (algopts.precompute_phi)
     flags=bitor(PRE_PHI_HUT,flags);
 end;
@@ -282,18 +285,11 @@ end;
 fftw_flag = bitor(fftw_flag, 1); % FFTW_DESTROY_INPUT
 plan=nfft(3,N,M,n,n,n,algopts.m,flags,fftw_flag); % use of nfft_init_guru
 
-% if (algopts.fftw_measure)
-%     plan=nfft(3,N,M,n,n,n,algopts.m,bitor(PRE_PHI_HUT,bitor(PRE_PSI,NFFT_OMP_BLOCKWISE_ADJOINT)),FFTW_MEASURE); % use of nfft_init_guru
-% else
-%     plan=nfft(3,N,M,n,n,n,algopts.m,bitor(PRE_PHI_HUT,bitor(PRE_PSI,NFFT_OMP_BLOCKWISE_ADJOINT)),FFTW_ESTIMATE); % use of nfft_init_guru
-% end;
-
 fprintf('  Creating nfft plan: %g s\n',toc(ticA));
-
 ticA=tic;
-xyz=cat(1,x,y,z)';
-fprintf('  Concatenating locations: %g s\n',toc(ticA));
+xyz=[x y z];
 
+fprintf('  Concatenating locations: %g s\n',toc(ticA));
 ticA=tic;
 plan.x=(xyz)/(2*pi); % set nodes in plan
 fprintf('  Setting nodes in plan: %g s\n',toc(ticA));
@@ -304,14 +300,11 @@ fprintf('  time for nfft_precompute_psi: %g s\n',toc(ticA));
 
 init_data.plan=plan;
 
-
 function X=run_nfft(algopts,x,y,z,d,N1,N2,N3,init_data)
-
 plan=init_data.plan;
-
 M=length(x);
-plan.f=d';
-nfft_adjoint(plan);
+plan.f=d;
+nfft_adjoint(plan);  % type 1
 if algopts.reshape
     X=reshape(plan.fhat,[N1,N2,N3]);            % ahb removed fac 1/M, 10/24/17
 else

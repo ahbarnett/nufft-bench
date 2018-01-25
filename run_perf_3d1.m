@@ -1,8 +1,8 @@
-function outfile = run_perf_3d1(NN,M,nudist,multithreaded,nfftpre,cpuname)
+function outfile = run_perf_3d1(NN,M,nudist,multithreaded,nfftpre,cpuname,verb)
 % FIG_PERF_3D1.  compare NUFFT 3D type-1 performance of various codes
 %
-% fig_perf_3d1(NN,M,nudist,multithreaded,nfftpre,cpuname), with each input
-%  argument optional, prints summary data, plots a figure, and writes
+% fig_perf_3d1(NN,M,nudist,multithreaded,nfftpre,cpuname,verb), with each input
+%  argument optional, prints summary data, maybe plots a figure, and writes
 %  a results file.
 %
 % Inputs:
@@ -12,6 +12,7 @@ function outfile = run_perf_3d1(NN,M,nudist,multithreaded,nfftpre,cpuname)
 %                  of time).
 %  nfftpre = 0 (no pre psi), 1 (pre psi), or 2 (full pre psi)
 %  cpuname = text string giving cpu name (used to name the output file) 
+%  verb = 0 (no figure), 1 (make figure)
 % Output:
 %  outfile = file name written to (without .mat suffix)
 %
@@ -23,7 +24,7 @@ if nargin<3 || isempty(nudist), nudist=0; end
 if nargin<4 || isempty(multithreaded), multithreaded=1; end
 if nargin<5 || isempty(nfftpre), nfftpre = 1; end
 if nargin<6, cpuname='unknowncpu'; end
-
+if nargin<7, verb=0; end
 
 setuppaths(multithreaded);
 nthreads = java.lang.Runtime.getRuntime().availableProcessors;
@@ -34,14 +35,15 @@ N1=NN; N2=NN; N3=NN;  % the output mode cube
 % FFTW opts for everybody...
 fftw_meas=1;   % 0 for ESTIMATE, 1 for MEASURE, in all algs that use FFTW
 
-rng(1); [data_in x y z] = nudata(nudist,M);  % gen data
+rng(1); [x y z] = nudata(nudist,M);  % gen data
+data_in = randn(M,1) + 1i*randn(M,1);   % nu pt strengths
 
 title0=sprintf('Type 1, %dx%dx%d, %g sources, %d threads',NN,NN,NN,M,nthreads);
 if multithreaded, thrstr='multi'; else thrstr='single'; end
 if nudist, nudstr='sph'; else nudstr='unif'; end
 nfftstr=''; if nfftpre==0, nfftstr='_nopre'; elseif nfftpre==2, nfftstr='_full';end
 
-outfile=sprintf('%s_%s_3d1_N%d_M%d%s%s',cpuname,thrstr,NN,M,nudstr,nfftstr);
+outfile=sprintf('results/%s_%s_3d1_N%d_M%d%s%s',cpuname,thrstr,NN,M,nudstr,nfftstr);
 
 ALGS={};  % build the ALGS struct encoding all runs ========================
 
@@ -133,7 +135,7 @@ for j=1:length(ALGS)            % generate error values, text output
     %m0=(max(abs(X0(:)))+max(abs(X0(:))))/2;
     %max_diff0=max(abs(X0(:)-X1(:)))/m0;
     %avg_diff0=mean(abs(X0(:)-X1(:)))/m0;
-    numer0=norm(X0(:)-X1(:));
+    numer0=norm(X0(:)-X1(:));              % l2 norm
     denom0=norm(X0(:));
     errors(j)=numer0/denom0;
     init_times(j)=results{j}.init_time;
@@ -144,20 +146,23 @@ for j=1:length(ALGS)            % generate error values, text output
 end
 ii1=find(algtypes==1);  % finufft
 ii2=find(algtypes==2);  % nfft
-ii3=find(algtypes==3);  % cmc
-clear x y z data_in X0 X1; save(outfile);  % save just errors to disk (small)
+ii3=find(algtypes==3);  % cmcl
+clear x y z data_in X0 X1 results
+save(outfile);  % save just errors to disk (small)
 
-figure;  % just for checking
-semilogx(errors(ii1),run_times(ii1),'b.-');
-hold on;
-semilogx(errors(ii2),run_times(ii2),'r.-');
-semilogx(errors(ii2),init_times(ii2),'r.--');
-if ~isempty(ii3), semilogx(errors(ii3),run_times(ii3),'g.-'); end
-set(gca,'fontsize',22);
-v=axis; axis([1e-12 1e-1 0 v(4)])
-xlabel('Error'); ylabel('Run time (s)');
-legend({'finufft','NFFT','NFFT init','CMCL'}); % ignores unused ones
-title(title0); drawnow
+if verb
+  figure;  % just for checking
+  semilogx(errors(ii1),run_times(ii1),'b.-');
+  hold on;
+  semilogx(errors(ii2),run_times(ii2),'r.-');
+  semilogx(errors(ii2),init_times(ii2),'r.--');
+  if ~isempty(ii3), semilogx(errors(ii3),run_times(ii3),'g.-'); end
+  set(gca,'fontsize',22);
+  v=axis; axis([1e-12 1e-1 0 v(4)])
+  xlabel('Error'); ylabel('Run time (s)');
+  legend({'finufft','NFFT','NFFT init','CMCL'}); % ignores unused ones
+  title(title0); drawnow
+end
 
 %keyboard
 %axis([1e-12 1e-2 0 60])
@@ -262,40 +267,39 @@ data_out = M*data_out;    % cmcl normalization
 % nfft
 function init_data=init_nfft(algopts,x,y,z,N1,N2,N3)
 M=length(x);
-N=[N1;N2;N3];
-%plan=nfft(3,N,M);
-n=2^(ceil(log(max(N))/log(2))+1); % choose next biggest power of 2 to help FFTW?
-
-ticA=tic;
+N=[N1;N2;N3];       % note N is a vector!
+ticA=tic;   % set up the plan...
+%plan=nfft(3,N,M);  % default interface gives 13 digits, uses full kernel width
+n=2^(ceil(log(max(N))/log(2))+1); % lowest power of 2 that's at least 2N
 flags=NFFT_OMP_BLOCKWISE_ADJOINT;         % choose more NFFT flags
 flags=bitor(FFT_OUT_OF_PLACE,flags);
 flags=bitor(bitshift(uint32(1),11),flags); % NFFT_SORT_NODES
 if algopts.precompute_psi==1
-   flags=bitor(PRE_PSI,flags);
+  flags=bitor(PRE_PSI,flags);
 elseif algopts.precompute_psi==2
   flags=bitor(PRE_FULL_PSI,flags);   % uses 35 GB for M=1e6, m=6 !!
 end
 if (algopts.precompute_phi)
-    flags=bitor(PRE_PHI_HUT,flags);
+  flags=bitor(PRE_PHI_HUT,flags);
 end;
 fftw_flag=FFTW_ESTIMATE;
 if (algopts.fftw_measure)
-    fftw_flag=FFTW_MEASURE;
+  fftw_flag=FFTW_MEASURE;
 end;
-fftw_flag = bitor(fftw_flag, 1); % FFTW_DESTROY_INPUT
+fftw_flag = bitor(fftw_flag, 1);    % FFTW_DESTROY_INPUT
 plan=nfft(3,N,M,n,n,n,algopts.m,flags,fftw_flag); % use of nfft_init_guru
-
 fprintf('  Creating nfft plan: %g s\n',toc(ticA));
+
 ticA=tic;
 xyz=[x y z];
-
 fprintf('  Concatenating locations: %g s\n',toc(ticA));
+
 ticA=tic;
 plan.x=(xyz)/(2*pi); % set nodes in plan
 fprintf('  Setting nodes in plan: %g s\n',toc(ticA));
 
 ticA=tic;
-nfft_precompute_psi(plan); % precomputations
+nfft_precompute_psi(plan);                     % precomputations
 fprintf('  time for nfft_precompute_psi: %g s\n',toc(ticA));
 
 init_data.plan=plan;

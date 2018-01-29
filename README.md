@@ -46,5 +46,7 @@ See https://github.com/ahbarnett/finufft
 
 ### Installing CMCL NUFFT
 
+This is single thread only.
+
 See https://cims.nyu.edu/cmcl/nufft/nufft.html
 

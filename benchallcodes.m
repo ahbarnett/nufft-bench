@@ -127,7 +127,7 @@ end
 
 % cmcl
 if ~multithreaded
-  epsilons=10.^(-(1:10));      % range of target accuracies
+  epsilons=10.^(-(1:11));      % range of target accuracies
   cmcl_algopts.isign=isign;
   for ieps=1:length(epsilons)
     eps=epsilons(ieps);

@@ -39,7 +39,7 @@ if calc
   for i = 1:numel(nudists), nudist=nudists(i)
     head{i} = benchallcodes(ty,dim,N,M,nudist,multi,nfftpres,expt);
   end
-  save([fighead '_heads'],'head');
+  save([fighead '_heads'],'head','nudists');
 else
   load([fighead '_heads']);        % no calc: get filenames into head{:}
 end

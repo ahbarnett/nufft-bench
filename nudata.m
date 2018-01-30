@@ -32,13 +32,31 @@ elseif nudist==1  % radial (unif in 1D, 1/r density in 2D, 1/r^2 in 3D)
     y = r.*sin(phi);
   elseif dim==3
     costh = 2*rand(M,1)-1; sinth = sqrt(1-costh.^2);
-    %th = rand(M,1)*pi; costh=cos(th); sinth=sin(th); % jfm old, not unif on S2
     x = r.*sinth.*cos(phi);
     y = r.*sinth.*sin(phi);
     z = r.*costh;
   end
+
+elseif nudist==2    % code from expts of 11/7/17 used for FSU talk:
+  name = 'sphwrong';
+  if dim==3
+    theta=rand(M,1)*2*pi;
+    phi=acos(rand(M,1));   % ahb attempt for unif on S2, but was wrong!
+    rad=rand(M,1)*pi;
+    x=rad.*cos(theta).*cos(phi);
+    y=rad.*sin(theta).*cos(phi);
+    z=rad.*sin(phi);
+    %temp = x; x=z; z= temp;  % swap, made nfft faster, strangely
+  end
   
-else, error('nudist > 1 not yet implemented');
+elseif nudist==3  % unif in small cuboid
+  name = 'x-flat pancake';      % only uses 1-2 cores for spreading!
+  x = x/10;
+  %x(M/10:end) = x(M/10:end)/10;  % some unif, some pancake...
+  if dim>1, y = pi*(2*rand(M,1)-1); end
+  if dim>2, z = pi*(2*rand(M,1)-1); end
+  
+else, error('nudist > 3 not yet implemented');
          % *** add deterministic quadr scheme? or adaptive
 end
 

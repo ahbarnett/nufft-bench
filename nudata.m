@@ -37,7 +37,7 @@ elseif nudist==1  % radial (unif in 1D, 1/r density in 2D, 1/r^2 in 3D)
     z = r.*costh;
   end
 
-elseif nudist==2    % code from expts of 11/7/17 used for FSU talk:
+elseif nudist==2    % reprod code from expts of 11/7/17 used for FSU talk:
   name = 'sphwrong';
   if dim==3
     theta=rand(M,1)*2*pi;
@@ -55,14 +55,20 @@ elseif nudist==3  % unif in small cuboid
   %x(M/10:end) = x(M/10:end)/10;  % some unif, some pancake...
   if dim>1, y = pi*(2*rand(M,1)-1); end
   if dim>2, z = pi*(2*rand(M,1)-1); end
-  
-else, error('nudist > 3 not yet implemented');
-         % *** add deterministic quadr scheme? or adaptive
+
+elseif nudist==4  %  deterministic quadr scheme
+  name = 'sphquad';
+  if dim==3
+    
+    
+  end
+
+else, error('nudist > 4 not yet implemented');
 end
 
 %%%%%%%%%%%
 function test_nudata
-for nudist=0:1
+for nudist=0:4
   [x y z nam] = nudata(3,nudist,5e3);
   figure; plot3(x,y,z,'.'); title(nam);
   axis vis3d equal tight off; view(20,10);

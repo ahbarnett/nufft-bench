@@ -56,11 +56,24 @@ elseif nudist==3  % unif in small cuboid
   if dim>1, y = pi*(2*rand(M,1)-1); end
   if dim>2, z = pi*(2*rand(M,1)-1); end
 
-elseif nudist==4  %  deterministic quadr scheme
+elseif nudist==4  % deterministic quadr scheme pts, no weights
   name = 'sphquad';
   if dim==3
-    
-    
+    m = round(M^(1/3)); if mod(m,2)==1, m=m+1; end  % m even, # grid pts/dim
+    rad = pi; %/2;  % radius, arb, <=pi otherwise exceeds cube walls
+    mug=gauss(m);  % mu from -1 to 1, z for unit sph.  col vec
+    mp = 2*m;      % # phi pts (equator)
+    pg = 2*pi*(1:mp)'/mp;
+    mr = m/2;      % # radial pts
+    rg = rad*(1+gauss(mr))/2;  % from [0,rad], would have r^2 metric
+    sthg = sqrt(1-mug.^2);
+    sth = kron(kron(ones(mp,1),sthg),ones(mr,1));  % all sin th's
+    cth = kron(kron(ones(mp,1),mug),ones(mr,1));   % all cos th's
+    cpg = cos(pg); spg = sin(pg);
+    r = kron(ones(mp*m,1),rg);
+    x = r.*sth.*kron(cpg,ones(m*mr,1));
+    y = r.*sth.*kron(spg,ones(m*mr,1));
+    z = r.*cth;
   end
 
 else, error('nudist > 4 not yet implemented');

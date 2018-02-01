@@ -18,20 +18,23 @@ end
 clear
 memorygraph('start',struct('dt',0.1));
 
-N=64; M=1e8;
-nudist=0; dim=3;
-[x y z] = nudata(dim,nudist,M);
+dim=3; N=128; M=1e7;
+nudist=4;
+[x y z] = nudata(dim,nudist,M); M=numel(x); % in case changed
 d = randn(M,1) + 1i*randn(M,1);   % nu pt strengths
-pause(0.3);  % check the RAM usage
-[b,t,~,c] = memorygraph('get'); ramindata = b(end);
+[b,t,~,c] = memorygraph('get');    % check the RAM usage
+ramindata = b(end);
 
+tol=1e-6; %1e-12;
 opts.nthreads=0;  % FINUFFT: all threads
 opts.fftw=0;  % ESTIMATE
-t=tic; [Ff ier] = finufft3d1(x,y,z,d,+1,1e-6,N,N,N,opts);
+t=tic; [Ff ier] = finufft3d1(x,y,z,d,+1,tol,N,N,N,opts);
 tf=toc(t);
 fprintf('  time for finufft: %g s\n',tf);
+[b,t,~,c] = memorygraph('get'); MRf = max(b)-ramindata;
+fprintf('FINUFFT max RAM use above input data = %.3g GB (%.3g bytes/NUpt)\n',MRf/1e9,MRf/M)
 
-m=3;  % NFFT: kernel half-wid
+m=3; %6;  % NFFT: kernel half-wid
 n=2^(ceil(log2(N))+1);                % lowest power of 2 that's at least 2N
 flags=NFFT_OMP_BLOCKWISE_ADJOINT;         % advanced NFFT flags
 flags=bitor(FFT_OUT_OF_PLACE,flags);
@@ -45,6 +48,8 @@ t=tic; nfft_precompute_psi(plan);                     % precomputations
 plan.f=d;  clear d     % be honest about RAM usage
 nfft_adjoint(plan);  % type 1
 tn=toc(t); fprintf('  time for nfft_adj(no pre): %g s\n',tn);
+[b,t,~,c] = memorygraph('get'); MRn = max(b)-ramindata;
+fprintf('NFFT(no pre) max RAM use above input data = %.3g GB (%.3g bytes/NUpt)\n',MRn/1e9,MRn/M)
 Fn = plan.fhat;       % out
 %nfft_finalize(plan); % fails
 
@@ -56,14 +61,17 @@ tnpre=toc(t);
 fprintf('  time for nfft_precompute_psi: %g s\n',tnpre);
 t=tic; nfft_adjoint(plan2);  % type 1
 tnp=toc(t); fprintf('  time for nfft_adj(pre psi): %g s\n',tnp);
+[b,t,~,c] = memorygraph('get'); MRnp = max(b)-ramindata;
+fprintf('NFFT(pre psi) max RAM use above input data = %.3g GB (%.3g bytes/NUpt)\n',MRnp/1e9,MRnp/M)
 Fnp = plan2.fhat;       % out
 clear plan2
 
 pause(0.3); [b,t,~,c] = memorygraph('get');
 memorygraph('done');
 b = b-ramindata;   % work relative to input data RAM need
-figure; subplot(1,2,1); plot(t,b/M,'.-'); xlabel('t (s)');
-ylabel('RAM (bytes/NUpt)'); axis tight; subplot(1,2,2);
+%fprintf('overall peak RAM use above input data = %.3g GB (%.3g bytes/NUpt)\n',max(b)/1e9,max(b)/M)
+figure; subplot(2,1,1); plot(t,b/M,'.-'); xlabel('t (s)');
+ylabel('RAM (bytes/NUpt)'); axis tight; subplot(2,1,2);
 plot(t,c/100,'.-'); xlabel('t (s)'); ylabel('CPU usage (threads)');
 axis tight; drawnow
 %total_matlab_memory  % obsolete

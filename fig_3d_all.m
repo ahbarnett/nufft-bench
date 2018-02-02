@@ -18,7 +18,7 @@ end
 clear
 memorygraph('start',struct('dt',0.1));
 
-dim=3; N=128; M=1e7;
+dim=3; N=128; M=1e8;
 nudist=4;
 [x y z] = nudata(dim,nudist,M); M=numel(x); % in case changed
 d = randn(M,1) + 1i*randn(M,1);   % nu pt strengths
@@ -26,8 +26,10 @@ d = randn(M,1) + 1i*randn(M,1);   % nu pt strengths
 ramindata = b(end);
 
 tol=1e-6; %1e-12;
-opts.nthreads=0;  % FINUFFT: all threads
+opts.nthreads=8;  % FINUFFT: all threads
 opts.fftw=0;  % ESTIMATE
+opts.chkbnds=0;  % saves 6 sec @ M=1e9
+opts.debug=2;
 t=tic; [Ff ier] = finufft3d1(x,y,z,d,+1,tol,N,N,N,opts);
 tf=toc(t);
 fprintf('  time for finufft: %g s\n',tf);

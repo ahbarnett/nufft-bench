@@ -1,6 +1,6 @@
 function setuppaths(multithreaded)
 % set up all paths for NUFFT comparisons
-% Barnett 1/22/18
+% Barnett 2/20/18
 
 % NFFT
 addnfftpath(multithreaded)
@@ -9,4 +9,12 @@ addnfftpath(multithreaded)
 addpath ~/numerics/finufft/matlab/
 
 % CMCL
-addpath ~/numerics/nufftall-1.33/
+addpath ../nufftall-1.33/
+
+% BART
+run ../bart-0.4.02/startup
+
+% MIRT (Fessler)
+irtdir='../irt';
+run([irtdir '/setup'])
+clear irtdir

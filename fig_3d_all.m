@@ -18,7 +18,7 @@ end
 clear
 memorygraph('start',struct('dt',0.1));
 
-dim=3; N=128; M=1e8;
+dim=3; N=128; M=3e8;
 nudist=4;
 [x y z] = nudata(dim,nudist,M); M=numel(x); % in case changed
 d = randn(M,1) + 1i*randn(M,1);   % nu pt strengths
@@ -67,6 +67,7 @@ tnp=toc(t); fprintf('  time for nfft_adj(pre psi): %g s\n',tnp);
 fprintf('NFFT(pre psi) max RAM use above input data = %.3g GB (%.3g bytes/NUpt)\n',MRnp/1e9,MRnp/M)
 Fnp = plan2.fhat;       % out
 clear plan2
+fprintf('  final RAM/NUpt = %3.g\n',total_matlab_memory/M)
 
 pause(0.3); [b,t,~,c] = memorygraph('get');
 memorygraph('done');
@@ -76,7 +77,6 @@ figure; subplot(2,1,1); plot(t,b/M,'.-'); xlabel('t (s)');
 ylabel('RAM (bytes/NUpt)'); axis tight; subplot(2,1,2);
 plot(t,c/100,'.-'); xlabel('t (s)'); ylabel('CPU usage (threads)');
 axis tight; drawnow
-%total_matlab_memory  % obsolete
 
 fprintf('  rel2diff (f vs n) = %.3g\n', norm(Fn(:)-Ff(:))/norm(Ff(:)))
 fprintf('  rel2diff (np vs n) = %.3g\n\n', norm(Fn(:)-Fnp(:))/norm(Fn(:)))

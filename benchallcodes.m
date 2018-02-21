@@ -24,16 +24,20 @@ function benchallcodes(ty,dim,N,M,nudist,multithreaded,outname,o)
 %  CMCL (only if single thread)                  jc
 %  BART (only 3D)                                jb
 %
+% Called without arguments, does a self-test.
+%
 % Magland; Barnett edit of 1/23/18, unify 1/28/18, all dims 2/20/18
 %
 % Issues: 1) BART shows large init time if nfftpres=2, which is fake (actually 0)
 %          => ignore BART's init time.
+%         2) all data_out copies from all algs stored in results. can get big.
+%         if M=1e8 (it's 1.6GB for type 2, per alg).
 
 if nargin==0, benchallcodes(1); return; load temp; end        % crude self-test
 if nargin<1, ty=1; end                             % defaults (for self-test)
 if nargin<2 || isempty(dim), dim=3; end
 if nargin<3 || isempty(N), N=32; end
-if nargin<4 || isempty(M), M=1e6; end
+if nargin<4 || isempty(M), M=1e5; end
 if nargin<5 || isempty(nudist), nudist=0; end
 if nargin<6 || isempty(multithreaded), multithreaded=1; end
 if nargin<7, outname='temp'; end
@@ -147,9 +151,9 @@ if ~multithreaded
 end
 
 % bart
-% Let's check that writing to SSD temp file that it does, is insignificant:
+% Let's check that writing to SSD temp file that it does is insignificant:
 % xyz = rand(3,1e7); tic; writecfl(tempname,xyz); toc    % 1 sec
-% BART throughput is 5e5 to 1e6 NU pts/sec, so not big hit.
+% BART throughput is 5e5 to 1e6 NU pts/sec, so we're at 10% level.
 if dim==3
   ALG=struct;
   ALG.algtype=4;
@@ -161,10 +165,11 @@ if dim==3
 end
 % =============================================
 
-% do all expts
+% do all expts, storing all the data_out in results (can be big)...
 results=run_algs(ALGS,x,y,z,data_in,N1,N2,N3);
 
 % copy out results to various arrays, while also summarizing to text table...
+disp('computing error metrics...')
 txttbl{1} = sprintf('\n\n%15s %15s %15s %15s %15s','name','init_time(s)','run_time(s)','rel2err','therr');
 X0=results{1}.data_out;         % truth
 outputl1 = sum(abs(X0(:)));
@@ -350,21 +355,23 @@ X=plan.f;
 
 % bart ---------------------------------------------------------------------
 function X=run_bart_adj(algopts,x,y,z,d,N1,N2,N3,init_data)
-% type 1 ("adjoint"), 3D only. See README.md
+% type 1 ("adjoint"), 3D only. Writes and reads from tempfile. See README.md
 % Barnett 2/20/18.  algopts unused.  matches modeord=0 in finufft.
 % untested for N1 neq N2 or neq N3.
 weirdprefac = 1.00211;                    % expt prefactor best for BART!
 prefac = sqrt(N1*N2*N3) / weirdprefac;
 xyz = [x*(N1/2/pi) y*(N2/2/pi) z*(N3/2/pi)]';     % NU locs, size d*M
+clear x y z
 cmd=sprintf('nufft -a -d %d:%d:%d',N1,N2,N3);
 X = prefac * bart(cmd,xyz,d.');               % NB strengths must be row vec
 
 function X=run_bart(algopts,x,y,z,d,N1,N2,N3,init_data)
-% type 2 ("fwd"), 3D only. See README.md
+% type 2 ("fwd"), 3D only. Writes and reads from tempfile. See README.md
 % Barnett 2/20/18.  algopts unused.  matches modeord=0 in finufft.
 % untested for N1 neq N2 or neq N3.
 weirdprefac = 1.00211;
 prefac = sqrt(N1*N2*N3) / weirdprefac;
 xyz = [x*(N1/2/pi) y*(N2/2/pi) z*(N3/2/pi)]';     % NU locs, size d*M
+clear x y z
 cmd=sprintf('nufft -d %d:%d:%d',N1,N2,N3);
 X = prefac * bart(cmd,xyz,d);

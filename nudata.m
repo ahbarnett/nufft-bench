@@ -7,7 +7,7 @@ function [x y z name] = nudata(dim,nudist,M)
 %  nudist = 0 (unif in cube), 1 (spherical)
 %  M = number of NU pts
 %
-% Outputs: the NU locations are
+% Outputs: the NU locations are M*1 column vectors,
 %  in x (for 1D), x y (for 2D), x y z (for 3D). unused outputs are empty.
 %  name = string abbrev of the distribution.
 %

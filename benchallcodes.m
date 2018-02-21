@@ -16,25 +16,29 @@ function benchallcodes(ty,dim,N,M,nudist,multithreaded,outname,o)
 %  opts has fields controlling:
 %   nfftpres = which NFFT PSI precompute stage to test up to (PRE_PHI always on)
 %              0: no pre psi,  1: also test pre psi,  2: also test pre full psi.
-%                                (needs ~ 600B/NUpt)    (needs ~ 35kB/NUpt)
+%                                (3d needs ~ 600B/NUpt)  (needs ~ 35kB/NUpt)
 %
 % Codes currently benchmarked:                   outname indices for each code:
 %  FINUFFT                                       jf
 %  NFFT w/ above precompute opts                 jn, jnp, jnf
 %  CMCL (only if single thread)                  jc
+%  BART (only 3D)                                jb
 %
-% Magland; Barnett edit of 1/23/18, unify 1/28/18, 2/20/18
+% Magland; Barnett edit of 1/23/18, unify 1/28/18, all dims 2/20/18
+%
+% Issues: 1) BART shows large init time if nfftpres=2, which is fake (actually 0)
+%          => ignore BART's init time.
 
 if nargin==0, benchallcodes(1); return; load temp; end        % crude self-test
 if nargin<1, ty=1; end                             % defaults (for self-test)
 if nargin<2 || isempty(dim), dim=3; end
 if nargin<3 || isempty(N), N=32; end
-if nargin<4 || isempty(M), M=1e4; end
+if nargin<4 || isempty(M), M=1e6; end
 if nargin<5 || isempty(nudist), nudist=0; end
 if nargin<6 || isempty(multithreaded), multithreaded=1; end
 if nargin<7, outname='temp'; end
 if nargin<8, o = []; end
-if ~isfield(o,'nfftpres'), o.nfftpres = 2; end
+if ~isfield(o,'nfftpres'), o.nfftpres = 0; end  % 2
 
 setuppaths(multithreaded);
 nthreads = 1;
@@ -141,6 +145,20 @@ if ~multithreaded
     ALGS{end+1}=ALG;
   end
 end
+
+% bart
+% Let's check that writing to SSD temp file that it does, is insignificant:
+% xyz = rand(3,1e7); tic; writecfl(tempname,xyz); toc    % 1 sec
+% BART throughput is 5e5 to 1e6 NU pts/sec, so not big hit.
+if dim==3
+  ALG=struct;
+  ALG.algtype=4;
+  ALG.name=sprintf('BART');
+  ALG.algopts=[];
+  ALG.init=@dummy_init;
+  if ty==1, ALG.run=@run_bart_adj; else, ALG.run=@run_bart; end
+  ALGS{end+1}=ALG;
+end
 % =============================================
 
 % do all expts
@@ -172,6 +190,7 @@ jn =find(algtypes==2);  % nfft
 jnp=find(algtypes==2.25);  % nfft no pre (see silly encoding above)
 jnf=find(algtypes==2.5);  % nfft full pre
 jc =find(algtypes==3);  % cmcl
+jb =find(algtypes==4);  % bart
 
 clear i j x y z data_in X0 X1 results % kill the big stuff
 save(outname)                        % save just error stats to disk (small)
@@ -327,3 +346,25 @@ M=length(x);
 plan.fhat=d(:);     % unwrap to single col
 nfft_trafo(plan);   % type 2
 X=plan.f;
+
+
+% bart ---------------------------------------------------------------------
+function X=run_bart_adj(algopts,x,y,z,d,N1,N2,N3,init_data)
+% type 1 ("adjoint"), 3D only. See README.md
+% Barnett 2/20/18.  algopts unused.  matches modeord=0 in finufft.
+% untested for N1 neq N2 or neq N3.
+weirdprefac = 1.00211;                    % expt prefactor best for BART!
+prefac = sqrt(N1*N2*N3) / weirdprefac;
+xyz = [x*(N1/2/pi) y*(N2/2/pi) z*(N3/2/pi)]';     % NU locs, size d*M
+cmd=sprintf('nufft -a -d %d:%d:%d',N1,N2,N3);
+X = prefac * bart(cmd,xyz,d.');               % NB strengths must be row vec
+
+function X=run_bart(algopts,x,y,z,d,N1,N2,N3,init_data)
+% type 2 ("fwd"), 3D only. See README.md
+% Barnett 2/20/18.  algopts unused.  matches modeord=0 in finufft.
+% untested for N1 neq N2 or neq N3.
+weirdprefac = 1.00211;
+prefac = sqrt(N1*N2*N3) / weirdprefac;
+xyz = [x*(N1/2/pi) y*(N2/2/pi) z*(N3/2/pi)]';     % NU locs, size d*M
+cmd=sprintf('nufft -d %d:%d:%d',N1,N2,N3);
+X = prefac * bart(cmd,xyz,d);

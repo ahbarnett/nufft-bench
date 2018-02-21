@@ -1,12 +1,12 @@
 function setuppaths(multithreaded)
-% set up all paths for NUFFT comparisons
+% set up all paths for NUFFT comparisons. Also see README.md
 % Barnett 2/20/18
 
 % NFFT
 addnfftpath(multithreaded)
 
 % FINUFFT
-addpath ~/numerics/finufft/matlab/
+addpath ../finufft/matlab/
 
 % CMCL
 addpath ../nufftall-1.33/

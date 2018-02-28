@@ -106,3 +106,10 @@ Replace `bart-0.4.02/src/noncart/grid.c` with this file and recompile.
 See `bart_*.m`
 
 
+### Installing MIRT (Fessler) NUFFT
+
+The complete package is at:
+https://web.eecs.umich.edu/~fessler/irt/fessler.tgz
+
+All MEX files are included; no compilation is needed.
+

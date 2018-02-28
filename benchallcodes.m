@@ -5,7 +5,7 @@ function benchallcodes(ty,dim,N,M,nudist,multithreaded,outname,o)
 %  input argument optional, prints summary data, writes to filename.mat
 %
 % Inputs:
-%  type = 1 or 2 (in latter case, isign=-1 to match nfft).
+%  type = 1 ("adjoint") or 2 ("forward"; here isign=-1 to match nfft).
 %  dim = 1, 2 or 3. Spatial dimension.
 %  N = # modes in each dimension (same for now)
 %  M = # NU pts.
@@ -20,9 +20,10 @@ function benchallcodes(ty,dim,N,M,nudist,multithreaded,outname,o)
 %
 % Codes currently benchmarked:                   outname indices for each code:
 %  FINUFFT                                       jf
-%  NFFT w/ above precompute opts                 jn, jnp, jnf
+%  NFFT w/ the above precompute opts             jn, jnp, jnf
 %  CMCL (only if single thread)                  jc
 %  BART (only 3D)                                jb
+%  MIRT                                          jm
 %
 % Called without arguments, does a self-test.
 %
@@ -163,6 +164,22 @@ if dim==3
   if ty==1, ALG.run=@run_bart_adj; else, ALG.run=@run_bart; end
   ALGS{end+1}=ALG;
 end
+
+% mirt/fessler
+if dim==3
+  Js = 2:2:8;  % set of kernels widths to try. >8 doesn't help?
+  for i=1:numel(Js)
+    ALG=struct;
+    ALG.algtype=5;
+    ALG.name=sprintf('Fessler(J=%d)',Js(i));
+    ALG.algopts=[];
+    ALG.algopts.J = Js(i);      % kernel width in fine grid pts
+    ALG.algopts.oversamp = 2.0;   % "R", oversampling ratio
+    ALG.init=@init_fessler;
+    if ty==1, ALG.run=@run_fessler_adj; else, ALG.run=@run_fessler; end
+    ALGS{end+1}=ALG;
+  end
+end
 % =============================================
 
 % do all expts, storing all the data_out in results (can be big)...
@@ -196,6 +213,7 @@ jnp=find(algtypes==2.25);  % nfft no pre (see silly encoding above)
 jnf=find(algtypes==2.5);  % nfft full pre
 jc =find(algtypes==3);  % cmcl
 jb =find(algtypes==4);  % bart
+jm =find(algtypes==5);  % mirt
 
 clear i j x y z data_in X0 X1 results % kill the big stuff
 save(outname)                        % save just error stats to disk (small)
@@ -375,3 +393,17 @@ xyz = [x*(N1/2/pi) y*(N2/2/pi) z*(N3/2/pi)]';     % NU locs, size d*M
 clear x y z
 cmd=sprintf('nufft -d %d:%d:%d',N1,N2,N3);
 X = prefac * bart(cmd,xyz,d);
+
+
+% mirt ---------------------------------------------------------------------
+function init_data=init_fessler(algopts,x,y,z,N1,N2,N3)
+J=algopts.J;  % kernel width
+N = [N1 N2 N3];
+xyz = [x y z];     % NU locs in [-pi,pi]^d,  size M*d
+init_data=nufft_init(xyz,N,[J,J,J],algopts.oversamp*N,N/2);
+
+function X=run_fessler_adj(algopts,x,y,z,d,N1,N2,N3,init_data)
+X=nufft_adj(d,init_data);
+
+function X=run_fessler(algopts,x,y,z,d,N1,N2,N3,init_data)
+X=nufft(d,init_data);

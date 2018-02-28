@@ -20,10 +20,10 @@ function benchallcodes(ty,dim,N,M,nudist,multithreaded,outname,o)
 %
 % Codes currently benchmarked:                   outname indices for each code:
 %  FINUFFT                                       jf
-%  NFFT w/ the above precompute opts             jn, jnp, jnf
+%  NFFT w/ the above precompute opts             jnp (no pre), jn, jnf (full)
 %  CMCL (only if single thread)                  jc
 %  BART (only 3D)                                jb
-%  MIRT                                          jm
+%  MIRT (only 3D for now)                        jm
 %
 % Called without arguments, does a self-test.
 %
@@ -167,7 +167,7 @@ end
 
 % mirt/fessler
 if dim==3
-  Js = 2:2:8;  % set of kernels widths to try. >8 doesn't help?
+  Js = 2:2:6;  % set of kernels widths to try. >8 doesn't help?
   for i=1:numel(Js)
     ALG=struct;
     ALG.algtype=5;
@@ -208,8 +208,8 @@ for j=1:numel(txttbl), disp(txttbl{j}); end   % stdout
 
 % these sets of indices for each code are useful for later plotting...
 jf =find(algtypes==1);  % finufft
-jn =find(algtypes==2);  % nfft
-jnp=find(algtypes==2.25);  % nfft no pre (see silly encoding above)
+jnp=find(algtypes==2);  % nfft no pre (see silly encoding above)
+jn =find(algtypes==2.25);  % nfft pre psi
 jnf=find(algtypes==2.5);  % nfft full pre
 jc =find(algtypes==3);  % cmcl
 jb =find(algtypes==4);  % bart

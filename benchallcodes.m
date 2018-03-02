@@ -7,7 +7,7 @@ function benchallcodes(ty,dim,N,M,nudist,multithreaded,outname,o)
 % Inputs:
 %  type = 1 ("adjoint") or 2 ("forward"; here isign=-1 to match nfft).
 %  dim = 1, 2 or 3. Spatial dimension.
-%  N = # modes in each dimension (same for now)
+%  N = # modes in each dimension (assumed same)
 %  M = # NU pts.
 %  nudist = 0 (quasi-unif in cube), 1,...4 etc; see NUDIST.
 %  multithreaded = 0 (single core) or 1 (all logical cores; user could control
@@ -31,8 +31,7 @@ function benchallcodes(ty,dim,N,M,nudist,multithreaded,outname,o)
 %
 % Issues: 1) BART shows large init time if nfftpres=2, which is fake (actually 0)
 %          => ignore BART's init time.
-%         2) all data_out copies from all algs stored in results. can get big.
-%         if M=1e8 (it's 1.6GB for type 2, per alg).
+%         2) type-3 not tested.
 
 if nargin==0, benchallcodes(1); return; load temp; end        % crude self-test
 if nargin<1, ty=1; end                             % defaults (for self-test)

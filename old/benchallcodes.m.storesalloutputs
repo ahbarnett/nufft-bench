@@ -53,7 +53,6 @@ end
 %https://stackoverflow.com/questions/8311426/how-can-i-query-the-number-of-physical-cores-from-matlab
 
 N1=N; N2=1; N3=1; if dim>1, N2=N; end, if dim>2, N3=N; end  % set up N1,N2,N3
-% (unit values of N2 and/or N3 signify lower space dimension, ie 2 or 1)
 
 % FFTW opts for everybody...
 fftw_meas=1;   % 0 for ESTIMATE, 1 for MEASURE, in all algs that use FFTW
@@ -156,7 +155,6 @@ end
 % Let's check that writing to SSD temp file that it does is insignificant:
 % xyz = rand(3,1e7); tic; writecfl(tempname,xyz); toc    % 1 sec
 % BART throughput is 5e5 to 1e6 NU pts/sec, so we're at 10% level.
-% This is multithreaded code. 3D only.
 if dim==3
   ALG=struct;
   ALG.algtype=4;
@@ -168,47 +166,44 @@ if dim==3
 end
 
 % mirt/fessler
-% runs all threads at start, then much of init and all of run is single-thread.
-if ~multithreaded
-Js = 2:2:6;  % set of kernels widths to try. >8 doesn't help? & v slow
-for i=1:numel(Js)
-  ALG=struct;
-  ALG.algtype=5;
-  ALG.name=sprintf('Fessler(J=%d)',Js(i));
-  ALG.algopts=[];
-  ALG.algopts.J = Js(i);      % kernel width in fine grid pts
-  ALG.algopts.oversamp = 2.0;   % "R", oversampling ratio
-  ALG.algopts.nthreads = nthreads;
-  ALG.init=@init_fessler;
-  if ty==1, ALG.run=@run_fessler_adj; else, ALG.run=@run_fessler; end
-  ALGS{end+1}=ALG;
-end
-end
-
-% ====================================================
-disp('running algs & computing error metrics for each one...')
-txttbl{1} = sprintf('\n\n%15s %15s %15s %15s %15s','name','init_time(s)','run_time(s)','rel2err','therr');
-inputl1 = sum(abs(data_in(:)));  % appears in theoretical err estimate
-for j=1:length(ALGS), ALG=ALGS{j};  % ================ main run loop
-  fprintf('(%d/%d) Initializing %s...\n',j,length(ALGS),ALG.name);
-  tA=tic;
-  init_data = ALG.init(ALG.algopts,x,y,z,N1,N2,N3);
-  init_times(j)=toc(tA);
-  fprintf('Running %s...\n',ALG.name);
-  tA=tic;
-  X = ALG.run(ALG.algopts,x,y,z,data_in,N1,N2,N3,init_data);   % run it!
-  run_times(j)=toc(tA);
-  if j==1                     % save properties of the truth
-    X0 = X; outputl1 = sum(abs(X0(:))); outputl2 = norm(X0(:));
+if dim==3
+  Js = 2:2:6;  % set of kernels widths to try. >8 doesn't help? & v slow
+  for i=1:numel(Js)
+    ALG=struct;
+    ALG.algtype=5;
+    ALG.name=sprintf('Fessler(J=%d)',Js(i));
+    ALG.algopts=[];
+    ALG.algopts.J = Js(i);      % kernel width in fine grid pts
+    ALG.algopts.oversamp = 2.0;   % "R", oversampling ratio
+    ALG.init=@init_fessler;
+    if ty==1, ALG.run=@run_fessler_adj; else, ALG.run=@run_fessler; end
+    ALGS{end+1}=ALG;
   end
-  rel2err(j)=norm(X(:)-X0(:))/outputl2;
-  rel1err(j)=norm(X(:)-X0(:),1)/outputl1;
-  maxerr(j)=max(abs(X(:)-X0(:)));
+end
+% =============================================
+
+% do all expts, storing all the data_out in results (can be big)...
+results=run_algs(ALGS,x,y,z,data_in,N1,N2,N3);
+
+% copy out results to various arrays, while also summarizing to text table...
+disp('computing error metrics...')
+txttbl{1} = sprintf('\n\n%15s %15s %15s %15s %15s','name','init_time(s)','run_time(s)','rel2err','therr');
+X0=results{1}.data_out;         % truth
+outputl1 = sum(abs(X0(:)));
+outputl2 = norm(X0(:));
+inputl1 = sum(abs(data_in(:)));  % appears in theoretical err estimate.
+for j=1:length(ALGS)            % generate error values, text output
+  X1=results{j}.data_out;
+  rel2err(j)=norm(X0(:)-X1(:))/outputl2;
+  rel1err(j)=norm(X0(:)-X1(:),1)/outputl1;
+  maxerr(j)=max(abs(X0(:)-X1(:)));
   theoryerr(j)=maxerr(j)/inputl1;      % eps for which there's rigorous estimate
-  total_times(j)=init_times(j)+run_times(j);
-  algtypes(j)=ALG.algtype;
-  txttbl{j+1}=sprintf('%15s %15g %15g %15g %15g',ALG.name,init_times(j),run_times(j),rel2err(j),theoryerr(j));
-end                                  % =================
+  init_times(j)=results{j}.init_time;
+  run_times(j)=results{j}.run_time;
+  total_times(j)=results{j}.tot_time;
+  algtypes(j)=ALGS{j}.algtype;
+  txttbl{j+1}=sprintf('%15s %15g %15g %15g %15g',ALGS{j}.name,init_times(j),run_times(j),rel2err(j),theoryerr(j));
+end
 for j=1:numel(txttbl), disp(txttbl{j}); end   % stdout
 
 % these sets of indices for each code are useful for later plotting...
@@ -220,10 +215,35 @@ jc =find(algtypes==3);  % cmcl
 jb =find(algtypes==4);  % bart
 jm =find(algtypes==5);  % mirt
 
-clear Js j i eps ieps epsilons m_s pretype im ALG tA  % kill small stuff
-clear x y z data_in init_data X0 X      % kill the big stuff
-save(outname)                           % save just error stats to disk (small)
+clear i j x y z data_in X0 X1 results % kill the big stuff
+save(outname)                        % save just error stats to disk (small)
 %%%%%%%%%%%%%%%%%%%% done
+
+
+function results=run_algs(ALGS,x,y,z,data_in,N1,N2,N3)
+% jfm. run list of expts specified in ALGS struct
+results={};
+for j=1:length(ALGS)
+    ALG=ALGS{j};
+    RESULT=struct;
+    
+    fprintf('(%d/%d) Initializing %s...\n',j,length(ALGS),ALG.name);
+    tA=tic;
+    init_data=ALG.init(ALG.algopts,x,y,z,N1,N2,N3);
+    RESULT.init_time=toc(tA);
+    
+    fprintf('Running %s...\n',ALG.name);
+    tA=tic;
+    RESULT.data_out=ALG.run(ALG.algopts,x,y,z,data_in,N1,N2,N3,init_data);
+    RESULT.run_time=toc(tA);
+    
+    RESULT.tot_time=RESULT.init_time+RESULT.run_time;
+    
+    fprintf('init_time=%.3f, run_time=%.3f, tot_time=%.3f\n',RESULT.init_time,RESULT.run_time,RESULT.tot_time);
+    
+    results{j}=RESULT;
+end;
+
 
 
 %%%%%%%%%%%% UNIFORM WRAPPERS TO THE VARIOUS 3D NUFFT CODES %%%%%%%%%%%%%%%%%%%
@@ -377,23 +397,13 @@ X = prefac * bart(cmd,xyz,d);
 
 % mirt ---------------------------------------------------------------------
 function init_data=init_fessler(algopts,x,y,z,N1,N2,N3)
-% works in all dims 1,2,3.  Barnett 3/1/18
-J=algopts.J;       % kernel width
-dim = 1; if N2>1, dim=2; end, if N3>1, dim=3; end  % get the dim
-% N = #s of modes per dim, is a vector! Set it up, and NU locs in [-pi,pi]^d...
-if dim==1,     N=N1; nodes = x;
-elseif dim==2, N=[N1 N2]; nodes = [x y]; 
-else           N=[N1 N2 N3]; nodes = [x y z]; end
-clear x y z
-Nspreads = J*ones(size(N));
-Nfines = algopts.oversamp*N;
-Nshifts = N/2;
-nthreads_save = maxNumCompThreads(algopts.nthreads);  % enforce # threads!
-init_data=nufft_init(nodes,N,Nspreads,Nfines,Nshifts);
-maxNumCompThreads(nthreads_save);                     % restore value
+J=algopts.J;  % kernel width
+N = [N1 N2 N3];
+xyz = [x y z];     % NU locs in [-pi,pi]^d,  size M*d
+init_data=nufft_init(xyz,N,[J,J,J],algopts.oversamp*N,N/2);
 
 function X=run_fessler_adj(algopts,x,y,z,d,N1,N2,N3,init_data)
-X=nufft_adj(d,init_data);         % appears to be single-thread
+X=nufft_adj(d,init_data);
 
 function X=run_fessler(algopts,x,y,z,d,N1,N2,N3,init_data)
-X=nufft(d,init_data);             % appears to be single-thread
+X=nufft(d,init_data);

@@ -4,9 +4,9 @@
 clear
 dim=3;
 ty=1;
-%nudist=0; expt='unif, i7';
-nudist=4; expt='sph, i7';
-multi=1;
+nudist=0; expt='unif, i7';
+%nudist=4; expt='sph, i7';
+multi=0;
 N=64; M=1e6;
 o.nfftpres = 1;
 nth = 1; if multi, nth = java.lang.Runtime.getRuntime().availableProcessors; end

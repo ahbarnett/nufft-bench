@@ -74,6 +74,8 @@ elseif nudist==4  % deterministic quadr scheme pts, no weights
     x = r.*sth.*kron(cpg,ones(m*mr,1));
     y = r.*sth.*kron(spg,ones(m*mr,1));
     z = r.*cth;
+  else
+    error('nudist=4 not implemented for dim<3 !');
   end
 
 else, error('nudist > 4 not yet implemented');

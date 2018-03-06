@@ -78,7 +78,7 @@ ALG.algtype=0;
 ALG.name=sprintf('truth(%dd%d)',dim,ty);
 ALG.algopts.eps=eps;
 ALG.algopts.opts.nthreads=0;       % all threads 
-ALG.algopts.opts.spread_sort=1;
+ALG.algopts.opts.spread_sort=2;    % default
 ALG.algopts.isign=isign;
 ALG.algopts.opts.fftw=fftw_meas;   % serves to precompute FFTW for finufft tests
 ALG.init=@dummy_init;
@@ -88,7 +88,7 @@ ALGS{end+1}=ALG;
 % finufft
 epsilons=10.^(-(2:12));      % range of accuracies
 finufft_algopts.opts.nthreads=nthreads;
-finufft_algopts.opts.spread_sort=1;               % whether to sort
+finufft_algopts.opts.spread_sort=2;   % default
 finufft_algopts.opts.fftw=fftw_meas;
 finufft_algopts.isign=isign;
 finufft_algopts.opts.debug=0;
@@ -169,7 +169,7 @@ end
 % mirt/fessler
 % runs all threads at start, then much of init and all of run is single-thread.
 if ~multithreaded
-Js = 2:2:6;  % set of kernels widths to try. >8 doesn't help? & v slow
+Js = 2:2:4;  % set of kernels widths to try. >8 doesn't help? & all v slow
 for i=1:numel(Js)
   ALG=struct;
   ALG.algtype=5;
@@ -277,7 +277,7 @@ data_out = M*data_out;    % cmcl normalization
 
 function data_out=run_nufft1d2(algopts,x,y,z,data_in,N1,N2,N3,init_data)
 M=length(x);
-[data_out ier]=nufft3d2(M,x,algopts.isign,algopts.eps,N1,data_in);
+[data_out ier]=nufft1d2(M,x,algopts.isign,algopts.eps,N1,data_in);
 
 
 % nfft --------------------------------------------------------------------

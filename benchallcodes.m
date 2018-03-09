@@ -45,11 +45,11 @@ if nargin<8, o = []; end
 if ~isfield(o,'nfftpres'), o.nfftpres = 0; end  % 2
 
 setuppaths(multithreaded);
-nthreads = 1;
-if multithreaded
-  nthreads = java.lang.Runtime.getRuntime().availableProcessors;
-end
+nthreads_avail = java.lang.Runtime.getRuntime().availableProcessors;
 %https://stackoverflow.com/questions/8311426/how-can-i-query-the-number-of-physical-cores-from-matlab
+if multithreaded, nthreads = nthreads_avail; else nthreads=1; end
+
+maxNumCompThreads(nthreads);     % don't trust processes to use one thread!
 
 N1=N; N2=1; N3=1; if dim>1, N2=N; end, if dim>2, N3=N; end  % set up N1,N2,N3
 % (unit values of N2 and/or N3 signify lower space dimension, ie 2 or 1)
@@ -189,14 +189,15 @@ disp('running algs & computing error metrics for each one...')
 txttbl{1} = sprintf('\n\n%15s %15s %15s %15s %15s','name','init_time(s)','run_time(s)','rel2err','therr');
 inputl1 = sum(abs(data_in(:)));  % appears in theoretical err estimate
 for j=1:length(ALGS), ALG=ALGS{j};  % ================ main run loop
-  fprintf('(%d/%d) Initializing %s...\n',j,length(ALGS),ALG.name);
+  fprintf('(%d/%d) Initializing %s...\n',j,length(ALGS),ALG.name)
   tA=tic;
   init_data = ALG.init(ALG.algopts,x,y,z,N1,N2,N3);
   init_times(j)=toc(tA);
-  fprintf('Running %s...\n',ALG.name);
+  fprintf('Running %s...',ALG.name)
   tA=tic;
   X = ALG.run(ALG.algopts,x,y,z,data_in,N1,N2,N3,init_data);   % run it!
   run_times(j)=toc(tA);
+  fprintf('  run done in %.3g s\n',run_times(j))
   if j==1                     % save properties of the truth
     X0 = X; outputl1 = sum(abs(X0(:))); outputl2 = norm(X0(:));
   end
@@ -222,6 +223,9 @@ jm =find(algtypes==5);  % mirt
 clear Js j i eps ieps epsilons m_s pretype im ALG tA  % kill small stuff
 clear x y z data_in init_data X0 X      % kill the big stuff
 save(outname)                           % save just error stats to disk (small)
+
+maxNumCompThreads(nthreads_avail);   % return to original state
+
 %%%%%%%%%%%%%%%%%%%% done
 
 

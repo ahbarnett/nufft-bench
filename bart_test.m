@@ -43,7 +43,7 @@ end
 if 1
 % type 1
 n=50;  % U size in each dim
-M=1e6;
+M=3e6;
 N = n^3;   % total output pts
 c = randn(1,M)+1i*randn(1,M);
 x = pi*(2*rand(1,M)-1);   % std nufft scaling for NU

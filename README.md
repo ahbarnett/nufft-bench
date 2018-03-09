@@ -6,7 +6,7 @@ Written in MATLAB/octave.
 
 Alex Barnett and Jeremy Magland; contributions by Joakim Anden.
 
-January 2018.
+January-March 2018.
 
 ## Dependencies
 
@@ -50,15 +50,25 @@ Then change that directory name to `nfft-3.3.2-single-thread`
 
 If you use different locations, edit `addnfftpath.m` to match.
 
+Note: we find success with gcc 4.8.5 and 6.4.0. We find compilation
+fails for gcc 7.2.0 and 7.3.0 with:
+
+```
+cc1: internal compiler error: in gimplify_modify_expr, at gimplify.c:5638
+```
+
+This gcc bug seems to be slated to be fixed in 7.4
+
 
 ### Installing FINUFFT
 
 See https://github.com/ahbarnett/finufft
 
+This is multithreaded.
 
 ### Installing CMCL NUFFT
 
-This the Greengard-Lee fortran code from 2004, and is single thread only.
+This the Greengard-Lee fortran code from 2004, and is single-thread only.
 MEX files are shipped, so no compilation is needed.
 
 See https://cims.nyu.edu/cmcl/nufft/nufft.html
@@ -70,9 +80,11 @@ This is a new (2016) MRI reconstruction package with a MATLAB interface.
 See: https://mrirecon.github.io/bart/
 
 The NUFFT is 3D only, and is by Frank Ong and Martin Uecker.
+It uses all available threads.
 The MATLAB interface writes data to a tempfile, then makes a system
 call to an executable `bart nufft` which reads in the data.
-We have to be careful not to penalize this.
+We have to be careful to use problem sizes that don't
+penalize this.
 
 We installed v 0.4.02 from
 https://github.com/mrirecon/bart/releases/tag/v0.4.02
@@ -97,7 +109,8 @@ it is [-N/2,N/2]^d where N is the number of modes in each dimension
 (we assume equal).
 We found the normalization is (sqrt(N^3)/prefac) where prefac was
 found by trial and error to be the constant 1.00211.
-This is strange, and probably something to do with BART's kernel.
+This choice improves accuracy from 3 to 5 digits.
+This is strange, and probably derives from BART's spreading kernel.
 
 In addition, points near box edges incorrectly wrap, giving O(1) errors.
 Uecker kindly sent us a patched `grid.c` which you may find in `patches`.
@@ -112,4 +125,7 @@ The complete package is at:
 https://web.eecs.umich.edu/~fessler/irt/fessler.tgz
 
 All MEX files are included; no compilation is needed.
+The precomputation is very expensive (up to 100x slower than
+the apply when limited to one thread).
+The apply appears to be single-threaded and very fast.
 

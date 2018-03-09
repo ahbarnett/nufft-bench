@@ -56,15 +56,23 @@ elseif nudist==3  % unif in small cuboid
   if dim>1, y = pi*(2*rand(M,1)-1); end
   if dim>2, z = pi*(2*rand(M,1)-1); end
 
-elseif nudist==4  % deterministic quadr scheme pts, no weights
+elseif nudist==4  % deterministic quadr scheme pts (no weights!)
   name = 'sphquad';
-  if dim==3
+  rad = pi; %/2;  % radius param: <=pi otherwise exceeds cube walls
+  m = round(M^(1/dim)); if mod(m,2)==1, m=m+1; end   % m even, # grid pts/dim
+  mug = cos(pi*((1:m)'-0.5)/m);   % mu from -1 to 1, Cheby grid, col vec.
+  %mug=gauss(m);  % mu from -1 to 1, z for unit sph.  col vec. (slow for m>100)
+  if dim==1        % simple 1d cheby line
+    x = rad*mug;
+  elseif dim==2      % m radial * m in theta (not optimal aspect, but 2 is ok)
+    pg = 2*pi*(1:m)'/m;
+    x = kron(ones(m,1), rad*mug) .* kron(cos(pg), ones(m,1));
+    y = kron(ones(m,1), rad*mug) .* kron(sin(pg), ones(m,1));
+  elseif dim==3
     m = round(M^(1/3)); if mod(m,2)==1, m=m+1; end  % m even, # grid pts/dim
-    rad = pi; %/2;  % radius, arb, <=pi otherwise exceeds cube walls
-    mug=gauss(m);  % mu from -1 to 1, z for unit sph.  col vec
     mp = 2*m;      % # phi pts (equator)
     pg = 2*pi*(1:mp)'/mp;
-    mr = m/2;      % # radial pts
+    mr = m/2;      % # radial pts (needn't be even)
     rg = rad*(1+gauss(mr))/2;  % from [0,rad], would have r^2 metric
     sthg = sqrt(1-mug.^2);
     sth = kron(kron(ones(mp,1),sthg),ones(mr,1));  % all sin th's
@@ -74,21 +82,22 @@ elseif nudist==4  % deterministic quadr scheme pts, no weights
     x = r.*sth.*kron(cpg,ones(m*mr,1));
     y = r.*sth.*kron(spg,ones(m*mr,1));
     z = r.*cth;
-  else
-    error('nudist=4 not implemented for dim<3 !');
   end
 
 else, error('nudist > 4 not yet implemented');
 end
 
 %%%%%%%%%%%
-function test_nudata
-for nudist=0:4
+function test_nudata          % 2d and 3d small-M pics
+for nudist=[0 1 4]
+  [x y z nam] = nudata(2,nudist,5e3);
+  figure; plot(x,y,'.'); title([nam ' 2d']);
+  axis equal tight off;
+  set(gcf,'paperposition',[0 0 4 4]);
+  print(sprintf('results/nudist2d_%d.eps',nudist),'-depsc2')
   [x y z nam] = nudata(3,nudist,5e3);
-  figure; plot3(x,y,z,'.'); title(nam);
+  figure; plot3(x,y,z,'.'); title([nam ' 3d']);
   axis vis3d equal tight off; view(20,10);
   set(gcf,'paperposition',[0 0 4 4]);
-  print(sprintf('results/nudist_%d.eps',nudist),'-depsc2')
+  print(sprintf('results/nudist3d_%d.eps',nudist),'-depsc2')
 end
-
-

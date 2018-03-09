@@ -1,0 +1,104 @@
+
+============= single-core bin sort:
+
+
+>> tbl_xeon_3d
+Warning: Name is nonexistent or not a directory:
+/mnt/home/ahb/numerics/nufftall-1.33 
+> In path (line 109)
+  In addpath (line 88)
+  In setuppaths (line 12)
+  In tbl_xeon_3d (line 5) 
+making data: 76.4355 s
+3d1: (ms,mt,mu)=(128,128,128) (nf1,nf2,nf3)=(256,256,256) nj=1000000000 ...
+kernel fser (ns=7):	 0 s
+fftw plan		 0.002 s
+starting spread 3D (dir=1. M=1000000000; N1=256,N2=256,N3=256; pir=1), 24 threads
+sort time (sort=1): 51.4 s
+subprobs setup 5.06 s (10000 subprobs)
+spread (ier=0):		 149 s
+fft (24 threads):	 0.142 s
+deconvolve & copy out:	 0.017 s
+freed
+  time for finufft: 157.321 s
+FINUFFT max RAM use above input data = 28.6 GB (28.6 bytes/NUpt)
+nfft plan done
+nfft set_x done (it's a method!)
+nfft set_x max RAM use above input data = 69.3 GB (69.3 bytes/NUpt)
+nfft_precomp done in 0.000353
+tot time for nfft_adj(no pre): 686.3 s
+NFFT(no pre) max RAM use above input data = 29.7 GB (29.7 bytes/NUpt)
+ans =
+   2.1003e+09
+  rel2diff (f vs n) = 4.04e-06
+  time NFFT(no pre) / FINUFFT =      4.36
+>> hgsave emcpu_M1e9_nopre 
+
+============== partial multicore bin_sort  2/6/18
+
+>> tbl_xeon_3d
+Warning: Name is nonexistent or not a directory:
+/mnt/home/ahb/numerics/nufftall-1.33 
+> In path (line 109)
+  In addpath (line 88)
+  In setuppaths (line 12)
+  In tbl_xeon_3d (line 5) 
+making data: 78.4851 s
+3d1: (ms,mt,mu)=(128,128,128) (nf1,nf2,nf3)=(256,256,256) nj=1000000000 ...
+kernel fser (ns=7):	 0 s
+fftw plan		 0.004 s
+starting spread 3D (dir=1. M=1000000000; N1=256,N2=256,N3=256; pir=1), 24 threads
+sort time (sort=1): 16.6 s
+subprobs setup 5.16 s (10000 subprobs)
+spread (ier=0):		 124 s
+fft (24 threads):	 0.279 s
+deconvolve & copy out:	 0.012 s
+freed
+  time for finufft: 132.493 s
+FINUFFT max RAM use above input data = 28.6 GB (28.6 bytes/NUpt)
+nfft plan done
+nfft set_x done (it's a method!)
+nfft set_x max RAM use above input data = 69.3 GB (69.3 bytes/NUpt)
+nfft_precomp done in 0.000358
+tot time for nfft_adj(no pre): 687.239 s
+NFFT(no pre) max RAM use above input data = 29.7 GB (29.7 bytes/NUpt)
+ans =
+   2.0659e+09
+  rel2diff (f vs n) = 4.01e-06
+  time NFFT(no pre) / FINUFFT =      5.19
+>> hgsave memcpu_M1e9_nopre_parsort
+
+============== full multicore bin_sort  2/8/18
+
+
+>> tbl_xeon_3d
+Warning: Name is nonexistent or not a directory:
+/mnt/home/ahb/numerics/nufftall-1.33 
+> In path (line 109)
+  In addpath (line 88)
+  In setuppaths (line 12)
+  In tbl_xeon_3d (line 5) 
+making data: 78.5197 s
+3d1: (ms,mt,mu)=(128,128,128) (nf1,nf2,nf3)=(256,256,256) nj=1000000000 ...
+kernel fser (ns=7):	 0 s
+fftw plan		 0.001 s
+starting spread 3D (dir=1. M=1000000000; N1=256,N2=256,N3=256; pir=1), 24 threads
+sort time (sort=1): 	6.88 s
+subprobs setup		5.15 s (10000 subprobs)
+pure spread stage: 	100 s
+spread (ier=0):		 113 s
+fft (24 threads):	 0.271 s
+deconvolve & copy out:	 0.013 s
+freed
+  time for finufft: 122.191 s
+FINUFFT max RAM use above input data = 23.1 GB (23.1 bytes/NUpt)
+nfft plan done
+nfft set_x done (it's a method!)
+nfft set_x max RAM use above input data = 63.8 GB (63.8 bytes/NUpt)
+nfft_precomp done in 0.000605
+tot time for nfft_adj(no pre): 669.533 s
+NFFT(no pre) max RAM use above input data = 24.2 GB (24.2 bytes/NUpt)
+ans =
+   2.1284e+09
+  rel2diff (f vs n) = 4.02e-06
+  time NFFT(no pre) / FINUFFT =      5.48

@@ -68,8 +68,9 @@ This is multithreaded.
 
 ### Installing CMCL NUFFT
 
-This the Greengard-Lee fortran code from 2004, and is single-thread only.
+This the Greengard-Lee fortran code from 2009-2014, and is single-thread only.
 MEX files are shipped, so no compilation is needed.
+We use nufft-all version 1.3.3.
 
 See https://cims.nyu.edu/cmcl/nufft/nufft.html
 

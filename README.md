@@ -57,7 +57,8 @@ fails for gcc 7.2.0 and 7.3.0 with:
 cc1: internal compiler error: in gimplify_modify_expr, at gimplify.c:5638
 ```
 
-This gcc bug seems to be slated to be fixed in 7.4
+This gcc bug seems to be slated to be fixed in 7.4. Thus we standardized
+to 6.4.0.
 
 
 ### Installing FINUFFT
@@ -69,8 +70,10 @@ This is multithreaded.
 ### Installing CMCL NUFFT
 
 This the Greengard-Lee fortran code from 2009-2014, and is single-thread only.
-MEX files are shipped, so no compilation is needed.
-We use nufft-all version 1.3.3.
+We use nufftall version 1.3.3.
+MEX binaries are shipped. However, for fairness we recompiled the binaries
+on our test machine with flags ``-fPIC -Ofast -funroll-loops -march=native``.
+Our compilation is done by ``patches/rebuild_cmcl_mex.sh``
 
 See https://cims.nyu.edu/cmcl/nufft/nufft.html
 
@@ -125,8 +128,12 @@ See `bart_*.m`
 The complete package is at:
 https://web.eecs.umich.edu/~fessler/irt/fessler.tgz
 
+There is no version number; however, the `nufft` directory has the most recent
+modifications on Dec 13, 2016.
+
 All MEX files are included; no compilation is needed.
-The precomputation is very expensive (up to 100x slower than
+The precomputation is very expensive in time and RAM (up to 100x slower than
 the apply when limited to one thread).
-The apply appears to be single-threaded and very fast.
+The apply appears to be a single-threaded sparse matvec done in MATLAB,
+and very fast.
 

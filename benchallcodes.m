@@ -22,12 +22,13 @@ function benchallcodes(ty,dim,N,M,nudist,multithreaded,outname,o)
 %  FINUFFT                                       jf
 %  NFFT w/ the above precompute opts             jnp (no pre), jn, jnf (full)
 %  CMCL (only if single thread)                  jc
-%  BART (only 3D)                                jb
-%  MIRT (only 3D for now)                        jm
+%  BART (is only 3D)                             jb
+%  MIRT (only if single thread)                  jm
 %
 % Called without arguments, does a self-test.
 %
-% Magland; Barnett edit of 1/23/18, unify 1/28/18, all dims 2/20/18
+% Magland; Barnett edit of 1/23/18, unify 1/28/18, all dims 2/20/18.
+% memorygraph 3/13/18.
 %
 % Issues: 1) BART shows large init time if nfftpres=2, which is fake (actually 0)
 %          => ignore BART's init time.
@@ -48,8 +49,6 @@ setuppaths(multithreaded);
 nthreads_avail = java.lang.Runtime.getRuntime().availableProcessors;
 %https://stackoverflow.com/questions/8311426/how-can-i-query-the-number-of-physical-cores-from-matlab
 if multithreaded, nthreads = nthreads_avail; else nthreads=1; end
-
-maxNumCompThreads(nthreads);     % don't trust processes to use one thread!
 
 N1=N; N2=1; N3=1; if dim>1, N2=N; end, if dim>2, N3=N; end  % set up N1,N2,N3
 % (unit values of N2 and/or N3 signify lower space dimension, ie 2 or 1)
@@ -122,6 +121,9 @@ end;
 m_s=1:6;   % NFFT range of accuracies (kernel integer half-widths)
 for pretype = 0:o.nfftpres
   nfft_algopts.precompute_psi=pretype;
+  if pretype==2
+    m_s=1:2;   % NFFT FULL PRE range of acc, smaller due to RAM use
+  end
   for im=1:length(m_s)
     ALG=struct;
     ALG.algtype=2 + 0.25*pretype;          % silly way to encode which setting
@@ -186,14 +188,19 @@ end
 
 % ====================================================
 disp('running algs & computing error metrics for each one...')
+memorygraph('start',struct('dt',0.1));
 txttbl{1} = sprintf('\n\n%15s %15s %15s %15s %15s','name','init_time(s)','run_time(s)','rel2err','therr');
 inputl1 = sum(abs(data_in(:)));  % appears in theoretical err estimate
 for j=1:length(ALGS), ALG=ALGS{j};  % ================ main run loop
-  fprintf('(%d/%d) Initializing %s...\n',j,length(ALGS),ALG.name)
+  % once truth is done, don't trust processes to use one thread!
+  if j==2, maxNumCompThreads(nthreads); end
+  str = sprintf('(%d/%d) Initializing %s...\n',j,length(ALGS),ALG.name);
+  disp(str)
   tA=tic;
   init_data = ALG.init(ALG.algopts,x,y,z,N1,N2,N3);
   init_times(j)=toc(tA);
-  fprintf('Running %s...',ALG.name)
+  str = sprintf('Running %s...',ALG.name);
+  disp(str)
   tA=tic;
   X = ALG.run(ALG.algopts,x,y,z,data_in,N1,N2,N3,init_data);   % run it!
   run_times(j)=toc(tA);
@@ -210,6 +217,8 @@ for j=1:length(ALGS), ALG=ALGS{j};  % ================ main run loop
   txttbl{j+1}=sprintf('%15s %15g %15g %15g %15g',ALG.name,init_times(j),run_times(j),rel2err(j),theoryerr(j));
 end                                  % =================
 for j=1:numel(txttbl), disp(txttbl{j}); end   % stdout
+
+[bytes est_times cpu_times cpu_usages labelstrings labeltimes] = memorygraph('get');
 
 % these sets of indices for each code are useful for later plotting...
 jf =find(algtypes==1);  % finufft
@@ -303,7 +312,7 @@ if algopts.precompute_psi==1
 elseif algopts.precompute_psi==2
   flags=bitor(PRE_FULL_PSI,flags);   % uses 35 GB for M=1e6, m=6 !!
 end
-if (algopts.precompute_phi)
+if (algopts.precompute_phi)           % should be using?
   flags=bitor(PRE_PHI_HUT,flags);
 end;
 fftw_flag=FFTW_ESTIMATE;

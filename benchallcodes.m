@@ -194,17 +194,18 @@ inputl1 = sum(abs(data_in(:)));  % appears in theoretical err estimate
 for j=1:length(ALGS), ALG=ALGS{j};  % ================ main run loop
   % once truth is done, don't trust processes to use one thread!
   if j==2, maxNumCompThreads(nthreads); end
-  str = sprintf('(%d/%d) Initializing %s...\n',j,length(ALGS),ALG.name);
-  disp(str)
+  fprintf('(%d/%d) Initializing %s...\n',j,length(ALGS),ALG.name)
+  memorygraph('label',[ALG.name ' init']);
   tA=tic;
   init_data = ALG.init(ALG.algopts,x,y,z,N1,N2,N3);
   init_times(j)=toc(tA);
-  str = sprintf('Running %s...',ALG.name);
-  disp(str)
+  fprintf('Running %s...',ALG.name);
+  memorygraph('label',[ALG.name ' run']);
   tA=tic;
   X = ALG.run(ALG.algopts,x,y,z,data_in,N1,N2,N3,init_data);   % run it!
   run_times(j)=toc(tA);
   fprintf('  run done in %.3g s\n',run_times(j))
+  clear init_data             % added in case causes mem leak
   if j==1                     % save properties of the truth
     X0 = X; outputl1 = sum(abs(X0(:))); outputl2 = norm(X0(:));
   end
@@ -295,7 +296,7 @@ M=length(x);
 
 % nfft --------------------------------------------------------------------
 function init_data=init_nfft(algopts,x,y,z,N1,N2,N3)
-% dim is conveyed by N2, N3 not being 1.
+% dim is conveyed by N2, N3 not being 1. Removed plan copy, 3/13/18.
 M=length(x);
 dim=1; N=N1;
 if N2>1, dim=2; N=[N1;N2]; end
@@ -324,43 +325,44 @@ ticA=tic;
 % set NU pts, and use of nfft_init_guru...
 sc = 1/(2*pi);   % NU pt scale factor so that periodic domain is [-.5,.5]^d
 if dim==1
-  plan=nfft(dim,N,M,n,algopts.m,flags,fftw_flag);
+  init_data.plan=nfft(dim,N,M,n,algopts.m,flags,fftw_flag);
   nodes = x*sc;
 elseif dim==2
-  plan=nfft(dim,N,M,n,n,algopts.m,flags,fftw_flag);
+  init_data.plan=nfft(dim,N,M,n,n,algopts.m,flags,fftw_flag);
   nodes = [x y]*sc;
 else
-  plan=nfft(dim,N,M,n,n,n,algopts.m,flags,fftw_flag);
+  init_data.plan=nfft(dim,N,M,n,n,n,algopts.m,flags,fftw_flag);
   nodes = [x y z]*sc;
 end
-plan.x = nodes;   % nodes is M*d. set_x is a method, causes a RAM spike
+init_data.plan.x = nodes;  % nodes is M*d. set_x is a method, causes a RAM spike
 fprintf('  Creating nfft plan (dim=%d) & setting nodes: %g s\n',dim,toc(ticA));
 
 ticA=tic;
-nfft_precompute_psi(plan);                     % precomputations
+nfft_precompute_psi(init_data.plan);                     % precomputations
 fprintf('  time for nfft_precompute_psi: %g s\n',toc(ticA));
 
-init_data.plan=plan;
 
 function X=run_nfft_adj(algopts,x,y,z,d,N1,N2,N3,init_data)
 % type 1 ("adjoint"), any dim
-plan=init_data.plan;   % already carries NU locs (x y z args unused)
+% removed copying of plan (big)... already carries NU locs (x y z args unused)
 M=length(x);
-plan.f=d;
-nfft_adjoint(plan);  % type 1
+init_data.plan.f=d;
+nfft_adjoint(init_data.plan);  % type 1
 if algopts.reshape
-    X=reshape(plan.fhat,[N1,N2,N3]);            % ahb removed fac 1/M, 10/24/17
+    X=reshape(init_data.plan.fhat,[N1,N2,N3]);  % ahb removed fac 1/M, 10/24/17
 else
-    X=plan.fhat;
+    X=init_data.plan.fhat;
 end;
+nfft_finalize(init_data.plan);
 
 function X=run_nfft(algopts,x,y,z,d,N1,N2,N3,init_data)
 % type 2 ("non-adjoint"), any dim
-plan=init_data.plan;   % already carries NU locs (x y z args unused)
+% removed copying of plan (big)... already carries NU locs (x y z args unused)
 M=length(x);
-plan.fhat=d(:);     % unwrap to single col
-nfft_trafo(plan);   % type 2
-X=plan.f;
+init_data.plan.fhat=d(:);     % unwrap to single col
+nfft_trafo(init_data.plan);   % type 2
+X=init_data.plan.f;
+nfft_finalize(init_data.plan);
 
 
 % bart ---------------------------------------------------------------------

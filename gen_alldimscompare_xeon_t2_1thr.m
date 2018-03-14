@@ -11,8 +11,8 @@ for multithreaded=0%[1 0]
   end
 
   for ty = 2%[1 2]
-    for nudist = [0 4]
-      for dim = [2 3]
+    for nudist = 4%[0 4]
+      for dim = 3%[2 3]
         N=round(NN^(1/dim)); if mod(N,2)==1, N=N+1; end   % modes per dim, even
         o.nfftpres = 2; if dim==3 & M>1e7, o.nfftpres=1; end
         outname=sprintf('results/%s/%dd%d_nudist%d_N%d_M%d_%dthr_nfftpres%d',cpu,dim,ty,nudist,N,M,nthreads,o.nfftpres);

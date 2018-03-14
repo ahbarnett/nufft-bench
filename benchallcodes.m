@@ -17,6 +17,7 @@ function benchallcodes(ty,dim,N,M,nudist,multithreaded,outname,o)
 %   nfftpres = which NFFT PSI precompute stage to test up to (PRE_PHI always on)
 %              0: no pre psi,  1: also test pre psi,  2: also test pre full psi.
 %                                (3d needs ~ 600B/NUpt)  (needs ~ 35kB/NUpt)
+%   memcpu = 0 (no memorygraph, default), 1 (memorygraph)
 %
 % Codes currently benchmarked:                   outname indices for each code:
 %  FINUFFT                                       jf
@@ -44,6 +45,7 @@ if nargin<6 || isempty(multithreaded), multithreaded=1; end
 if nargin<7, outname='temp'; end
 if nargin<8, o = []; end
 if ~isfield(o,'nfftpres'), o.nfftpres = 0; end  % 2
+if ~isfield(o,'memcpu'), o.memcpu = 0; end
 
 setuppaths(multithreaded);
 nthreads_avail = java.lang.Runtime.getRuntime().availableProcessors;
@@ -188,19 +190,19 @@ end
 
 % ====================================================
 disp('running algs & computing error metrics for each one...')
-memorygraph('start',struct('dt',0.1));
+if o.memcpu, memorygraph('start',struct('dt',0.1)); end
 txttbl{1} = sprintf('\n\n%15s %15s %15s %15s %15s','name','init_time(s)','run_time(s)','rel2err','therr');
 inputl1 = sum(abs(data_in(:)));  % appears in theoretical err estimate
 for j=1:length(ALGS), ALG=ALGS{j};  % ================ main run loop
   % once truth is done, don't trust processes to use one thread!
   if j==2, maxNumCompThreads(nthreads); end
   fprintf('(%d/%d) Initializing %s...\n',j,length(ALGS),ALG.name)
-  memorygraph('label',[ALG.name ' init']);
+  if o.memcpu, memorygraph('label',[ALG.name ' init']); end
   tA=tic;
   init_data = ALG.init(ALG.algopts,x,y,z,N1,N2,N3);
   init_times(j)=toc(tA);
   fprintf('Running %s...',ALG.name);
-  memorygraph('label',[ALG.name ' run']);
+  if o.memcpu, memorygraph('label',[ALG.name ' run']); end
   tA=tic;
   X = ALG.run(ALG.algopts,x,y,z,data_in,N1,N2,N3,init_data);   % run it!
   run_times(j)=toc(tA);
@@ -219,7 +221,7 @@ for j=1:length(ALGS), ALG=ALGS{j};  % ================ main run loop
 end                                  % =================
 for j=1:numel(txttbl), disp(txttbl{j}); end   % stdout
 
-[bytes est_times cpu_times cpu_usages labelstrings labeltimes] = memorygraph('get');
+if o.memcpu, [bytes est_times cpu_times cpu_usages labelstrings labeltimes] = memorygraph('get'); memorygraph('done'); end
 
 % these sets of indices for each code are useful for later plotting...
 jf =find(algtypes==1);  % finufft
@@ -334,13 +336,13 @@ else
   init_data.plan=nfft(dim,N,M,n,n,n,algopts.m,flags,fftw_flag);
   nodes = [x y z]*sc;
 end
+% use the method for nfft matlab class obj:
 init_data.plan.x = nodes;  % nodes is M*d. set_x is a method, causes a RAM spike
 fprintf('  Creating nfft plan (dim=%d) & setting nodes: %g s\n',dim,toc(ticA));
 
 ticA=tic;
 nfft_precompute_psi(init_data.plan);                     % precomputations
 fprintf('  time for nfft_precompute_psi: %g s\n',toc(ticA));
-
 
 function X=run_nfft_adj(algopts,x,y,z,d,N1,N2,N3,init_data)
 % type 1 ("adjoint"), any dim
@@ -353,7 +355,8 @@ if algopts.reshape
 else
     X=init_data.plan.fhat;
 end;
-nfft_finalize(init_data.plan);
+%nfft_finalize(init_data.plan); % fails w/ Error using nfftmex. nfft: Input argument plan must be a scalar.
+delete(init_data.plan);    % matlab class obj interface seems to work
 
 function X=run_nfft(algopts,x,y,z,d,N1,N2,N3,init_data)
 % type 2 ("non-adjoint"), any dim
@@ -362,7 +365,7 @@ M=length(x);
 init_data.plan.fhat=d(:);     % unwrap to single col
 nfft_trafo(init_data.plan);   % type 2
 X=init_data.plan.f;
-nfft_finalize(init_data.plan);
+delete(init_data.plan);    % since a matlab class obj (see above)
 
 
 % bart ---------------------------------------------------------------------

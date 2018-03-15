@@ -165,6 +165,7 @@ if dim==3
   ALG.algtype=4;
   ALG.name=sprintf('BART');
   ALG.algopts=[];
+  ALG.algopts.nthreads = nthreads;
   ALG.init=@dummy_init;
   if ty==1, ALG.run=@run_bart_adj; else, ALG.run=@run_bart; end
   ALGS{end+1}=ALG;
@@ -195,12 +196,13 @@ txttbl{1} = sprintf('\n\n%15s %15s %15s %15s %15s','name','init_time(s)','run_ti
 inputl1 = sum(abs(data_in(:)));  % appears in theoretical err estimate
 for j=1:length(ALGS), ALG=ALGS{j};  % ================ main run loop
   % once truth is done, don't trust processes to use one thread!
-  if j==2, maxNumCompThreads(nthreads); end
-  fprintf('(%d/%d) Initializing %s...\n',j,length(ALGS),ALG.name)
+  if j==2, maxNumCompThreads(nthreads); end   % just in case an alg forgets
+  fprintf('(%d/%d) Initializing %s...',j,length(ALGS),ALG.name)
   if o.memcpu, memorygraph('label',[ALG.name ' init']); end
   tA=tic;
   init_data = ALG.init(ALG.algopts,x,y,z,N1,N2,N3);
   init_times(j)=toc(tA);
+  fprintf('  init done in %.3g s\n',init_times(j))
   fprintf('Running %s...',ALG.name);
   if o.memcpu, memorygraph('label',[ALG.name ' run']); end
   tA=tic;
@@ -378,7 +380,9 @@ prefac = sqrt(N1*N2*N3) / weirdprefac;
 xyz = [x*(N1/2/pi) y*(N2/2/pi) z*(N3/2/pi)]';     % NU locs, size d*M
 clear x y z
 cmd=sprintf('nufft -a -d %d:%d:%d',N1,N2,N3);
+setenv('OMP_NUM_THREADS',num2str(algopts.nthreads));
 X = prefac * bart(cmd,xyz,d.');               % NB strengths must be row vec
+setenv('OMP_NUM_THREADS') % sets to empty (libgomp complains, ok; can't unset)
 
 function X=run_bart(algopts,x,y,z,d,N1,N2,N3,init_data)
 % type 2 ("fwd"), 3D only. Writes and reads from tempfile. See README.md
@@ -389,7 +393,9 @@ prefac = sqrt(N1*N2*N3) / weirdprefac;
 xyz = [x*(N1/2/pi) y*(N2/2/pi) z*(N3/2/pi)]';     % NU locs, size d*M
 clear x y z
 cmd=sprintf('nufft -d %d:%d:%d',N1,N2,N3);
+setenv('OMP_NUM_THREADS',num2str(algopts.nthreads));
 X = prefac * bart(cmd,xyz,d);
+setenv('OMP_NUM_THREADS') % sets to empty (libgomp complains, ok; can't unset)
 
 
 % mirt ---------------------------------------------------------------------

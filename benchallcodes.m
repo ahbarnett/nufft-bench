@@ -191,7 +191,7 @@ end
 
 % ====================================================
 disp('running algs & computing error metrics for each one...')
-if o.memcpu, memorygraph('start',struct('dt',0.1)); end
+if o.memcpu, memorygraph('start',struct('dt',1.0)); end   % changed from 0.1 s
 txttbl{1} = sprintf('\n\n%15s %15s %15s %15s %15s','name','init_time(s)','run_time(s)','rel2err','therr');
 inputl1 = sum(abs(data_in(:)));  % appears in theoretical err estimate
 for j=1:length(ALGS), ALG=ALGS{j};  % ================ main run loop

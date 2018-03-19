@@ -8,18 +8,33 @@
 %cpu='xeon'; dim=1; ty=1; o.nfftpres=2; nudists=4; nthrs=24; Ns=1e7; Ms=1e8;
 %cpu='xeon'; dim=2; ty=1; o.nfftpres=2; nudists=4; nthrs=24; Ns=3162; Ms=1e8;
 
-% WEd am...     all 3D figs:
+if 0 % WEd am...     all 3D figs:
 cpu='xeon'; dim=3;
 s = [1 1 1 1]; % use for const lists
 nudists=[0 0 4 4 0 0 4 4]; tys = [1 2 1 2 1 2 1 2];
 nthrs=[s 24*s]; NNs=[100*s 216*s]; Ms=[1e7*s 1e8*s];
+end
 
-figure;
-for n = 1:8                           % ....... loop over cases
+% all 2d
+cpu='xeon'; dim=2;
+s = [1 1 1 1]; % use for const lists
+nudists=[0 0 4 4 0 0 4 4]; tys = [1 2 1 2 1 2 1 2];
+nthrs=[s 24*s]; NNs=[1000*s 3162*s]; Ms=[1e7*s 1e8*s];
+
+if 0 % 1d
+cpu='xeon'; dim=1;
+s = [1 1]; % use for const lists
+nudists=[0 0 0 0]; tys = [1 2 1 2];
+nthrs=[s 24*s]; NNs=[1e6*s 1e7*s]; Ms=[1e7*s 1e8*s];
+end
+
+
+for n = 1:numel(Ms)                        % ....... loop over cases
   nudist = nudists(n); nthreads = nthrs(n); N = NNs(n); M = Ms(n); ty=tys(n);
   o = []; o.nfftpres = 2; if dim==3 & M>1e7, o.nfftpres=1; end
   data = sprintf('results/%s/%dd%d_nudist%d_N%d_M%d_%dthr_nfftpres%d',cpu,dim,ty,nudist,N,M,nthreads,o.nfftpres)
   load(data)
+  if dim==2 & ty==1 & nthreads==24 & nudist==0, jf=jf(2:end); end  % kill glitch
   
   figure; %subplot(2,2,n);
   ms=10;
@@ -55,14 +70,23 @@ for n = 1:8                           % ....... loop over cases
   ylabel('wall-clock time (s)');
   if mod(n,4)==1, legend(legcel, 'location','northeast'); end
   
-  if nudist==0, nudnam='rand cube'; end
-  if nudist==4, nudnam='sph quad'; end
+  if nudist==0     % decide NU pt dist names appearing on plots
+    if dim==1, nudnam='rand', elseif dim==2, nudnam='rand square'; else, nudnam='rand cube'; end
+  elseif nudist==4
+    if dim==2, nudnam='disc quad'; else nudnam='sph quad'; end
+  end
+  
   plural = 's'; if nthreads==1, plural=''; end   % for text: thread(s)
   tstr = sprintf('type-%d, %d thread%s: $N=%d^%d$, $M=$ %.2g, %s',ty,nthreads,plural,N,dim,M,nudnam);
   title(tstr,'interpreter','latex');
 
+  if dim==3
   pos = [.67 .67]; if n==1, pos = [.13 .59]; elseif n==5, pos(2)= .45; end
   axes('position',[pos .25 .25]);         % inset (comes after title!)
+  elseif dim==2
+    pos = [.17 .55]; if nthreads==1, pos = [.17 .17]; end
+    axes('position',[pos .17 .17]);         % inset (comes after title!)
+  end
   [x y z nam] = nudata(dim,nudist,2500);
   if dim==2
     plot(x,y,'.','markersize',.5);

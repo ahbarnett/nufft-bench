@@ -27,7 +27,7 @@ o.debug = 0;
 o.fftw = 0;      % default
 eps = 1e-6;
 
-nthrs = [1 2 3 4 8 12 16 24];
+nthrs = [1 2 3 4 8];
 nthrold = maxNumCompThreads;
 
 ts = nan(numel(nthrs),2);
@@ -43,7 +43,7 @@ end
 maxNumCompThreads(nthrold);
 disp('        nthr       time(s)')
 disp([nthrs', ts])
-clear x y z c f; save results/xeon/strongscaling_3d_M1e7_N100
+clear x y z c f; save results/i7/strongscaling_3d_M1e6_N100
 
 disp('        nthr        par efficiencies')
 disp([nthrs', ts(1,:) ./ (ts.*nthrs')])
@@ -54,13 +54,13 @@ title('\hspace{.7in}strong scaling, $\epsilon=10^{-6}$, $M=10^7$, sph quad','int
 xlabel('p (number of threads)'); ylabel('throughput (NU pts / thread / sec)');
 legend('3D type-1', '3D type-2','location','northeast');
 set(gcf,'paperposition',[0 0 4 3]);
-print -depsc2 results/xeon/strongscaling_3d_M1e7_N100.eps
+%print -depsc2 results/xeon/strongscaling_3d_M1e7_N100.eps
 end
 
 
-if 1 % WEAK SCALING ---------------------------------------------
+if 0 % WEAK SCALING ---------------------------------------------
 
-nthrs = [1 2 3 4 8 12 16 24];
+nthrs = [1 2 3 4 8];
 nthrold = maxNumCompThreads;
 nthr_avail = java.lang.Runtime.getRuntime().availableProcessors;
 
@@ -81,7 +81,7 @@ end
 maxNumCompThreads(nthrold);
 disp('        nthr       3d1 time(s)    3d2 time(s)')
 disp([nthrs', ts])
-clear x y z c f; save results/xeon/weakscaling_3d_M1e7p_N100
+clear x y z c f; save results/i7/weakscaling_3d_M1e7p_N100
 
 disp('        nthr        par efficiencies')
 disp([nthrs', ts(1,:)./ts])
@@ -92,6 +92,6 @@ title('weak scaling, $\epsilon=10^{-6}$, \# NU pts $M=10^7 p$, sph quad','interp
 xlabel('p (number of threads)'); ylabel('time (s)');
 legend('3D type-1', '3D type-2','location','northwest');
 set(gcf,'paperposition',[0 0 4 3]);
-print -depsc2 results/xeon/weakscaling_3d_M1e7p_N100.eps
+%print -depsc2 results/xeon/weakscaling_3d_M1e7p_N100.eps
 
 end

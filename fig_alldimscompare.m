@@ -15,11 +15,12 @@ nudists=[0 0 4 4 0 0 4 4]; tys = [1 2 1 2 1 2 1 2];
 nthrs=[s 24*s]; NNs=[100*s 216*s]; Ms=[1e7*s 1e8*s];
 end
 
-% all 2d
+if 1 % all 2d
 cpu='xeon'; dim=2;
 s = [1 1 1 1]; % use for const lists
 nudists=[0 0 4 4 0 0 4 4]; tys = [1 2 1 2 1 2 1 2];
 nthrs=[s 24*s]; NNs=[1000*s 3162*s]; Ms=[1e7*s 1e8*s];
+end
 
 if 0 % 1d
 cpu='xeon'; dim=1;
@@ -28,6 +29,13 @@ nudists=[0 0 0 0]; tys = [1 2 1 2];
 nthrs=[s 24*s]; NNs=[1e6*s 1e7*s]; Ms=[1e7*s 1e8*s];
 end
 
+if 0 % 1d 1thr
+cpu='xeon'; dim=1;
+s = [1 1]; % use for const lists
+nudists=[0 0]; tys = [1 2];
+nthrs=s; NNs=[1e6*s]; Ms=[1e7*s];
+end
+  
 
 for n = 1:numel(Ms)                        % ....... loop over cases
   nudist = nudists(n); nthreads = nthrs(n); N = NNs(n); M = Ms(n); ty=tys(n);
@@ -38,7 +46,7 @@ for n = 1:numel(Ms)                        % ....... loop over cases
   
   figure; %subplot(2,2,n);
   ms=10;
-  legcel = {'FINUFFT','NFFT no pre'};
+  legcel = {'FINUFFT','NFFT'};
   semilogx(rel2err(jf),run_times(jf),'k.-','markersize',ms); hold on;
   semilogx(rel2err(jnp),run_times(jnp),'ms-','markersize',ms);
   if o.nfftpres>0
@@ -68,7 +76,9 @@ for n = 1:numel(Ms)                        % ....... loop over cases
   axis tight; v=axis; axis([6e-13 1e-1 0 v(4)]);
   xlabel('$\epsilon$ (relative $l_2$ error)','interpreter','latex');
   ylabel('wall-clock time (s)');
-  if mod(n,4)==1, legend(legcel, 'location','northeast'); end
+  if mod(n,4)==1
+    legend(legcel, 'location','best');
+  end
   
   if nudist==0     % decide NU pt dist names appearing on plots
     if dim==1, nudnam='rand', elseif dim==2, nudnam='rand square'; else, nudnam='rand cube'; end
@@ -80,6 +90,7 @@ for n = 1:numel(Ms)                        % ....... loop over cases
   tstr = sprintf('type-%d, %d thread%s: $N=%d^%d$, $M=$ %.2g, %s',ty,nthreads,plural,N,dim,M,nudnam);
   title(tstr,'interpreter','latex');
 
+  % inset...
   if dim==3
   pos = [.67 .67]; if n==1, pos = [.13 .59]; elseif n==5, pos(2)= .45; end
   axes('position',[pos .25 .25]);         % inset (comes after title!)
@@ -87,13 +98,13 @@ for n = 1:numel(Ms)                        % ....... loop over cases
     pos = [.17 .55]; if nthreads==1, pos = [.17 .17]; end
     axes('position',[pos .17 .17]);         % inset (comes after title!)
   end
-  [x y z nam] = nudata(dim,nudist,2500);
+  if dim>1, [x y z nam] = nudata(dim,nudist,2500); end
   if dim==2
     plot(x,y,'.','markersize',.5);
   elseif dim==3
     plot3(x,y,z,'.','markersize',.5); axis vis3d; view(20,10);
   end
-  axis equal tight off
+  if dim>1, axis equal tight off; end
   
   set(gcf,'paperposition', [0 0 4 3.5]);
   print('-depsc2',[data '.eps'])

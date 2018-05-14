@@ -18,6 +18,7 @@ function benchallcodes(ty,dim,N,M,nudist,multithreaded,outname,o)
 %              0: no pre psi,  1: also test pre psi,  2: also test pre full psi.
 %                                (3d needs ~ 600B/NUpt)  (needs ~ 35kB/NUpt)
 %   memcpu = 0 (no memorygraph, default), 1 (memorygraph)
+%   reps = 1,2,3... (default 1): number of repetitions to take the best of.
 %
 % Codes currently benchmarked:                   outname indices for each code:
 %  FINUFFT                                       jf
@@ -46,6 +47,7 @@ if nargin<7, outname='temp'; end
 if nargin<8, o = []; end
 if ~isfield(o,'nfftpres'), o.nfftpres = 0; end  % 2
 if ~isfield(o,'memcpu'), o.memcpu = 0; end
+if ~isfield(o,'reps'), o.reps=1; end
 
 setuppaths(multithreaded);
 nthreads_avail = java.lang.Runtime.getRuntime().availableProcessors;
@@ -205,10 +207,18 @@ for j=1:length(ALGS), ALG=ALGS{j};  % ================ main run loop
   fprintf('  init done in %.3g s\n',init_times(j))
   fprintf('Running %s...',ALG.name);
   if o.memcpu, memorygraph('label',[ALG.name ' run']); end
-  tA=tic;
-  X = ALG.run(ALG.algopts,x,y,z,data_in,N1,N2,N3,init_data);   % run it!
-  run_times(j)=toc(tA);
-  fprintf('  run done in %.3g s\n',run_times(j))
+  reps = o.reps; if j==1, reps=1; end  % don't test reps for "truth"
+  for r=1:reps
+    tA=tic;
+    X = ALG.run(ALG.algopts,x,y,z,data_in,N1,N2,N3,init_data);   % run it!
+    runtimelist(r)=toc(tA);
+  end
+  run_times(j)=min(runtimelist);
+  if reps==1
+    fprintf('  run done in %.3g s\n',run_times(j))
+  else
+    fprintf('  best of %d runs took %.3g s\n',reps,run_times(j))
+  end
   clear init_data             % added in case causes mem leak
   if j==1                     % save properties of the truth
     X0 = X; outputl1 = sum(abs(X0(:))); outputl2 = norm(X0(:));

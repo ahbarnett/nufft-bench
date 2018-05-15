@@ -1,0 +1,37 @@
+>> gen_comparexeonall
+Path setup for irt appears to have succeeded.
+running algs & computing error metrics for each one...
+(1/27) Initializing truth(1d1)...  init done in 0.00176 s
+Running truth(1d1)...  run done in 255 s
+(2/27) Initializing finufft(0.01)...  init done in 0.000929 s
+Running finufft(0.01)...  best of 3 runs took 4.5 s
+(3/27) Initializing finufft(0.001)...  init done in 0.00127 s
+Running finufft(0.001)...  best of 3 runs took 4.21 s
+(4/27) Initializing finufft(0.0001)...  init done in 0.000471 s
+Running finufft(0.0001)...  best of 3 runs took 4.2 s
+(5/27) Initializing finufft(1e-05)...  init done in 0.0029 s
+Running finufft(1e-05)...  best of 3 runs took 4.33 s
+(6/27) Initializing finufft(1e-06)...  init done in 0.000281 s
+Running finufft(1e-06)...  best of 3 runs took 4.41 s
+(7/27) Initializing finufft(1e-07)...  init done in 0.000178 s
+Running finufft(1e-07)...  best of 3 runs took 4.4 s
+(8/27) Initializing finufft(1e-08)...  init done in 0.00014 s
+Running finufft(1e-08)...  best of 3 runs took 4.23 s
+(9/27) Initializing finufft(1e-09)...  init done in 0.000156 s
+Running finufft(1e-09)...  best of 3 runs took 4.38 s
+(10/27) Initializing finufft(1e-10)...  init done in 0.000201 s
+Running finufft(1e-10)...  best of 3 runs took 4.59 s
+(11/27) Initializing finufft(1e-11)...  init done in 0.000175 s
+Running finufft(1e-11)...  best of 3 runs took 4.42 s
+(12/27) Initializing finufft(1e-12)...  init done in 0.000135 s
+Running finufft(1e-12)...  best of 3 runs took 4.43 s
+(13/27) Initializing nfft(1) - dummy...  Creating nfft plan (dim=1) & setting nodes: 6473.48 s
+  time for nfft_precompute_psi: 4.86744 s
+  init done in 6.48e+03 s
+Running nfft(1) - dummy...Invalid or deleted object.
+Error in benchallcodes>run_nfft_adj (line 363)
+init_data.plan.f=d;
+Error in benchallcodes (line 213)
+    X = ALG.run(ALG.algopts,x,y,z,data_in,N1,N2,N3,init_data);   % run it!
+Error in gen_comparexeonall (line 20)
+        benchallcodes(ty,dim,N,M,nudist,multithreaded,outname,o); 

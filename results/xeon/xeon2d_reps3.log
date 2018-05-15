@@ -1,0 +1,1866 @@
+>> gen_comparexeonall
+Path setup for irt appears to have succeeded.
+running algs & computing error metrics for each one...
+(1/40) Initializing truth(2d1)...  init done in 0.00323 s
+Running truth(2d1)...  run 1 done in 5.18 s
+(2/40) Initializing finufft(0.01)...  init done in 0.00114 s
+Running finufft(0.01)...  run 1 done in 1.88 s
+  run 2 done in 1.84 s
+  run 3 done in 2.13 s
+      best of 3 runs took 1.84 s
+(3/40) Initializing finufft(0.001)...  init done in 0.00117 s
+Running finufft(0.001)...  run 1 done in 2.35 s
+  run 2 done in 1.85 s
+  run 3 done in 1.87 s
+      best of 3 runs took 1.85 s
+(4/40) Initializing finufft(0.0001)...  init done in 0.000637 s
+Running finufft(0.0001)...  run 1 done in 1.99 s
+  run 2 done in 1.9 s
+  run 3 done in 1.96 s
+      best of 3 runs took 1.9 s
+(5/40) Initializing finufft(1e-05)...  init done in 0.003 s
+Running finufft(1e-05)...  run 1 done in 1.95 s
+  run 2 done in 1.92 s
+  run 3 done in 2.09 s
+      best of 3 runs took 1.92 s
+(6/40) Initializing finufft(1e-06)...  init done in 0.000728 s
+Running finufft(1e-06)...  run 1 done in 2.47 s
+  run 2 done in 2.06 s
+  run 3 done in 2.03 s
+      best of 3 runs took 2.03 s
+(7/40) Initializing finufft(1e-07)...  init done in 0.000226 s
+Running finufft(1e-07)...  run 1 done in 2.11 s
+  run 2 done in 2.08 s
+  run 3 done in 2.05 s
+      best of 3 runs took 2.05 s
+(8/40) Initializing finufft(1e-08)...  init done in 0.000413 s
+Running finufft(1e-08)...  run 1 done in 2.24 s
+  run 2 done in 2.31 s
+  run 3 done in 2.19 s
+      best of 3 runs took 2.19 s
+(9/40) Initializing finufft(1e-09)...  init done in 0.00023 s
+Running finufft(1e-09)...  run 1 done in 2.27 s
+  run 2 done in 2.17 s
+  run 3 done in 2.08 s
+      best of 3 runs took 2.08 s
+(10/40) Initializing finufft(1e-10)...  init done in 0.000513 s
+Running finufft(1e-10)...  run 1 done in 2.54 s
+  run 2 done in 2.39 s
+  run 3 done in 2.58 s
+      best of 3 runs took 2.39 s
+(11/40) Initializing finufft(1e-11)...  init done in 0.000156 s
+Running finufft(1e-11)...  run 1 done in 2.35 s
+  run 2 done in 2.42 s
+  run 3 done in 2.65 s
+      best of 3 runs took 2.35 s
+(12/40) Initializing finufft(1e-12)...  init done in 0.000185 s
+Running finufft(1e-12)...  run 1 done in 2.98 s
+  run 2 done in 2.74 s
+  run 3 done in 2.77 s
+      best of 3 runs took 2.74 s
+(13/40) Initializing nfft(1) - dummy...  Creating nfft plan (dim=2) & setting nodes: 7.53448 s
+  time for nfft_precompute_psi: 4.36555 s
+  init done in 11.9 s
+Running nfft(1) - dummy...  run 1 done in 4.22 s
+  run 2 done in 3.67 s
+  run 3 done in 3.67 s
+      best of 3 runs took 3.67 s
+(14/40) Initializing nfft(1,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 0.650112 s
+  time for nfft_precompute_psi: 0.000354 s
+  init done in 0.668 s
+Running nfft(1,pre=0)...  run 1 done in 8.6 s
+  run 2 done in 8.86 s
+  run 3 done in 8.25 s
+      best of 3 runs took 8.25 s
+(15/40) Initializing nfft(2,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 0.677851 s
+  time for nfft_precompute_psi: 0.000401 s
+  init done in 0.695 s
+Running nfft(2,pre=0)...  run 1 done in 10.3 s
+  run 2 done in 9.69 s
+  run 3 done in 10.4 s
+      best of 3 runs took 9.69 s
+(16/40) Initializing nfft(3,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 0.668126 s
+  time for nfft_precompute_psi: 0.000364 s
+  init done in 0.685 s
+Running nfft(3,pre=0)...  run 1 done in 10.6 s
+  run 2 done in 10.6 s
+  run 3 done in 10.5 s
+      best of 3 runs took 10.5 s
+(17/40) Initializing nfft(4,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 0.842055 s
+  time for nfft_precompute_psi: 0.001257 s
+  init done in 0.88 s
+Running nfft(4,pre=0)...  run 1 done in 13.1 s
+  run 2 done in 13.1 s
+  run 3 done in 12.6 s
+      best of 3 runs took 12.6 s
+(18/40) Initializing nfft(5,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 0.652856 s
+  time for nfft_precompute_psi: 0.000123 s
+  init done in 0.67 s
+Running nfft(5,pre=0)...  run 1 done in 13.6 s
+  run 2 done in 13.5 s
+  run 3 done in 15 s
+      best of 3 runs took 13.5 s
+(19/40) Initializing nfft(6,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 0.699839 s
+  time for nfft_precompute_psi: 0.000142 s
+  init done in 0.717 s
+Running nfft(6,pre=0)...  run 1 done in 17.1 s
+  run 2 done in 16.3 s
+  run 3 done in 16.6 s
+      best of 3 runs took 16.3 s
+(20/40) Initializing nfft(1,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 0.669863 s
+  time for nfft_precompute_psi: 4.65849 s
+  init done in 5.34 s
+Running nfft(1,pre=1)...  run 1 done in 3.88 s
+  run 2 done in 3.27 s
+  run 3 done in 3.18 s
+      best of 3 runs took 3.18 s
+(21/40) Initializing nfft(2,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 0.643821 s
+  time for nfft_precompute_psi: 6.26852 s
+  init done in 6.93 s
+Running nfft(2,pre=1)...  run 1 done in 3.87 s
+  run 2 done in 3.79 s
+  run 3 done in 3.65 s
+      best of 3 runs took 3.65 s
+(22/40) Initializing nfft(3,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 0.642516 s
+  time for nfft_precompute_psi: 7.34135 s
+  init done in 8 s
+Running nfft(3,pre=1)...  run 1 done in 4.67 s
+  run 2 done in 4.67 s
+  run 3 done in 5.06 s
+      best of 3 runs took 4.67 s
+(23/40) Initializing nfft(4,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 0.799425 s
+  time for nfft_precompute_psi: 9.24741 s
+  init done in 10.1 s
+Running nfft(4,pre=1)...  run 1 done in 5.61 s
+  run 2 done in 5.31 s
+  run 3 done in 5.26 s
+      best of 3 runs took 5.26 s
+(24/40) Initializing nfft(5,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 0.637214 s
+  time for nfft_precompute_psi: 10.1528 s
+  init done in 10.8 s
+Running nfft(5,pre=1)...  run 1 done in 7.28 s
+  run 2 done in 7.13 s
+  run 3 done in 7.33 s
+      best of 3 runs took 7.13 s
+(25/40) Initializing nfft(6,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 0.665253 s
+  time for nfft_precompute_psi: 10.7111 s
+  init done in 11.4 s
+Running nfft(6,pre=1)...  run 1 done in 6.97 s
+  run 2 done in 6.9 s
+  run 3 done in 6.92 s
+      best of 3 runs took 6.9 s
+(26/40) Initializing nfft(1,pre=2)...  Creating nfft plan (dim=2) & setting nodes: 0.639741 s
+  time for nfft_precompute_psi: 13.4646 s
+  init done in 14.1 s
+Running nfft(1,pre=2)...  run 1 done in 2.95 s
+  run 2 done in 2.91 s
+  run 3 done in 3.58 s
+      best of 3 runs took 2.91 s
+(27/40) Initializing nfft(2,pre=2)...  Creating nfft plan (dim=2) & setting nodes: 0.751971 s
+  time for nfft_precompute_psi: 28.386 s
+  init done in 29.2 s
+Running nfft(2,pre=2)...  run 1 done in 6.83 s
+  run 2 done in 8.09 s
+  run 3 done in 6.52 s
+      best of 3 runs took 6.52 s
+(28/40) Initializing CMCL(0.1)...  init done in 0.000248 s
+Running CMCL(0.1)...  run 1 done in 3.46 s
+  run 2 done in 3.98 s
+  run 3 done in 3.86 s
+      best of 3 runs took 3.46 s
+(29/40) Initializing CMCL(0.01)...  init done in 0.000496 s
+Running CMCL(0.01)...  run 1 done in 5.45 s
+  run 2 done in 4.85 s
+  run 3 done in 4.66 s
+      best of 3 runs took 4.66 s
+(30/40) Initializing CMCL(0.001)...  init done in 0.000364 s
+Running CMCL(0.001)...  run 1 done in 6.66 s
+  run 2 done in 6.98 s
+  run 3 done in 6.52 s
+      best of 3 runs took 6.52 s
+(31/40) Initializing CMCL(0.0001)...  init done in 0.000304 s
+Running CMCL(0.0001)...  run 1 done in 9.06 s
+  run 2 done in 11.7 s
+  run 3 done in 9.29 s
+      best of 3 runs took 9.06 s
+(32/40) Initializing CMCL(1e-05)...  init done in 0.000274 s
+Running CMCL(1e-05)...  run 1 done in 11.5 s
+  run 2 done in 11.7 s
+  run 3 done in 12.9 s
+      best of 3 runs took 11.5 s
+(33/40) Initializing CMCL(1e-06)...  init done in 0.000334 s
+Running CMCL(1e-06)...  run 1 done in 20.8 s
+  run 2 done in 21.2 s
+  run 3 done in 18.9 s
+      best of 3 runs took 18.9 s
+(34/40) Initializing CMCL(1e-07)...  init done in 0.000257 s
+Running CMCL(1e-07)...  run 1 done in 24.8 s
+  run 2 done in 24.9 s
+  run 3 done in 26 s
+      best of 3 runs took 24.8 s
+(35/40) Initializing CMCL(1e-08)...  init done in 0.000299 s
+Running CMCL(1e-08)...  run 1 done in 28.1 s
+  run 2 done in 33.7 s
+  run 3 done in 34.9 s
+      best of 3 runs took 28.1 s
+(36/40) Initializing CMCL(1e-09)...  init done in 0.000196 s
+Running CMCL(1e-09)...  run 1 done in 35.2 s
+  run 2 done in 34.2 s
+  run 3 done in 38.3 s
+      best of 3 runs took 34.2 s
+(37/40) Initializing CMCL(1e-10)...  init done in 0.000243 s
+Running CMCL(1e-10)...  run 1 done in 41.2 s
+  run 2 done in 43.7 s
+  run 3 done in 45.8 s
+      best of 3 runs took 41.2 s
+(38/40) Initializing CMCL(1e-11)...  init done in 0.000218 s
+Running CMCL(1e-11)...  run 1 done in 49.8 s
+  run 2 done in 44.2 s
+  run 3 done in 47.3 s
+      best of 3 runs took 44.2 s
+(39/40) Initializing Fessler(J=2)...  init done in 69.7 s
+Running Fessler(J=2)...  run 1 done in 1.58 s
+  run 2 done in 1.23 s
+  run 3 done in 1.23 s
+      best of 3 runs took 1.23 s
+(40/40) Initializing Fessler(J=4)...  init done in 149 s
+Running Fessler(J=4)...  run 1 done in 2.71 s
+  run 2 done in 2.91 s
+  run 3 done in 2.55 s
+      best of 3 runs took 2.55 s
+
+
+           name    init_time(s)     run_time(s)         rel2err           therr
+     truth(2d1)        0.003227         5.17997               0               0
+  finufft(0.01)        0.001142         1.83879      0.00917976     2.64258e-05
+ finufft(0.001)        0.001172         1.85279      0.00186488      6.5525e-06
+finufft(0.0001)        0.000637         1.89845     9.91926e-05     3.92193e-07
+ finufft(1e-05)        0.003005         1.92209     9.69737e-06     2.97068e-08
+ finufft(1e-06)        0.000728         2.02877     1.13304e-06     3.50983e-09
+ finufft(1e-07)        0.000226         2.05141     1.44983e-07     4.92591e-10
+ finufft(1e-08)        0.000413         2.18893      1.7478e-08     6.30207e-11
+ finufft(1e-09)         0.00023         2.08073     1.91744e-09     8.49957e-12
+ finufft(1e-10)        0.000513         2.38873     1.95685e-10     8.94598e-13
+ finufft(1e-11)        0.000156         2.34948     2.01088e-11     7.49525e-14
+ finufft(1e-12)        0.000185          2.7368     2.32736e-12      9.4551e-15
+nfft(1) - dummy         11.9297         3.66914       0.0232433     7.39873e-05
+  nfft(1,pre=0)        0.667713         8.25117       0.0232433     7.39873e-05
+  nfft(2,pre=0)        0.695445           9.694     0.000314437     1.24422e-06
+  nfft(3,pre=0)        0.684522         10.4945      3.3712e-06     1.23867e-08
+  nfft(4,pre=0)        0.879921         12.6251     3.52908e-08     1.73179e-10
+  nfft(5,pre=0)        0.669612         13.5279     3.74703e-10     2.03106e-12
+  nfft(6,pre=0)         0.71733         16.3161     4.02048e-12     2.63509e-14
+  nfft(1,pre=1)          5.3445         3.18157       0.0232433     7.39873e-05
+  nfft(2,pre=1)         6.92653         3.64848     0.000314437     1.24422e-06
+  nfft(3,pre=1)         7.99821         4.66531      3.3712e-06     1.23867e-08
+  nfft(4,pre=1)          10.067         5.25625     3.52908e-08     1.73179e-10
+  nfft(5,pre=1)          10.805         7.12996     3.74703e-10     2.03106e-12
+  nfft(6,pre=1)         11.3957         6.90443     4.02048e-12     2.63509e-14
+  nfft(1,pre=2)         14.1241         2.90601       0.0232433     7.39873e-05
+  nfft(2,pre=2)         29.1553          6.5217     0.000314437     1.24422e-06
+      CMCL(0.1)        0.000248         3.45744      0.00899633     2.50678e-05
+     CMCL(0.01)        0.000496         4.65997     0.000958837     2.61287e-06
+    CMCL(0.001)        0.000364         6.51547     8.39778e-05     2.53223e-07
+   CMCL(0.0001)        0.000304          9.0553     8.10591e-06      3.0636e-08
+    CMCL(1e-05)        0.000274         11.5142     1.08146e-06     4.39311e-09
+    CMCL(1e-06)        0.000334         18.8736     1.31472e-08     5.61848e-11
+    CMCL(1e-07)        0.000257         24.8133     1.38617e-09     6.88223e-12
+    CMCL(1e-08)        0.000299         28.0692     1.86405e-10     9.53364e-13
+    CMCL(1e-09)        0.000196          34.222     2.32157e-11     1.16188e-13
+    CMCL(1e-10)        0.000243           41.22     2.41122e-12     1.23913e-14
+    CMCL(1e-11)        0.000218         44.2222     4.01437e-13      1.7992e-15
+   Fessler(J=2)           69.72         1.23219       0.0440974     9.23366e-05
+   Fessler(J=4)         148.995         2.54988     0.000512881     1.59962e-06
+Path setup for irt appears to have succeeded.
+running algs & computing error metrics for each one...
+(1/40) Initializing truth(2d1)...  init done in 0.000346 s
+Running truth(2d1)...  run 1 done in 0.591 s
+(2/40) Initializing finufft(0.01)...  init done in 0.000328 s
+Running finufft(0.01)...  run 1 done in 0.997 s
+  run 2 done in 0.842 s
+  run 3 done in 0.998 s
+      best of 3 runs took 0.842 s
+(3/40) Initializing finufft(0.001)...  init done in 0.000165 s
+Running finufft(0.001)...  run 1 done in 1.06 s
+  run 2 done in 1.12 s
+  run 3 done in 0.951 s
+      best of 3 runs took 0.951 s
+(4/40) Initializing finufft(0.0001)...  init done in 0.00012 s
+Running finufft(0.0001)...  run 1 done in 1.15 s
+  run 2 done in 0.998 s
+  run 3 done in 1.1 s
+      best of 3 runs took 0.998 s
+(5/40) Initializing finufft(1e-05)...  init done in 0.000108 s
+Running finufft(1e-05)...  run 1 done in 1.21 s
+  run 2 done in 1.11 s
+  run 3 done in 1.12 s
+      best of 3 runs took 1.11 s
+(6/40) Initializing finufft(1e-06)...  init done in 0.000112 s
+Running finufft(1e-06)...  run 1 done in 1.4 s
+  run 2 done in 1.27 s
+  run 3 done in 1.21 s
+      best of 3 runs took 1.21 s
+(7/40) Initializing finufft(1e-07)...  init done in 0.000227 s
+Running finufft(1e-07)...  run 1 done in 1.22 s
+  run 2 done in 1.27 s
+  run 3 done in 1.56 s
+      best of 3 runs took 1.22 s
+(8/40) Initializing finufft(1e-08)...  init done in 0.000251 s
+Running finufft(1e-08)...  run 1 done in 1.66 s
+  run 2 done in 1.33 s
+  run 3 done in 1.27 s
+      best of 3 runs took 1.27 s
+(9/40) Initializing finufft(1e-09)...  init done in 0.000488 s
+Running finufft(1e-09)...  run 1 done in 1.83 s
+  run 2 done in 1.43 s
+  run 3 done in 1.4 s
+      best of 3 runs took 1.4 s
+(10/40) Initializing finufft(1e-10)...  init done in 0.000118 s
+Running finufft(1e-10)...  run 1 done in 1.95 s
+  run 2 done in 1.72 s
+  run 3 done in 1.63 s
+      best of 3 runs took 1.63 s
+(11/40) Initializing finufft(1e-11)...  init done in 0.000282 s
+Running finufft(1e-11)...  run 1 done in 1.69 s
+  run 2 done in 1.46 s
+  run 3 done in 1.47 s
+      best of 3 runs took 1.46 s
+(12/40) Initializing finufft(1e-12)...  init done in 0.000136 s
+Running finufft(1e-12)...  run 1 done in 2.11 s
+  run 2 done in 1.83 s
+  run 3 done in 1.79 s
+      best of 3 runs took 1.79 s
+(13/40) Initializing nfft(1) - dummy...  Creating nfft plan (dim=2) & setting nodes: 0.644855 s
+  time for nfft_precompute_psi: 4.6314 s
+  init done in 5.3 s
+Running nfft(1) - dummy...  run 1 done in 2.14 s
+  run 2 done in 1.82 s
+  run 3 done in 1.87 s
+      best of 3 runs took 1.82 s
+(14/40) Initializing nfft(1,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 0.629049 s
+  time for nfft_precompute_psi: 0.00012 s
+  init done in 0.645 s
+Running nfft(1,pre=0)...  run 1 done in 5.87 s
+  run 2 done in 5.57 s
+  run 3 done in 6.35 s
+      best of 3 runs took 5.57 s
+(15/40) Initializing nfft(2,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 0.684437 s
+  time for nfft_precompute_psi: 0.000124 s
+  init done in 0.7 s
+Running nfft(2,pre=0)...  run 1 done in 7.39 s
+  run 2 done in 7.26 s
+  run 3 done in 7.33 s
+      best of 3 runs took 7.26 s
+(16/40) Initializing nfft(3,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 0.703857 s
+  time for nfft_precompute_psi: 0.000115 s
+  init done in 0.719 s
+Running nfft(3,pre=0)...  run 1 done in 9.02 s
+  run 2 done in 8.91 s
+  run 3 done in 8.58 s
+      best of 3 runs took 8.58 s
+(17/40) Initializing nfft(4,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 0.684378 s
+  time for nfft_precompute_psi: 7.3e-05 s
+  init done in 0.7 s
+Running nfft(4,pre=0)...  run 1 done in 10.6 s
+  run 2 done in 10.3 s
+  run 3 done in 10.7 s
+      best of 3 runs took 10.3 s
+(18/40) Initializing nfft(5,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 0.771805 s
+  time for nfft_precompute_psi: 0.00014 s
+  init done in 0.79 s
+Running nfft(5,pre=0)...  run 1 done in 12.1 s
+  run 2 done in 12.3 s
+  run 3 done in 11.9 s
+      best of 3 runs took 11.9 s
+(19/40) Initializing nfft(6,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 0.673434 s
+  time for nfft_precompute_psi: 8.5e-05 s
+  init done in 0.689 s
+Running nfft(6,pre=0)...  run 1 done in 13.1 s
+  run 2 done in 12.7 s
+  run 3 done in 13.4 s
+      best of 3 runs took 12.7 s
+(20/40) Initializing nfft(1,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 0.675194 s
+  time for nfft_precompute_psi: 4.61803 s
+  init done in 5.31 s
+Running nfft(1,pre=1)...  run 1 done in 1.85 s
+  run 2 done in 1.61 s
+  run 3 done in 1.71 s
+      best of 3 runs took 1.61 s
+(21/40) Initializing nfft(2,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 0.600594 s
+  time for nfft_precompute_psi: 5.64882 s
+  init done in 6.27 s
+Running nfft(2,pre=1)...  run 1 done in 2 s
+  run 2 done in 1.73 s
+  run 3 done in 1.76 s
+      best of 3 runs took 1.73 s
+(22/40) Initializing nfft(3,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 0.641363 s
+  time for nfft_precompute_psi: 6.99474 s
+  init done in 7.65 s
+Running nfft(3,pre=1)...  run 1 done in 2.51 s
+  run 2 done in 2.26 s
+  run 3 done in 2.94 s
+      best of 3 runs took 2.26 s
+(23/40) Initializing nfft(4,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 0.67081 s
+  time for nfft_precompute_psi: 8.57386 s
+  init done in 9.26 s
+Running nfft(4,pre=1)...  run 1 done in 3.76 s
+  run 2 done in 3.35 s
+  run 3 done in 3.39 s
+      best of 3 runs took 3.35 s
+(24/40) Initializing nfft(5,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 0.730181 s
+  time for nfft_precompute_psi: 9.44638 s
+  init done in 10.2 s
+Running nfft(5,pre=1)...  run 1 done in 3.63 s
+  run 2 done in 3.57 s
+  run 3 done in 3.15 s
+      best of 3 runs took 3.15 s
+(25/40) Initializing nfft(6,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 0.674394 s
+  time for nfft_precompute_psi: 10.4525 s
+  init done in 11.1 s
+Running nfft(6,pre=1)...  run 1 done in 4.66 s
+  run 2 done in 4.74 s
+  run 3 done in 4.59 s
+      best of 3 runs took 4.59 s
+(26/40) Initializing nfft(1,pre=2)...  Creating nfft plan (dim=2) & setting nodes: 0.652148 s
+  time for nfft_precompute_psi: 13.5559 s
+  init done in 14.2 s
+Running nfft(1,pre=2)...  run 1 done in 2.42 s
+  run 2 done in 1.69 s
+  run 3 done in 1.56 s
+      best of 3 runs took 1.56 s
+(27/40) Initializing nfft(2,pre=2)...  Creating nfft plan (dim=2) & setting nodes: 0.635198 s
+  time for nfft_precompute_psi: 27.2867 s
+  init done in 27.9 s
+Running nfft(2,pre=2)...  run 1 done in 2.48 s
+  run 2 done in 2.19 s
+  run 3 done in 2.21 s
+      best of 3 runs took 2.19 s
+(28/40) Initializing CMCL(0.1)...  init done in 0.000487 s
+Running CMCL(0.1)...  run 1 done in 1.8 s
+  run 2 done in 1.53 s
+  run 3 done in 1.54 s
+      best of 3 runs took 1.53 s
+(29/40) Initializing CMCL(0.01)...  init done in 0.000141 s
+Running CMCL(0.01)...  run 1 done in 1.99 s
+  run 2 done in 2 s
+  run 3 done in 1.81 s
+      best of 3 runs took 1.81 s
+(30/40) Initializing CMCL(0.001)...  init done in 0.00019 s
+Running CMCL(0.001)...  run 1 done in 2.21 s
+  run 2 done in 2.08 s
+  run 3 done in 2.09 s
+      best of 3 runs took 2.08 s
+(31/40) Initializing CMCL(0.0001)...  init done in 0.000141 s
+Running CMCL(0.0001)...  run 1 done in 2.76 s
+  run 2 done in 2.76 s
+  run 3 done in 2.61 s
+      best of 3 runs took 2.61 s
+(32/40) Initializing CMCL(1e-05)...  init done in 0.000115 s
+Running CMCL(1e-05)...  run 1 done in 3.25 s
+  run 2 done in 3.14 s
+  run 3 done in 3.08 s
+      best of 3 runs took 3.08 s
+(33/40) Initializing CMCL(1e-06)...  init done in 0.000544 s
+Running CMCL(1e-06)...  run 1 done in 4.2 s
+  run 2 done in 4.12 s
+  run 3 done in 4.11 s
+      best of 3 runs took 4.11 s
+(34/40) Initializing CMCL(1e-07)...  init done in 0.000105 s
+Running CMCL(1e-07)...  run 1 done in 5.13 s
+  run 2 done in 5.09 s
+  run 3 done in 4.97 s
+      best of 3 runs took 4.97 s
+(35/40) Initializing CMCL(1e-08)...  init done in 0.000223 s
+Running CMCL(1e-08)...  run 1 done in 6 s
+  run 2 done in 5.78 s
+  run 3 done in 5.76 s
+      best of 3 runs took 5.76 s
+(36/40) Initializing CMCL(1e-09)...  init done in 0.000107 s
+Running CMCL(1e-09)...  run 1 done in 6.91 s
+  run 2 done in 6.88 s
+  run 3 done in 6.81 s
+      best of 3 runs took 6.81 s
+(37/40) Initializing CMCL(1e-10)...  init done in 0.000215 s
+Running CMCL(1e-10)...  run 1 done in 7.7 s
+  run 2 done in 7.55 s
+  run 3 done in 7.6 s
+      best of 3 runs took 7.55 s
+(38/40) Initializing CMCL(1e-11)...  init done in 0.000127 s
+Running CMCL(1e-11)...  run 1 done in 8.94 s
+  run 2 done in 8.75 s
+  run 3 done in 8.72 s
+      best of 3 runs took 8.72 s
+(39/40) Initializing Fessler(J=2)...  init done in 66.5 s
+Running Fessler(J=2)...  run 1 done in 1.09 s
+  run 2 done in 0.885 s
+  run 3 done in 0.922 s
+      best of 3 runs took 0.885 s
+(40/40) Initializing Fessler(J=4)...  init done in 147 s
+Running Fessler(J=4)...  run 1 done in 1.37 s
+  run 2 done in 1.02 s
+  run 3 done in 1.08 s
+      best of 3 runs took 1.02 s
+
+
+           name    init_time(s)     run_time(s)         rel2err           therr
+     truth(2d1)        0.000346        0.590577               0               0
+  finufft(0.01)        0.000328        0.842357      0.00917172     2.70456e-05
+ finufft(0.001)        0.000165        0.951225       0.0018619     6.78449e-06
+finufft(0.0001)         0.00012        0.998122     9.90848e-05     4.24229e-07
+ finufft(1e-05)        0.000108         1.11191     9.69149e-06     3.24159e-08
+ finufft(1e-06)        0.000112         1.21028     1.13096e-06     3.29104e-09
+ finufft(1e-07)        0.000227         1.21918     1.44599e-07     4.43102e-10
+ finufft(1e-08)        0.000251         1.27386     1.74398e-08     6.13779e-11
+ finufft(1e-09)        0.000488         1.39623     1.91537e-09     8.70437e-12
+ finufft(1e-10)        0.000118         1.63061     1.95879e-10     9.73265e-13
+ finufft(1e-11)        0.000282         1.45852     2.00821e-11     8.18554e-14
+ finufft(1e-12)        0.000136         1.78697     2.31682e-12     8.76636e-15
+nfft(1) - dummy         5.30026         1.82477       0.0232736     6.38236e-05
+  nfft(1,pre=0)         0.64456         5.57496       0.0232736     6.38236e-05
+  nfft(2,pre=0)        0.699833         7.26267     0.000314049     1.08901e-06
+  nfft(3,pre=0)        0.718577         8.58496     3.36643e-06     1.20388e-08
+  nfft(4,pre=0)        0.700357          10.333     3.52614e-08     1.61132e-10
+  nfft(5,pre=0)        0.790257          11.908     3.74688e-10     1.93872e-12
+  nfft(6,pre=0)        0.689482         12.6997     4.02124e-12     2.60291e-14
+  nfft(1,pre=1)         5.30799         1.61212       0.0232736     6.38236e-05
+  nfft(2,pre=1)         6.26814         1.73212     0.000314049     1.08901e-06
+  nfft(3,pre=1)         7.65038         2.25963     3.36643e-06     1.20388e-08
+  nfft(4,pre=1)          9.2639         3.35319     3.52614e-08     1.61132e-10
+  nfft(5,pre=1)         10.1956         3.15103     3.74688e-10     1.93872e-12
+  nfft(6,pre=1)         11.1457         4.59122     4.02124e-12     2.60291e-14
+  nfft(1,pre=2)         14.2273         1.56462       0.0232736     6.38236e-05
+  nfft(2,pre=2)         27.9411         2.18674     0.000314049     1.08901e-06
+      CMCL(0.1)        0.000487         1.53183      0.00898334     2.44489e-05
+     CMCL(0.01)        0.000141         1.81245     0.000957367     2.63926e-06
+    CMCL(0.001)         0.00019          2.0836      8.3888e-05     2.64454e-07
+   CMCL(0.0001)        0.000141         2.61393     8.09084e-06      3.4567e-08
+    CMCL(1e-05)        0.000115         3.08181     1.07879e-06     4.69874e-09
+    CMCL(1e-06)        0.000544         4.11023     1.31362e-08     5.84458e-11
+    CMCL(1e-07)        0.000105          4.9712     1.38488e-09     7.57018e-12
+    CMCL(1e-08)        0.000223         5.76135     1.86107e-10     1.01592e-12
+    CMCL(1e-09)        0.000107         6.81442     2.31929e-11     1.20604e-13
+    CMCL(1e-10)        0.000215         7.55038     2.41023e-12     1.33874e-14
+    CMCL(1e-11)        0.000127         8.72405     4.06295e-13     1.72338e-15
+   Fessler(J=2)         66.5299        0.884917       0.0441086     9.52528e-05
+   Fessler(J=4)         147.405         1.02266     0.000512283     1.68346e-06
+Path setup for irt appears to have succeeded.
+running algs & computing error metrics for each one...
+(1/40) Initializing truth(2d2)...  init done in 0.00126 s
+Running truth(2d2)...  run 1 done in 4.78 s
+(2/40) Initializing finufft(0.01)...  init done in 0.000666 s
+Running finufft(0.01)...  run 1 done in 2.43 s
+  run 2 done in 2.38 s
+  run 3 done in 2.22 s
+      best of 3 runs took 2.22 s
+(3/40) Initializing finufft(0.001)...  init done in 0.000895 s
+Running finufft(0.001)...  run 1 done in 1.94 s
+  run 2 done in 1.81 s
+  run 3 done in 1.8 s
+      best of 3 runs took 1.8 s
+(4/40) Initializing finufft(0.0001)...  init done in 0.000227 s
+Running finufft(0.0001)...  run 1 done in 2.21 s
+  run 2 done in 1.82 s
+  run 3 done in 1.85 s
+      best of 3 runs took 1.82 s
+(5/40) Initializing finufft(1e-05)...  init done in 0.000407 s
+Running finufft(1e-05)...  run 1 done in 2.1 s
+  run 2 done in 1.96 s
+  run 3 done in 1.96 s
+      best of 3 runs took 1.96 s
+(6/40) Initializing finufft(1e-06)...  init done in 0.000338 s
+Running finufft(1e-06)...  run 1 done in 2.52 s
+  run 2 done in 2.37 s
+  run 3 done in 2.18 s
+      best of 3 runs took 2.18 s
+(7/40) Initializing finufft(1e-07)...  init done in 0.000147 s
+Running finufft(1e-07)...  run 1 done in 2.41 s
+  run 2 done in 2.23 s
+  run 3 done in 2.26 s
+      best of 3 runs took 2.23 s
+(8/40) Initializing finufft(1e-08)...  init done in 0.0001 s
+Running finufft(1e-08)...  run 1 done in 2.42 s
+  run 2 done in 2.22 s
+  run 3 done in 2.35 s
+      best of 3 runs took 2.22 s
+(9/40) Initializing finufft(1e-09)...  init done in 0.000242 s
+Running finufft(1e-09)...  run 1 done in 2.63 s
+  run 2 done in 2.46 s
+  run 3 done in 2.48 s
+      best of 3 runs took 2.46 s
+(10/40) Initializing finufft(1e-10)...  init done in 0.000124 s
+Running finufft(1e-10)...  run 1 done in 3.01 s
+  run 2 done in 2.78 s
+  run 3 done in 3.07 s
+      best of 3 runs took 2.78 s
+(11/40) Initializing finufft(1e-11)...  init done in 0.000104 s
+Running finufft(1e-11)...  run 1 done in 2.75 s
+  run 2 done in 2.59 s
+  run 3 done in 2.59 s
+      best of 3 runs took 2.59 s
+(12/40) Initializing finufft(1e-12)...  init done in 0.000193 s
+Running finufft(1e-12)...  run 1 done in 3.05 s
+  run 2 done in 2.9 s
+  run 3 done in 2.9 s
+      best of 3 runs took 2.9 s
+(13/40) Initializing nfft(1) - dummy...  Creating nfft plan (dim=2) & setting nodes: 0.642038 s
+  time for nfft_precompute_psi: 4.38125 s
+  init done in 5.04 s
+Running nfft(1) - dummy...  run 1 done in 3.28 s
+  run 2 done in 3.46 s
+  run 3 done in 4.37 s
+      best of 3 runs took 3.28 s
+(14/40) Initializing nfft(1,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 0.646311 s
+  time for nfft_precompute_psi: 9.5e-05 s
+  init done in 0.662 s
+Running nfft(1,pre=0)...  run 1 done in 6.92 s
+  run 2 done in 7.33 s
+  run 3 done in 7.12 s
+      best of 3 runs took 6.92 s
+(15/40) Initializing nfft(2,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 0.653214 s
+  time for nfft_precompute_psi: 4.9e-05 s
+  init done in 0.669 s
+Running nfft(2,pre=0)...  run 1 done in 8.61 s
+  run 2 done in 8.51 s
+  run 3 done in 8.97 s
+      best of 3 runs took 8.51 s
+(16/40) Initializing nfft(3,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 0.672683 s
+  time for nfft_precompute_psi: 9.6e-05 s
+  init done in 0.689 s
+Running nfft(3,pre=0)...  run 1 done in 10.9 s
+  run 2 done in 10.4 s
+  run 3 done in 11.8 s
+      best of 3 runs took 10.4 s
+(17/40) Initializing nfft(4,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 0.672993 s
+  time for nfft_precompute_psi: 7.8e-05 s
+  init done in 0.689 s
+Running nfft(4,pre=0)...  run 1 done in 13.7 s
+  run 2 done in 11.8 s
+  run 3 done in 12.6 s
+      best of 3 runs took 11.8 s
+(18/40) Initializing nfft(5,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 0.703274 s
+  time for nfft_precompute_psi: 6.4e-05 s
+  init done in 0.72 s
+Running nfft(5,pre=0)...  run 1 done in 13.5 s
+  run 2 done in 13.1 s
+  run 3 done in 13.7 s
+      best of 3 runs took 13.1 s
+(19/40) Initializing nfft(6,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 0.676042 s
+  time for nfft_precompute_psi: 6.5e-05 s
+  init done in 0.692 s
+Running nfft(6,pre=0)...  run 1 done in 15 s
+  run 2 done in 15.1 s
+  run 3 done in 15.4 s
+      best of 3 runs took 15 s
+(20/40) Initializing nfft(1,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 0.660474 s
+  time for nfft_precompute_psi: 4.63224 s
+  init done in 5.31 s
+Running nfft(1,pre=1)...  run 1 done in 3.54 s
+  run 2 done in 3.15 s
+  run 3 done in 3.07 s
+      best of 3 runs took 3.07 s
+(21/40) Initializing nfft(2,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 0.722233 s
+  time for nfft_precompute_psi: 5.79441 s
+  init done in 6.53 s
+Running nfft(2,pre=1)...  run 1 done in 3.78 s
+  run 2 done in 3.72 s
+  run 3 done in 3.64 s
+      best of 3 runs took 3.64 s
+(22/40) Initializing nfft(3,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 0.659926 s
+  time for nfft_precompute_psi: 7.26454 s
+  init done in 7.94 s
+Running nfft(3,pre=1)...  run 1 done in 4.26 s
+  run 2 done in 4.63 s
+  run 3 done in 4.08 s
+      best of 3 runs took 4.08 s
+(23/40) Initializing nfft(4,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 0.666195 s
+  time for nfft_precompute_psi: 8.47323 s
+  init done in 9.15 s
+Running nfft(4,pre=1)...  run 1 done in 5.99 s
+  run 2 done in 5.18 s
+  run 3 done in 4.64 s
+      best of 3 runs took 4.64 s
+(24/40) Initializing nfft(5,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 0.667628 s
+  time for nfft_precompute_psi: 9.75977 s
+  init done in 10.4 s
+Running nfft(5,pre=1)...  run 1 done in 5.97 s
+  run 2 done in 5.89 s
+  run 3 done in 5.43 s
+      best of 3 runs took 5.43 s
+(25/40) Initializing nfft(6,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 0.668082 s
+  time for nfft_precompute_psi: 10.5303 s
+  init done in 11.2 s
+Running nfft(6,pre=1)...  run 1 done in 6.58 s
+  run 2 done in 7.95 s
+  run 3 done in 8.54 s
+      best of 3 runs took 6.58 s
+(26/40) Initializing nfft(1,pre=2)...  Creating nfft plan (dim=2) & setting nodes: 0.66205 s
+  time for nfft_precompute_psi: 13.7424 s
+  init done in 14.4 s
+Running nfft(1,pre=2)...  run 1 done in 3.22 s
+  run 2 done in 3.13 s
+  run 3 done in 2.79 s
+      best of 3 runs took 2.79 s
+(27/40) Initializing nfft(2,pre=2)...  Creating nfft plan (dim=2) & setting nodes: 0.656063 s
+  time for nfft_precompute_psi: 27.3444 s
+  init done in 28 s
+Running nfft(2,pre=2)...  run 1 done in 5.03 s
+  run 2 done in 4.88 s
+  run 3 done in 5.07 s
+      best of 3 runs took 4.88 s
+(28/40) Initializing CMCL(0.1)...  init done in 0.000178 s
+Running CMCL(0.1)...  run 1 done in 2.39 s
+  run 2 done in 2.25 s
+  run 3 done in 2.23 s
+      best of 3 runs took 2.23 s
+(29/40) Initializing CMCL(0.01)...  init done in 0.000126 s
+Running CMCL(0.01)...  run 1 done in 3.93 s
+  run 2 done in 3.39 s
+  run 3 done in 3.38 s
+      best of 3 runs took 3.38 s
+(30/40) Initializing CMCL(0.001)...  init done in 0.000229 s
+Running CMCL(0.001)...  run 1 done in 5.88 s
+  run 2 done in 5.06 s
+  run 3 done in 5.73 s
+      best of 3 runs took 5.06 s
+(31/40) Initializing CMCL(0.0001)...  init done in 0.000227 s
+Running CMCL(0.0001)...  run 1 done in 6.57 s
+  run 2 done in 6.54 s
+  run 3 done in 6.84 s
+      best of 3 runs took 6.54 s
+(32/40) Initializing CMCL(1e-05)...  init done in 0.000205 s
+Running CMCL(1e-05)...  run 1 done in 10 s
+  run 2 done in 9.3 s
+  run 3 done in 8.84 s
+      best of 3 runs took 8.84 s
+(33/40) Initializing CMCL(1e-06)...  init done in 0.000201 s
+Running CMCL(1e-06)...  run 1 done in 16 s
+  run 2 done in 13.9 s
+  run 3 done in 15.7 s
+      best of 3 runs took 13.9 s
+(34/40) Initializing CMCL(1e-07)...  init done in 0.000227 s
+Running CMCL(1e-07)...  run 1 done in 15.5 s
+  run 2 done in 14.2 s
+  run 3 done in 14.1 s
+      best of 3 runs took 14.1 s
+(35/40) Initializing CMCL(1e-08)...  init done in 0.0002 s
+Running CMCL(1e-08)...  run 1 done in 24 s
+  run 2 done in 19.3 s
+  run 3 done in 18.7 s
+      best of 3 runs took 18.7 s
+(36/40) Initializing CMCL(1e-09)...  init done in 0.000212 s
+Running CMCL(1e-09)...  run 1 done in 23.9 s
+  run 2 done in 18.2 s
+  run 3 done in 19.5 s
+      best of 3 runs took 18.2 s
+(37/40) Initializing CMCL(1e-10)...  init done in 0.000218 s
+Running CMCL(1e-10)...  run 1 done in 24.9 s
+  run 2 done in 22.9 s
+  run 3 done in 22.9 s
+      best of 3 runs took 22.9 s
+(38/40) Initializing CMCL(1e-11)...  init done in 0.000218 s
+Running CMCL(1e-11)...  run 1 done in 27.9 s
+  run 2 done in 26.2 s
+  run 3 done in 27.2 s
+      best of 3 runs took 26.2 s
+(39/40) Initializing Fessler(J=2)...  init done in 71.2 s
+Running Fessler(J=2)...  run 1 done in 1.62 s
+  run 2 done in 1.35 s
+  run 3 done in 1.32 s
+      best of 3 runs took 1.32 s
+(40/40) Initializing Fessler(J=4)...  init done in 152 s
+Running Fessler(J=4)...  run 1 done in 2.54 s
+  run 2 done in 2.7 s
+  run 3 done in 2.5 s
+      best of 3 runs took 2.5 s
+
+
+           name    init_time(s)     run_time(s)         rel2err           therr
+     truth(2d2)        0.001261         4.78298               0               0
+  finufft(0.01)        0.000666         2.21807      0.00916782     4.33899e-05
+ finufft(0.001)        0.000895         1.80394      0.00186208     9.15845e-06
+finufft(0.0001)        0.000227         1.81899     9.91047e-05     4.48456e-07
+ finufft(1e-05)        0.000407         1.95651     9.68868e-06     4.83843e-08
+ finufft(1e-06)        0.000338         2.18372     1.13172e-06     5.26751e-09
+ finufft(1e-07)        0.000147         2.23434     1.44861e-07      6.6527e-10
+ finufft(1e-08)          0.0001         2.22053     1.74599e-08     7.93506e-11
+ finufft(1e-09)        0.000242         2.45964     1.91366e-09     8.84171e-12
+ finufft(1e-10)        0.000124         2.77927     1.95471e-10     9.02901e-13
+ finufft(1e-11)        0.000104         2.59103      2.0102e-11      9.3755e-14
+ finufft(1e-12)        0.000193         2.89653      2.3231e-12     1.16211e-14
+nfft(1) - dummy         5.04207         3.28383       0.0232541     0.000108719
+  nfft(1,pre=0)        0.662005         6.91566       0.0232541     0.000108719
+  nfft(2,pre=0)         0.66897         8.50543     0.000313884     1.39036e-06
+  nfft(3,pre=0)         0.68943         10.4195      3.3663e-06     1.54252e-08
+  nfft(4,pre=0)        0.688975         11.8051      3.5275e-08     1.56392e-10
+  nfft(5,pre=0)        0.719893         13.1409     3.74417e-10     1.67947e-12
+  nfft(6,pre=0)        0.691968         15.0442     4.02146e-12     1.72812e-14
+  nfft(1,pre=1)         5.30719         3.07138       0.0232541     0.000108719
+  nfft(2,pre=1)         6.53389         3.64321     0.000313884     1.39036e-06
+  nfft(3,pre=1)         7.93899          4.0764      3.3663e-06     1.54252e-08
+  nfft(4,pre=1)         9.15406         4.63785      3.5275e-08     1.56392e-10
+  nfft(5,pre=1)         10.4431         5.43405     3.74417e-10     1.67947e-12
+  nfft(6,pre=1)         11.2125         6.58318     4.02146e-12     1.72812e-14
+  nfft(1,pre=2)         14.4231         2.78763       0.0232541     0.000108719
+  nfft(2,pre=2)         28.0204         4.88114     0.000313884     1.39036e-06
+      CMCL(0.1)        0.000178         2.23038       0.0775686     0.000455572
+     CMCL(0.01)        0.000126         3.38362      0.00898841     6.26868e-05
+    CMCL(0.001)        0.000229          5.0615     0.000958281     5.64559e-06
+   CMCL(0.0001)        0.000227         6.54067     8.39376e-05     4.16538e-07
+    CMCL(1e-05)        0.000205         8.83579     8.09358e-06     3.84824e-08
+    CMCL(1e-06)        0.000201         13.8901     1.31154e-07     6.66483e-10
+    CMCL(1e-07)        0.000227         14.0501     1.31328e-08     6.53712e-11
+    CMCL(1e-08)          0.0002         18.6882     1.38389e-09     6.73231e-12
+    CMCL(1e-09)        0.000212         18.2153     1.86038e-10     9.11016e-13
+    CMCL(1e-10)        0.000218         22.8881     2.31813e-11     1.10004e-13
+    CMCL(1e-11)        0.000218         26.1832     2.40738e-12     1.15496e-14
+   Fessler(J=2)         71.1808         1.32055        0.044068      0.00025875
+   Fessler(J=4)         151.869         2.50074      0.00051258     2.88996e-06
+Path setup for irt appears to have succeeded.
+running algs & computing error metrics for each one...
+(1/40) Initializing truth(2d2)...  init done in 0.00046 s
+Running truth(2d2)...  run 1 done in 0.665 s
+(2/40) Initializing finufft(0.01)...  init done in 0.000327 s
+Running finufft(0.01)...  run 1 done in 1.07 s
+  run 2 done in 0.905 s
+  run 3 done in 1.05 s
+      best of 3 runs took 0.905 s
+(3/40) Initializing finufft(0.001)...  init done in 0.000108 s
+Running finufft(0.001)...  run 1 done in 1.14 s
+  run 2 done in 0.98 s
+  run 3 done in 1.11 s
+      best of 3 runs took 0.98 s
+(4/40) Initializing finufft(0.0001)...  init done in 0.000109 s
+Running finufft(0.0001)...  run 1 done in 1.22 s
+  run 2 done in 1.09 s
+  run 3 done in 1.08 s
+      best of 3 runs took 1.08 s
+(5/40) Initializing finufft(1e-05)...  init done in 0.000102 s
+Running finufft(1e-05)...  run 1 done in 1.37 s
+  run 2 done in 1.23 s
+  run 3 done in 1.32 s
+      best of 3 runs took 1.23 s
+(6/40) Initializing finufft(1e-06)...  init done in 0.000113 s
+Running finufft(1e-06)...  run 1 done in 1.59 s
+  run 2 done in 1.43 s
+  run 3 done in 1.56 s
+      best of 3 runs took 1.43 s
+(7/40) Initializing finufft(1e-07)...  init done in 0.000259 s
+Running finufft(1e-07)...  run 1 done in 1.58 s
+  run 2 done in 1.34 s
+  run 3 done in 1.34 s
+      best of 3 runs took 1.34 s
+(8/40) Initializing finufft(1e-08)...  init done in 0.000113 s
+Running finufft(1e-08)...  run 1 done in 1.61 s
+  run 2 done in 1.51 s
+  run 3 done in 1.63 s
+      best of 3 runs took 1.51 s
+(9/40) Initializing finufft(1e-09)...  init done in 9.8e-05 s
+Running finufft(1e-09)...  run 1 done in 1.88 s
+  run 2 done in 1.8 s
+  run 3 done in 1.78 s
+      best of 3 runs took 1.78 s
+(10/40) Initializing finufft(1e-10)...  init done in 9.7e-05 s
+Running finufft(1e-10)...  run 1 done in 2.25 s
+  run 2 done in 2 s
+  run 3 done in 2.13 s
+      best of 3 runs took 2 s
+(11/40) Initializing finufft(1e-11)...  init done in 0.000111 s
+Running finufft(1e-11)...  run 1 done in 1.98 s
+  run 2 done in 1.85 s
+  run 3 done in 1.85 s
+      best of 3 runs took 1.85 s
+(12/40) Initializing finufft(1e-12)...  init done in 0.000153 s
+Running finufft(1e-12)...  run 1 done in 2.21 s
+  run 2 done in 2.1 s
+  run 3 done in 2.19 s
+      best of 3 runs took 2.1 s
+(13/40) Initializing nfft(1) - dummy...  Creating nfft plan (dim=2) & setting nodes: 0.640551 s
+  time for nfft_precompute_psi: 4.29546 s
+  init done in 4.96 s
+Running nfft(1) - dummy...  run 1 done in 1.57 s
+  run 2 done in 1.52 s
+  run 3 done in 1.39 s
+      best of 3 runs took 1.39 s
+(14/40) Initializing nfft(1,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 0.660178 s
+  time for nfft_precompute_psi: 7.7e-05 s
+  init done in 0.675 s
+Running nfft(1,pre=0)...  run 1 done in 5.78 s
+  run 2 done in 5.78 s
+  run 3 done in 5.91 s
+      best of 3 runs took 5.78 s
+(15/40) Initializing nfft(2,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 0.742593 s
+  time for nfft_precompute_psi: 6e-05 s
+  init done in 0.762 s
+Running nfft(2,pre=0)...  run 1 done in 7.5 s
+  run 2 done in 7.36 s
+  run 3 done in 7.28 s
+      best of 3 runs took 7.28 s
+(16/40) Initializing nfft(3,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 0.685429 s
+  time for nfft_precompute_psi: 0.000145 s
+  init done in 0.701 s
+Running nfft(3,pre=0)...  run 1 done in 10.1 s
+  run 2 done in 9.15 s
+  run 3 done in 8.57 s
+      best of 3 runs took 8.57 s
+(17/40) Initializing nfft(4,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 0.67084 s
+  time for nfft_precompute_psi: 7.3e-05 s
+  init done in 0.686 s
+Running nfft(4,pre=0)...  run 1 done in 10.6 s
+  run 2 done in 10.4 s
+  run 3 done in 10.8 s
+      best of 3 runs took 10.4 s
+(18/40) Initializing nfft(5,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 0.79107 s
+  time for nfft_precompute_psi: 0.000108 s
+  init done in 0.81 s
+Running nfft(5,pre=0)...  run 1 done in 12.6 s
+  run 2 done in 12.2 s
+  run 3 done in 11.8 s
+      best of 3 runs took 11.8 s
+(19/40) Initializing nfft(6,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 0.682858 s
+  time for nfft_precompute_psi: 8.1e-05 s
+  init done in 0.698 s
+Running nfft(6,pre=0)...  run 1 done in 13.7 s
+  run 2 done in 13.3 s
+  run 3 done in 13.4 s
+      best of 3 runs took 13.3 s
+(20/40) Initializing nfft(1,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 0.667696 s
+  time for nfft_precompute_psi: 4.4432 s
+  init done in 5.13 s
+Running nfft(1,pre=1)...  run 1 done in 1.85 s
+  run 2 done in 1.59 s
+  run 3 done in 1.61 s
+      best of 3 runs took 1.59 s
+(21/40) Initializing nfft(2,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 0.654587 s
+  time for nfft_precompute_psi: 6.61335 s
+  init done in 7.28 s
+Running nfft(2,pre=1)...  run 1 done in 2.31 s
+  run 2 done in 1.89 s
+  run 3 done in 1.84 s
+      best of 3 runs took 1.84 s
+(22/40) Initializing nfft(3,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 0.790051 s
+  time for nfft_precompute_psi: 7.3446 s
+  init done in 8.15 s
+Running nfft(3,pre=1)...  run 1 done in 2.39 s
+  run 2 done in 2.13 s
+  run 3 done in 2.11 s
+      best of 3 runs took 2.11 s
+(23/40) Initializing nfft(4,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 0.666964 s
+  time for nfft_precompute_psi: 9.32437 s
+  init done in 10 s
+Running nfft(4,pre=1)...  run 1 done in 3.09 s
+  run 2 done in 2.83 s
+  run 3 done in 2.83 s
+      best of 3 runs took 2.83 s
+(24/40) Initializing nfft(5,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 0.831159 s
+  time for nfft_precompute_psi: 10.0237 s
+  init done in 10.9 s
+Running nfft(5,pre=1)...  run 1 done in 3.86 s
+  run 2 done in 3.42 s
+  run 3 done in 3.44 s
+      best of 3 runs took 3.42 s
+(25/40) Initializing nfft(6,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 0.709874 s
+  time for nfft_precompute_psi: 10.4803 s
+  init done in 11.2 s
+Running nfft(6,pre=1)...  run 1 done in 4.6 s
+  run 2 done in 4.2 s
+  run 3 done in 4.16 s
+      best of 3 runs took 4.16 s
+(26/40) Initializing nfft(1,pre=2)...  Creating nfft plan (dim=2) & setting nodes: 0.703358 s
+  time for nfft_precompute_psi: 13.6343 s
+  init done in 14.4 s
+Running nfft(1,pre=2)...  run 1 done in 2.42 s
+  run 2 done in 1.31 s
+  run 3 done in 1.16 s
+      best of 3 runs took 1.16 s
+(27/40) Initializing nfft(2,pre=2)...  Creating nfft plan (dim=2) & setting nodes: 0.650153 s
+  time for nfft_precompute_psi: 27.4777 s
+  init done in 28.1 s
+Running nfft(2,pre=2)...  run 1 done in 2.11 s
+  run 2 done in 1.89 s
+  run 3 done in 1.82 s
+      best of 3 runs took 1.82 s
+(28/40) Initializing CMCL(0.1)...  init done in 0.000372 s
+Running CMCL(0.1)...  run 1 done in 1.72 s
+  run 2 done in 1.45 s
+  run 3 done in 1.45 s
+      best of 3 runs took 1.45 s
+(29/40) Initializing CMCL(0.01)...  init done in 0.00011 s
+Running CMCL(0.01)...  run 1 done in 1.88 s
+  run 2 done in 1.81 s
+  run 3 done in 1.91 s
+      best of 3 runs took 1.81 s
+(30/40) Initializing CMCL(0.001)...  init done in 0.000191 s
+Running CMCL(0.001)...  run 1 done in 2.14 s
+  run 2 done in 2.24 s
+  run 3 done in 2.08 s
+      best of 3 runs took 2.08 s
+(31/40) Initializing CMCL(0.0001)...  init done in 0.000131 s
+Running CMCL(0.0001)...  run 1 done in 2.33 s
+  run 2 done in 2.6 s
+  run 3 done in 2.19 s
+      best of 3 runs took 2.19 s
+(32/40) Initializing CMCL(1e-05)...  init done in 0.000107 s
+Running CMCL(1e-05)...  run 1 done in 2.8 s
+  run 2 done in 2.66 s
+  run 3 done in 2.65 s
+      best of 3 runs took 2.65 s
+(33/40) Initializing CMCL(1e-06)...  init done in 0.000208 s
+Running CMCL(1e-06)...  run 1 done in 3.48 s
+  run 2 done in 3.67 s
+  run 3 done in 3.71 s
+      best of 3 runs took 3.48 s
+(34/40) Initializing CMCL(1e-07)...  init done in 0.000152 s
+Running CMCL(1e-07)...  run 1 done in 3.6 s
+  run 2 done in 3.49 s
+  run 3 done in 3.49 s
+      best of 3 runs took 3.49 s
+(35/40) Initializing CMCL(1e-08)...  init done in 9.9e-05 s
+Running CMCL(1e-08)...  run 1 done in 4.64 s
+  run 2 done in 4.49 s
+  run 3 done in 4.42 s
+      best of 3 runs took 4.42 s
+(36/40) Initializing CMCL(1e-09)...  init done in 0.000199 s
+Running CMCL(1e-09)...  run 1 done in 4.46 s
+  run 2 done in 4.33 s
+  run 3 done in 4.33 s
+      best of 3 runs took 4.33 s
+(37/40) Initializing CMCL(1e-10)...  init done in 0.000139 s
+Running CMCL(1e-10)...  run 1 done in 5.4 s
+  run 2 done in 5.28 s
+  run 3 done in 5.29 s
+      best of 3 runs took 5.28 s
+(38/40) Initializing CMCL(1e-11)...  init done in 0.000103 s
+Running CMCL(1e-11)...  run 1 done in 5.5 s
+  run 2 done in 5.53 s
+  run 3 done in 5.49 s
+      best of 3 runs took 5.49 s
+(39/40) Initializing Fessler(J=2)...  init done in 66.4 s
+Running Fessler(J=2)...  run 1 done in 0.925 s
+  run 2 done in 0.694 s
+  run 3 done in 0.677 s
+      best of 3 runs took 0.677 s
+(40/40) Initializing Fessler(J=4)...  init done in 149 s
+Running Fessler(J=4)...  run 1 done in 1.3 s
+  run 2 done in 1.32 s
+  run 3 done in 1.29 s
+      best of 3 runs took 1.29 s
+
+
+           name    init_time(s)     run_time(s)         rel2err           therr
+     truth(2d2)         0.00046        0.664564               0               0
+  finufft(0.01)        0.000327        0.904908      0.00916375     4.21925e-05
+ finufft(0.001)        0.000108        0.979613      0.00186027     8.52904e-06
+finufft(0.0001)        0.000109         1.08447     9.90317e-05     5.13662e-07
+ finufft(1e-05)        0.000102         1.23374     9.68487e-06     4.64341e-08
+ finufft(1e-06)        0.000113         1.43146     1.13188e-06     5.20863e-09
+ finufft(1e-07)        0.000259         1.33604     1.44696e-07     6.18371e-10
+ finufft(1e-08)        0.000113         1.50601     1.74316e-08     7.94623e-11
+ finufft(1e-09)         9.8e-05         1.78123     1.91018e-09     8.71866e-12
+ finufft(1e-10)         9.7e-05         1.99896     1.95063e-10     8.62618e-13
+ finufft(1e-11)        0.000111         1.84975     2.00596e-11     8.67157e-14
+ finufft(1e-12)        0.000153         2.09576     2.32044e-12     1.08226e-14
+nfft(1) - dummy         4.95513         1.38757       0.0232654     0.000113848
+  nfft(1,pre=0)        0.675253         5.77847       0.0232654     0.000113848
+  nfft(2,pre=0)        0.761751         7.28222     0.000313624     1.44207e-06
+  nfft(3,pre=0)        0.701045         8.57141     3.36115e-06     1.57584e-08
+  nfft(4,pre=0)        0.686294         10.4286     3.51684e-08     1.53801e-10
+  nfft(5,pre=0)        0.810381         11.7703     3.73655e-10     1.69352e-12
+  nfft(6,pre=0)        0.698432         13.3348     4.00921e-12     1.97833e-14
+  nfft(1,pre=1)         5.12969         1.59311       0.0232654     0.000113848
+  nfft(2,pre=1)         7.28334         1.83838     0.000313624     1.44207e-06
+  nfft(3,pre=1)         8.15347         2.11134     3.36115e-06     1.57584e-08
+  nfft(4,pre=1)         10.0099         2.82685     3.51684e-08     1.53801e-10
+  nfft(5,pre=1)         10.8791         3.41986     3.73655e-10     1.69352e-12
+  nfft(6,pre=1)         11.2042         4.15637     4.00921e-12     1.97833e-14
+  nfft(1,pre=2)         14.3521         1.15857       0.0232654     0.000113848
+  nfft(2,pre=2)         28.1421          1.8221     0.000313624     1.44207e-06
+      CMCL(0.1)        0.000372         1.45085       0.0775883     0.000489718
+     CMCL(0.01)         0.00011         1.81094      0.00898782        6.39e-05
+    CMCL(0.001)        0.000191         2.08346     0.000957968      5.4072e-06
+   CMCL(0.0001)        0.000131         2.19176     8.39286e-05     4.01815e-07
+    CMCL(1e-05)        0.000107         2.65055     8.08674e-06     3.78828e-08
+    CMCL(1e-06)        0.000208         3.47905     1.30963e-07     6.78665e-10
+    CMCL(1e-07)        0.000152         3.48686     1.31092e-08     5.82965e-11
+    CMCL(1e-08)         9.9e-05         4.42449     1.38096e-09       6.248e-12
+    CMCL(1e-09)        0.000199         4.33008     1.85628e-10     9.08988e-13
+    CMCL(1e-10)        0.000139         5.28374     2.31282e-11     1.10627e-13
+    CMCL(1e-11)        0.000103         5.49167     2.40183e-12     1.12074e-14
+   Fessler(J=2)         66.3869        0.676975       0.0441054     0.000295047
+   Fessler(J=4)         148.871         1.28765     0.000512329      2.6288e-06
+Path setup for irt appears to have succeeded.
+running algs & computing error metrics for each one...
+(1/27) Initializing truth(2d1)...  init done in 0.00117 s
+Running truth(2d1)...  run 1 done in 35 s
+(2/27) Initializing finufft(0.01)...  init done in 0.00122 s
+Running finufft(0.01)...  run 1 done in 5.44 s
+  run 2 done in 4.31 s
+  run 3 done in 4.17 s
+      best of 3 runs took 4.17 s
+(3/27) Initializing finufft(0.001)...  init done in 0.000823 s
+Running finufft(0.001)...  run 1 done in 4.73 s
+  run 2 done in 4.49 s
+  run 3 done in 4.38 s
+      best of 3 runs took 4.38 s
+(4/27) Initializing finufft(0.0001)...  init done in 0.000234 s
+Running finufft(0.0001)...  run 1 done in 4.56 s
+  run 2 done in 4.56 s
+  run 3 done in 4.61 s
+      best of 3 runs took 4.56 s
+(5/27) Initializing finufft(1e-05)...  init done in 0.000335 s
+Running finufft(1e-05)...  run 1 done in 4.73 s
+  run 2 done in 4.43 s
+  run 3 done in 4.35 s
+      best of 3 runs took 4.35 s
+(6/27) Initializing finufft(1e-06)...  init done in 0.000786 s
+Running finufft(1e-06)...  run 1 done in 4.93 s
+  run 2 done in 4.7 s
+  run 3 done in 5.09 s
+      best of 3 runs took 4.7 s
+(7/27) Initializing finufft(1e-07)...  init done in 0.00108 s
+Running finufft(1e-07)...  run 1 done in 5.24 s
+  run 2 done in 4.53 s
+  run 3 done in 4.41 s
+      best of 3 runs took 4.41 s
+(8/27) Initializing finufft(1e-08)...  init done in 0.00035 s
+Running finufft(1e-08)...  run 1 done in 5.23 s
+  run 2 done in 5.38 s
+  run 3 done in 4.62 s
+      best of 3 runs took 4.62 s
+(9/27) Initializing finufft(1e-09)...  init done in 0.000216 s
+Running finufft(1e-09)...  run 1 done in 5.19 s
+  run 2 done in 4.76 s
+  run 3 done in 5.09 s
+      best of 3 runs took 4.76 s
+(10/27) Initializing finufft(1e-10)...  init done in 0.000284 s
+Running finufft(1e-10)...  run 1 done in 5.37 s
+  run 2 done in 5.31 s
+  run 3 done in 5.3 s
+      best of 3 runs took 5.3 s
+(11/27) Initializing finufft(1e-11)...  init done in 0.000275 s
+Running finufft(1e-11)...  run 1 done in 6.17 s
+  run 2 done in 5.14 s
+  run 3 done in 6.01 s
+      best of 3 runs took 5.14 s
+(12/27) Initializing finufft(1e-12)...  init done in 0.000249 s
+Running finufft(1e-12)...  run 1 done in 6.28 s
+  run 2 done in 5.3 s
+  run 3 done in 5.39 s
+      best of 3 runs took 5.3 s
+(13/27) Initializing nfft(1) - dummy...  Creating nfft plan (dim=2) & setting nodes: 72.9603 s
+  time for nfft_precompute_psi: 8.01181 s
+  init done in 81.1 s
+Running nfft(1) - dummy...  run 1 done in 4.77 s
+  run 2 done in 3.73 s
+  run 3 done in 3.75 s
+      best of 3 runs took 3.73 s
+(14/27) Initializing nfft(1,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 3.27212 s
+  time for nfft_precompute_psi: 0.001092 s
+  init done in 3.4 s
+Running nfft(1,pre=0)...  run 1 done in 12.5 s
+  run 2 done in 10.7 s
+  run 3 done in 10.3 s
+      best of 3 runs took 10.3 s
+(15/27) Initializing nfft(2,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 3.5023 s
+  time for nfft_precompute_psi: 0.000419 s
+  init done in 3.64 s
+Running nfft(2,pre=0)...  run 1 done in 13.7 s
+  run 2 done in 11.7 s
+  run 3 done in 12.6 s
+      best of 3 runs took 11.7 s
+(16/27) Initializing nfft(3,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 3.78404 s
+  time for nfft_precompute_psi: 0.000524 s
+  init done in 3.92 s
+Running nfft(3,pre=0)...  run 1 done in 14.9 s
+  run 2 done in 12.8 s
+  run 3 done in 12.8 s
+      best of 3 runs took 12.8 s
+(17/27) Initializing nfft(4,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 4.33121 s
+  time for nfft_precompute_psi: 0.001001 s
+  init done in 4.48 s
+Running nfft(4,pre=0)...  run 1 done in 17.2 s
+  run 2 done in 15.7 s
+  run 3 done in 14.7 s
+      best of 3 runs took 14.7 s
+(18/27) Initializing nfft(5,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 3.83834 s
+  time for nfft_precompute_psi: 0.000168 s
+  init done in 4 s
+Running nfft(5,pre=0)...  run 1 done in 17 s
+  run 2 done in 15.6 s
+  run 3 done in 15.5 s
+      best of 3 runs took 15.5 s
+(19/27) Initializing nfft(6,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 3.4934 s
+  time for nfft_precompute_psi: 0.000113 s
+  init done in 3.67 s
+Running nfft(6,pre=0)...  run 1 done in 18.5 s
+  run 2 done in 17 s
+  run 3 done in 17.2 s
+      best of 3 runs took 17 s
+(20/27) Initializing nfft(1,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 3.52554 s
+  time for nfft_precompute_psi: 8.24511 s
+  init done in 11.9 s
+Running nfft(1,pre=1)...  run 1 done in 4.57 s
+  run 2 done in 3.48 s
+  run 3 done in 3.5 s
+      best of 3 runs took 3.48 s
+(21/27) Initializing nfft(2,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 3.5503 s
+  time for nfft_precompute_psi: 8.96689 s
+  init done in 12.7 s
+Running nfft(2,pre=1)...  run 1 done in 4.94 s
+  run 2 done in 3.92 s
+  run 3 done in 3.87 s
+      best of 3 runs took 3.87 s
+(22/27) Initializing nfft(3,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 3.90428 s
+  time for nfft_precompute_psi: 10.5336 s
+  init done in 14.6 s
+Running nfft(3,pre=1)...  run 1 done in 6.07 s
+  run 2 done in 5.23 s
+  run 3 done in 4.9 s
+      best of 3 runs took 4.9 s
+(23/27) Initializing nfft(4,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 3.93076 s
+  time for nfft_precompute_psi: 11.1646 s
+  init done in 15.2 s
+Running nfft(4,pre=1)...  run 1 done in 6.34 s
+  run 2 done in 5.28 s
+  run 3 done in 5.34 s
+      best of 3 runs took 5.28 s
+(24/27) Initializing nfft(5,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 3.59398 s
+  time for nfft_precompute_psi: 11.4757 s
+  init done in 15.2 s
+Running nfft(5,pre=1)...  run 1 done in 7.2 s
+  run 2 done in 6.16 s
+  run 3 done in 6.12 s
+      best of 3 runs took 6.12 s
+(25/27) Initializing nfft(6,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 3.25911 s
+  time for nfft_precompute_psi: 11.8692 s
+  init done in 15.2 s
+Running nfft(6,pre=1)...  run 1 done in 7.88 s
+  run 2 done in 6.9 s
+  run 3 done in 6.95 s
+      best of 3 runs took 6.9 s
+(26/27) Initializing nfft(1,pre=2)...  Creating nfft plan (dim=2) & setting nodes: 3.27942 s
+  time for nfft_precompute_psi: 13.9117 s
+  init done in 17.3 s
+Running nfft(1,pre=2)...  run 1 done in 4.42 s
+  run 2 done in 3.29 s
+  run 3 done in 3.26 s
+      best of 3 runs took 3.26 s
+(27/27) Initializing nfft(2,pre=2)...  Creating nfft plan (dim=2) & setting nodes: 3.37877 s
+  time for nfft_precompute_psi: 22.0784 s
+  init done in 25.6 s
+Running nfft(2,pre=2)...  run 1 done in 5.83 s
+  run 2 done in 4.53 s
+  run 3 done in 4.18 s
+      best of 3 runs took 4.18 s
+
+
+           name    init_time(s)     run_time(s)         rel2err           therr
+     truth(2d1)        0.001174         35.0362               0               0
+  finufft(0.01)        0.001217         4.16626      0.00863534     9.66195e-06
+ finufft(0.001)        0.000823         4.38174      0.00168852     2.29547e-06
+finufft(0.0001)        0.000234         4.55581     8.68582e-05     1.15359e-07
+ finufft(1e-05)        0.000335         4.34791     9.05838e-06     8.34932e-09
+ finufft(1e-06)        0.000786         4.69654     1.13391e-06     1.29612e-09
+ finufft(1e-07)        0.001076         4.40819     1.41981e-07     1.82216e-10
+ finufft(1e-08)         0.00035         4.62189     1.59705e-08     2.41083e-11
+ finufft(1e-09)        0.000216         4.75549     1.62639e-09     2.56785e-12
+ finufft(1e-10)        0.000284         5.29933      1.6331e-10     2.43381e-13
+ finufft(1e-11)        0.000275         5.13984     1.84377e-11     2.43325e-14
+ finufft(1e-12)        0.000249         5.29884     2.29504e-12     3.25829e-15
+nfft(1) - dummy         81.1077          3.7261       0.0177724     1.64787e-05
+  nfft(1,pre=0)         3.39867         10.3192       0.0177724     1.64787e-05
+  nfft(2,pre=0)         3.64037         11.6925     0.000160229     1.90684e-07
+  nfft(3,pre=0)         3.92271         12.7647     1.18894e-06     1.41052e-09
+  nfft(4,pre=0)         4.47877           14.69      8.2576e-09     1.23132e-11
+  nfft(5,pre=0)         3.99829         15.5085     5.88797e-11     9.38264e-14
+  nfft(6,pre=0)         3.66641          16.989     4.84165e-13     7.47258e-16
+  nfft(1,pre=1)         11.9353         3.47914       0.0177724     1.64787e-05
+  nfft(2,pre=1)         12.6508         3.86816     0.000160229     1.90684e-07
+  nfft(3,pre=1)            14.6         4.89977     1.18894e-06     1.41052e-09
+  nfft(4,pre=1)         15.2181         5.28219      8.2576e-09     1.23132e-11
+  nfft(5,pre=1)         15.1803         6.11801     5.88797e-11     9.38264e-14
+  nfft(6,pre=1)         15.2438         6.89577     4.84165e-13     7.47258e-16
+  nfft(1,pre=2)          17.318         3.25799       0.0177724     1.64787e-05
+  nfft(2,pre=2)         25.6016         4.17778     0.000160229     1.90684e-07
+Path setup for irt appears to have succeeded.
+running algs & computing error metrics for each one...
+(1/27) Initializing truth(2d1)...  init done in 0.000562 s
+Running truth(2d1)...  run 1 done in 5 s
+(2/27) Initializing finufft(0.01)...  init done in 0.000426 s
+Running finufft(0.01)...  run 1 done in 3.35 s
+  run 2 done in 3.22 s
+  run 3 done in 3.31 s
+      best of 3 runs took 3.22 s
+(3/27) Initializing finufft(0.001)...  init done in 0.000448 s
+Running finufft(0.001)...  run 1 done in 3.65 s
+  run 2 done in 3.4 s
+  run 3 done in 3.71 s
+      best of 3 runs took 3.4 s
+(4/27) Initializing finufft(0.0001)...  init done in 0.000469 s
+Running finufft(0.0001)...  run 1 done in 3.65 s
+  run 2 done in 3.33 s
+  run 3 done in 3.38 s
+      best of 3 runs took 3.33 s
+(5/27) Initializing finufft(1e-05)...  init done in 0.000395 s
+Running finufft(1e-05)...  run 1 done in 3.6 s
+  run 2 done in 3.26 s
+  run 3 done in 3.44 s
+      best of 3 runs took 3.26 s
+(6/27) Initializing finufft(1e-06)...  init done in 0.000442 s
+Running finufft(1e-06)...  run 1 done in 3.7 s
+  run 2 done in 3.71 s
+  run 3 done in 3.36 s
+      best of 3 runs took 3.36 s
+(7/27) Initializing finufft(1e-07)...  init done in 0.00024 s
+Running finufft(1e-07)...  run 1 done in 4.1 s
+  run 2 done in 3.71 s
+  run 3 done in 3.45 s
+      best of 3 runs took 3.45 s
+(8/27) Initializing finufft(1e-08)...  init done in 0.000281 s
+Running finufft(1e-08)...  run 1 done in 4.27 s
+  run 2 done in 3.98 s
+  run 3 done in 4.44 s
+      best of 3 runs took 3.98 s
+(9/27) Initializing finufft(1e-09)...  init done in 0.00028 s
+Running finufft(1e-09)...  run 1 done in 4.28 s
+  run 2 done in 4.16 s
+  run 3 done in 3.71 s
+      best of 3 runs took 3.71 s
+(10/27) Initializing finufft(1e-10)...  init done in 0.000254 s
+Running finufft(1e-10)...  run 1 done in 4.35 s
+  run 2 done in 3.9 s
+  run 3 done in 3.67 s
+      best of 3 runs took 3.67 s
+(11/27) Initializing finufft(1e-11)...  init done in 0.000243 s
+Running finufft(1e-11)...  run 1 done in 4.66 s
+  run 2 done in 3.93 s
+  run 3 done in 4.58 s
+      best of 3 runs took 3.93 s
+(12/27) Initializing finufft(1e-12)...  init done in 0.000243 s
+Running finufft(1e-12)...  run 1 done in 4.29 s
+  run 2 done in 4.57 s
+  run 3 done in 4.52 s
+      best of 3 runs took 4.29 s
+(13/27) Initializing nfft(1) - dummy...  Creating nfft plan (dim=2) & setting nodes: 3.47626 s
+  time for nfft_precompute_psi: 8.09611 s
+  init done in 11.7 s
+Running nfft(1) - dummy...  run 1 done in 4.56 s
+  run 2 done in 3.45 s
+  run 3 done in 3.78 s
+      best of 3 runs took 3.45 s
+(14/27) Initializing nfft(1,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 3.17837 s
+  time for nfft_precompute_psi: 0.00027 s
+  init done in 3.3 s
+Running nfft(1,pre=0)...  run 1 done in 13.8 s
+  run 2 done in 13 s
+  run 3 done in 12.5 s
+      best of 3 runs took 12.5 s
+(15/27) Initializing nfft(2,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 3.94596 s
+  time for nfft_precompute_psi: 0.000106 s
+  init done in 4.09 s
+Running nfft(2,pre=0)...  run 1 done in 15.6 s
+  run 2 done in 13.9 s
+  run 3 done in 13.7 s
+      best of 3 runs took 13.7 s
+(16/27) Initializing nfft(3,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 3.70322 s
+  time for nfft_precompute_psi: 6.7e-05 s
+  init done in 3.83 s
+Running nfft(3,pre=0)...  run 1 done in 17 s
+  run 2 done in 17.1 s
+  run 3 done in 15.8 s
+      best of 3 runs took 15.8 s
+(17/27) Initializing nfft(4,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 3.91203 s
+  time for nfft_precompute_psi: 9.6e-05 s
+  init done in 4.06 s
+Running nfft(4,pre=0)...  run 1 done in 19.8 s
+  run 2 done in 18.2 s
+  run 3 done in 18.2 s
+      best of 3 runs took 18.2 s
+(18/27) Initializing nfft(5,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 3.539 s
+  time for nfft_precompute_psi: 0.000121 s
+  init done in 3.67 s
+Running nfft(5,pre=0)...  run 1 done in 21.3 s
+  run 2 done in 19.8 s
+  run 3 done in 19.9 s
+      best of 3 runs took 19.8 s
+(19/27) Initializing nfft(6,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 3.40535 s
+  time for nfft_precompute_psi: 6.6e-05 s
+  init done in 3.52 s
+Running nfft(6,pre=0)...  run 1 done in 22.7 s
+  run 2 done in 21.9 s
+  run 3 done in 21.3 s
+      best of 3 runs took 21.3 s
+(20/27) Initializing nfft(1,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 3.36918 s
+  time for nfft_precompute_psi: 8.0012 s
+  init done in 11.5 s
+Running nfft(1,pre=1)...  run 1 done in 4.32 s
+  run 2 done in 3.44 s
+  run 3 done in 3.58 s
+      best of 3 runs took 3.44 s
+(21/27) Initializing nfft(2,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 3.27647 s
+  time for nfft_precompute_psi: 8.98422 s
+  init done in 12.4 s
+Running nfft(2,pre=1)...  run 1 done in 5.09 s
+  run 2 done in 3.92 s
+  run 3 done in 3.74 s
+      best of 3 runs took 3.74 s
+(22/27) Initializing nfft(3,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 3.40143 s
+  time for nfft_precompute_psi: 9.77476 s
+  init done in 13.3 s
+Running nfft(3,pre=1)...  run 1 done in 5.57 s
+  run 2 done in 5 s
+  run 3 done in 4.78 s
+      best of 3 runs took 4.78 s
+(23/27) Initializing nfft(4,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 3.13186 s
+  time for nfft_precompute_psi: 11.193 s
+  init done in 14.5 s
+Running nfft(4,pre=1)...  run 1 done in 7.07 s
+  run 2 done in 5.82 s
+  run 3 done in 5.73 s
+      best of 3 runs took 5.73 s
+(24/27) Initializing nfft(5,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 3.62986 s
+  time for nfft_precompute_psi: 11.1403 s
+  init done in 14.9 s
+Running nfft(5,pre=1)...  run 1 done in 8.16 s
+  run 2 done in 7.05 s
+  run 3 done in 7.13 s
+      best of 3 runs took 7.05 s
+(25/27) Initializing nfft(6,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 3.76449 s
+  time for nfft_precompute_psi: 11.9313 s
+  init done in 15.8 s
+Running nfft(6,pre=1)...  run 1 done in 9.3 s
+  run 2 done in 8.66 s
+  run 3 done in 8.6 s
+      best of 3 runs took 8.6 s
+(26/27) Initializing nfft(1,pre=2)...  Creating nfft plan (dim=2) & setting nodes: 3.40506 s
+  time for nfft_precompute_psi: 13.5044 s
+  init done in 17 s
+Running nfft(1,pre=2)...  run 1 done in 4 s
+  run 2 done in 2.89 s
+  run 3 done in 3.04 s
+      best of 3 runs took 2.89 s
+(27/27) Initializing nfft(2,pre=2)...  Creating nfft plan (dim=2) & setting nodes: 3.36795 s
+  time for nfft_precompute_psi: 21.9794 s
+  init done in 25.5 s
+Running nfft(2,pre=2)...  run 1 done in 6.05 s
+  run 2 done in 4.86 s
+  run 3 done in 4.15 s
+      best of 3 runs took 4.15 s
+
+
+           name    init_time(s)     run_time(s)         rel2err           therr
+     truth(2d1)        0.000562         5.00418               0               0
+  finufft(0.01)        0.000426         3.22162      0.00864057     9.86548e-06
+ finufft(0.001)        0.000448         3.40491      0.00169015     2.34393e-06
+finufft(0.0001)        0.000469         3.33394     8.69295e-05     1.13773e-07
+ finufft(1e-05)        0.000395         3.26258     9.06854e-06     8.57166e-09
+ finufft(1e-06)        0.000442         3.36325     1.13409e-06     1.12568e-09
+ finufft(1e-07)         0.00024         3.44568     1.42043e-07     1.69813e-10
+ finufft(1e-08)        0.000281          3.9761      1.5994e-08     2.39788e-11
+ finufft(1e-09)         0.00028         3.71216     1.62851e-09     2.55149e-12
+ finufft(1e-10)        0.000254         3.66765     1.63415e-10      2.0906e-13
+ finufft(1e-11)        0.000243         3.93098     1.84568e-11      2.3023e-14
+ finufft(1e-12)        0.000243          4.2869     2.29787e-12      3.1656e-15
+nfft(1) - dummy         11.7443         3.45085       0.0177874     1.72487e-05
+  nfft(1,pre=0)         3.29996         12.5014       0.0177874     1.72487e-05
+  nfft(2,pre=0)         4.08915         13.7477     0.000160323     1.90388e-07
+  nfft(3,pre=0)         3.82616         15.8317      1.1891e-06      1.3564e-09
+  nfft(4,pre=0)         4.06023           18.22     8.25741e-09     1.23008e-11
+  nfft(5,pre=0)         3.66881         19.7812     5.89023e-11     9.87222e-14
+  nfft(6,pre=0)         3.52368         21.2763     4.80204e-13     7.62202e-16
+  nfft(1,pre=1)         11.5084         3.43918       0.0177874     1.72487e-05
+  nfft(2,pre=1)         12.3985         3.74341     0.000160323     1.90388e-07
+  nfft(3,pre=1)         13.3092         4.78322      1.1891e-06      1.3564e-09
+  nfft(4,pre=1)         14.5396         5.72989     8.25741e-09     1.23008e-11
+  nfft(5,pre=1)         14.8938          7.0534     5.89023e-11     9.87222e-14
+  nfft(6,pre=1)         15.8084         8.60428     4.80204e-13     7.62202e-16
+  nfft(1,pre=2)         17.0244          2.8926       0.0177874     1.72487e-05
+  nfft(2,pre=2)         25.4598         4.14507     0.000160323     1.90388e-07
+Path setup for irt appears to have succeeded.
+running algs & computing error metrics for each one...
+(1/27) Initializing truth(2d2)...  init done in 0.00122 s
+Running truth(2d2)...  run 1 done in 33.9 s
+(2/27) Initializing finufft(0.01)...  init done in 0.000684 s
+Running finufft(0.01)...  run 1 done in 4.17 s
+  run 2 done in 3.94 s
+  run 3 done in 4.07 s
+      best of 3 runs took 3.94 s
+(3/27) Initializing finufft(0.001)...  init done in 0.00165 s
+Running finufft(0.001)...  run 1 done in 4.15 s
+  run 2 done in 4.04 s
+  run 3 done in 4.32 s
+      best of 3 runs took 4.04 s
+(4/27) Initializing finufft(0.0001)...  init done in 0.000448 s
+Running finufft(0.0001)...  run 1 done in 4.34 s
+  run 2 done in 4.14 s
+  run 3 done in 4.15 s
+      best of 3 runs took 4.14 s
+(5/27) Initializing finufft(1e-05)...  init done in 0.00051 s
+Running finufft(1e-05)...  run 1 done in 4.4 s
+  run 2 done in 4.17 s
+  run 3 done in 4.2 s
+      best of 3 runs took 4.17 s
+(6/27) Initializing finufft(1e-06)...  init done in 0.000225 s
+Running finufft(1e-06)...  run 1 done in 4.8 s
+  run 2 done in 4.49 s
+  run 3 done in 4.43 s
+      best of 3 runs took 4.43 s
+(7/27) Initializing finufft(1e-07)...  init done in 0.000221 s
+Running finufft(1e-07)...  run 1 done in 4.67 s
+  run 2 done in 4.39 s
+  run 3 done in 4.36 s
+      best of 3 runs took 4.36 s
+(8/27) Initializing finufft(1e-08)...  init done in 0.00035 s
+Running finufft(1e-08)...  run 1 done in 4.71 s
+  run 2 done in 4.56 s
+  run 3 done in 4.53 s
+      best of 3 runs took 4.53 s
+(9/27) Initializing finufft(1e-09)...  init done in 0.000129 s
+Running finufft(1e-09)...  run 1 done in 4.91 s
+  run 2 done in 4.54 s
+  run 3 done in 4.5 s
+      best of 3 runs took 4.5 s
+(10/27) Initializing finufft(1e-10)...  init done in 0.000207 s
+Running finufft(1e-10)...  run 1 done in 4.9 s
+  run 2 done in 4.71 s
+  run 3 done in 4.84 s
+      best of 3 runs took 4.71 s
+(11/27) Initializing finufft(1e-11)...  init done in 0.000335 s
+Running finufft(1e-11)...  run 1 done in 4.93 s
+  run 2 done in 4.68 s
+  run 3 done in 4.74 s
+      best of 3 runs took 4.68 s
+(12/27) Initializing finufft(1e-12)...  init done in 0.000104 s
+Running finufft(1e-12)...  run 1 done in 4.97 s
+  run 2 done in 4.82 s
+  run 3 done in 4.88 s
+      best of 3 runs took 4.82 s
+(13/27) Initializing nfft(1) - dummy...  Creating nfft plan (dim=2) & setting nodes: 3.29881 s
+  time for nfft_precompute_psi: 8.27138 s
+  init done in 11.7 s
+Running nfft(1) - dummy...  run 1 done in 4.1 s
+  run 2 done in 4 s
+  run 3 done in 3.87 s
+      best of 3 runs took 3.87 s
+(14/27) Initializing nfft(1,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 3.09439 s
+  time for nfft_precompute_psi: 9.7e-05 s
+  init done in 3.2 s
+Running nfft(1,pre=0)...  run 1 done in 11.3 s
+  run 2 done in 10.2 s
+  run 3 done in 10.4 s
+      best of 3 runs took 10.2 s
+(15/27) Initializing nfft(2,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 3.88961 s
+  time for nfft_precompute_psi: 7.9e-05 s
+  init done in 4.03 s
+Running nfft(2,pre=0)...  run 1 done in 12.1 s
+  run 2 done in 11.2 s
+  run 3 done in 11.5 s
+      best of 3 runs took 11.2 s
+(16/27) Initializing nfft(3,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 3.59283 s
+  time for nfft_precompute_psi: 6.7e-05 s
+  init done in 3.7 s
+Running nfft(3,pre=0)...  run 1 done in 13.2 s
+  run 2 done in 12.5 s
+  run 3 done in 12.3 s
+      best of 3 runs took 12.3 s
+(17/27) Initializing nfft(4,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 3.23833 s
+  time for nfft_precompute_psi: 6.9e-05 s
+  init done in 3.36 s
+Running nfft(4,pre=0)...  run 1 done in 14.3 s
+  run 2 done in 13.7 s
+  run 3 done in 13.7 s
+      best of 3 runs took 13.7 s
+(18/27) Initializing nfft(5,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 3.70376 s
+  time for nfft_precompute_psi: 6.8e-05 s
+  init done in 3.81 s
+Running nfft(5,pre=0)...  run 1 done in 16.4 s
+  run 2 done in 14.3 s
+  run 3 done in 15 s
+      best of 3 runs took 14.3 s
+(19/27) Initializing nfft(6,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 3.34208 s
+  time for nfft_precompute_psi: 6.9e-05 s
+  init done in 3.46 s
+Running nfft(6,pre=0)...  run 1 done in 16.3 s
+  run 2 done in 15.8 s
+  run 3 done in 15.6 s
+      best of 3 runs took 15.6 s
+(20/27) Initializing nfft(1,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 3.37417 s
+  time for nfft_precompute_psi: 8.10137 s
+  init done in 11.6 s
+Running nfft(1,pre=1)...  run 1 done in 3.93 s
+  run 2 done in 3.82 s
+  run 3 done in 3.67 s
+      best of 3 runs took 3.67 s
+(21/27) Initializing nfft(2,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 3.58109 s
+  time for nfft_precompute_psi: 9.05953 s
+  init done in 12.8 s
+Running nfft(2,pre=1)...  run 1 done in 4.33 s
+  run 2 done in 4.38 s
+  run 3 done in 4.27 s
+      best of 3 runs took 4.27 s
+(22/27) Initializing nfft(3,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 3.12314 s
+  time for nfft_precompute_psi: 10.3907 s
+  init done in 13.7 s
+Running nfft(3,pre=1)...  run 1 done in 4.71 s
+  run 2 done in 4.21 s
+  run 3 done in 4.21 s
+      best of 3 runs took 4.21 s
+(23/27) Initializing nfft(4,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 3.40934 s
+  time for nfft_precompute_psi: 10.949 s
+  init done in 14.5 s
+Running nfft(4,pre=1)...  run 1 done in 5.65 s
+  run 2 done in 5.2 s
+  run 3 done in 4.92 s
+      best of 3 runs took 4.92 s
+(24/27) Initializing nfft(5,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 3.50544 s
+  time for nfft_precompute_psi: 11.9293 s
+  init done in 15.6 s
+Running nfft(5,pre=1)...  run 1 done in 5.63 s
+  run 2 done in 5.11 s
+  run 3 done in 5.23 s
+      best of 3 runs took 5.11 s
+(25/27) Initializing nfft(6,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 3.39666 s
+  time for nfft_precompute_psi: 12.0716 s
+  init done in 15.6 s
+Running nfft(6,pre=1)...  run 1 done in 6.47 s
+  run 2 done in 6.12 s
+  run 3 done in 5.51 s
+      best of 3 runs took 5.51 s
+(26/27) Initializing nfft(1,pre=2)...  Creating nfft plan (dim=2) & setting nodes: 3.46854 s
+  time for nfft_precompute_psi: 14.3094 s
+  init done in 18 s
+Running nfft(1,pre=2)...  run 1 done in 4.05 s
+  run 2 done in 3.75 s
+  run 3 done in 3.69 s
+      best of 3 runs took 3.69 s
+(27/27) Initializing nfft(2,pre=2)...  Creating nfft plan (dim=2) & setting nodes: 3.68662 s
+  time for nfft_precompute_psi: 21.9245 s
+  init done in 25.7 s
+Running nfft(2,pre=2)...  run 1 done in 4.84 s
+  run 2 done in 4.23 s
+  run 3 done in 4.21 s
+      best of 3 runs took 4.21 s
+
+
+           name    init_time(s)     run_time(s)         rel2err           therr
+     truth(2d2)         0.00122         33.8897               0               0
+  finufft(0.01)        0.000684         3.94489      0.00863537     1.34148e-05
+ finufft(0.001)        0.001648         4.03814       0.0016888     2.73056e-06
+finufft(0.0001)        0.000448         4.13579     8.68451e-05     1.45373e-07
+ finufft(1e-05)         0.00051         4.17486     9.06146e-06     1.52338e-08
+ finufft(1e-06)        0.000225         4.43466     1.13416e-06     1.76949e-09
+ finufft(1e-07)        0.000221         4.35605      1.4198e-07     2.25755e-10
+ finufft(1e-08)         0.00035          4.5292     1.59727e-08     2.53641e-11
+ finufft(1e-09)        0.000129          4.5039     1.62649e-09     2.54259e-12
+ finufft(1e-10)        0.000207         4.71182     1.63335e-10     2.89279e-13
+ finufft(1e-11)        0.000335          4.6833      1.8447e-11     3.01346e-14
+ finufft(1e-12)        0.000104         4.82102     2.29558e-12     3.57563e-15
+nfft(1) - dummy          11.668          3.8738       0.0177694     2.86966e-05
+  nfft(1,pre=0)         3.19852         10.2052       0.0177694     2.86966e-05
+  nfft(2,pre=0)         4.03174         11.1811      0.00016021     2.75479e-07
+  nfft(3,pre=0)         3.70153          12.312     1.18881e-06       2.011e-09
+  nfft(4,pre=0)         3.36031         13.6544     8.25602e-09      1.2732e-11
+  nfft(5,pre=0)         3.81384         14.3473     5.88703e-11      9.8914e-14
+  nfft(6,pre=0)         3.45978         15.6105     5.07152e-13     1.65855e-15
+  nfft(1,pre=1)          11.622         3.66857       0.0177694     2.86966e-05
+  nfft(2,pre=1)         12.7616         4.26766      0.00016021     2.75479e-07
+  nfft(3,pre=1)         13.6538         4.20647     1.18881e-06       2.011e-09
+  nfft(4,pre=1)         14.5302         4.91866     8.25602e-09      1.2732e-11
+  nfft(5,pre=1)           15.56         5.11136     5.88703e-11      9.8914e-14
+  nfft(6,pre=1)         15.5979         5.51009     5.07152e-13     1.65855e-15
+  nfft(1,pre=2)         17.9752         3.69325       0.0177694     2.86966e-05
+  nfft(2,pre=2)         25.7244         4.21232      0.00016021     2.75479e-07
+Path setup for irt appears to have succeeded.
+running algs & computing error metrics for each one...
+(1/27) Initializing truth(2d2)...  init done in 0.000484 s
+Running truth(2d2)...  run 1 done in 5.03 s
+(2/27) Initializing finufft(0.01)...  init done in 0.000709 s
+Running finufft(0.01)...  run 1 done in 3.01 s
+  run 2 done in 2.83 s
+  run 3 done in 2.82 s
+      best of 3 runs took 2.82 s
+(3/27) Initializing finufft(0.001)...  init done in 0.000147 s
+Running finufft(0.001)...  run 1 done in 3.26 s
+  run 2 done in 2.84 s
+  run 3 done in 2.96 s
+      best of 3 runs took 2.84 s
+(4/27) Initializing finufft(0.0001)...  init done in 0.00017 s
+Running finufft(0.0001)...  run 1 done in 3.09 s
+  run 2 done in 3.01 s
+  run 3 done in 3.04 s
+      best of 3 runs took 3.01 s
+(5/27) Initializing finufft(1e-05)...  init done in 0.000254 s
+Running finufft(1e-05)...  run 1 done in 3.26 s
+  run 2 done in 3.09 s
+  run 3 done in 3.12 s
+      best of 3 runs took 3.09 s
+(6/27) Initializing finufft(1e-06)...  init done in 0.000197 s
+Running finufft(1e-06)...  run 1 done in 3.5 s
+  run 2 done in 3.32 s
+  run 3 done in 3.45 s
+      best of 3 runs took 3.32 s
+(7/27) Initializing finufft(1e-07)...  init done in 0.000168 s
+Running finufft(1e-07)...  run 1 done in 3.52 s
+  run 2 done in 3.33 s
+  run 3 done in 3.36 s
+      best of 3 runs took 3.33 s
+(8/27) Initializing finufft(1e-08)...  init done in 0.000279 s
+Running finufft(1e-08)...  run 1 done in 3.52 s
+  run 2 done in 3.39 s
+  run 3 done in 3.75 s
+      best of 3 runs took 3.39 s
+(9/27) Initializing finufft(1e-09)...  init done in 0.000112 s
+Running finufft(1e-09)...  run 1 done in 3.9 s
+  run 2 done in 3.63 s
+  run 3 done in 3.69 s
+      best of 3 runs took 3.63 s
+(10/27) Initializing finufft(1e-10)...  init done in 0.000272 s
+Running finufft(1e-10)...  run 1 done in 4.06 s
+  run 2 done in 3.78 s
+  run 3 done in 3.74 s
+      best of 3 runs took 3.74 s
+(11/27) Initializing finufft(1e-11)...  init done in 0.000119 s
+Running finufft(1e-11)...  run 1 done in 3.93 s
+  run 2 done in 3.59 s
+  run 3 done in 3.78 s
+      best of 3 runs took 3.59 s
+(12/27) Initializing finufft(1e-12)...  init done in 0.000218 s
+Running finufft(1e-12)...  run 1 done in 4.01 s
+  run 2 done in 3.8 s
+  run 3 done in 3.83 s
+      best of 3 runs took 3.8 s
+(13/27) Initializing nfft(1) - dummy...  Creating nfft plan (dim=2) & setting nodes: 3.08703 s
+  time for nfft_precompute_psi: 7.99132 s
+  init done in 11.2 s
+Running nfft(1) - dummy...  run 1 done in 3.29 s
+  run 2 done in 3.14 s
+  run 3 done in 3.05 s
+      best of 3 runs took 3.05 s
+(14/27) Initializing nfft(1,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 3.42603 s
+  time for nfft_precompute_psi: 0.000155 s
+  init done in 3.53 s
+Running nfft(1,pre=0)...  run 1 done in 10.6 s
+  run 2 done in 10.7 s
+  run 3 done in 10.2 s
+      best of 3 runs took 10.2 s
+(15/27) Initializing nfft(2,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 3.11052 s
+  time for nfft_precompute_psi: 7e-05 s
+  init done in 3.21 s
+Running nfft(2,pre=0)...  run 1 done in 11.8 s
+  run 2 done in 10.8 s
+  run 3 done in 10.8 s
+      best of 3 runs took 10.8 s
+(16/27) Initializing nfft(3,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 3.94528 s
+  time for nfft_precompute_psi: 6.5e-05 s
+  init done in 4.06 s
+Running nfft(3,pre=0)...  run 1 done in 12.7 s
+  run 2 done in 12 s
+  run 3 done in 12.5 s
+      best of 3 runs took 12 s
+(17/27) Initializing nfft(4,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 3.57145 s
+  time for nfft_precompute_psi: 0.000103 s
+  init done in 3.71 s
+Running nfft(4,pre=0)...  run 1 done in 14.1 s
+  run 2 done in 13.6 s
+  run 3 done in 13.6 s
+      best of 3 runs took 13.6 s
+(18/27) Initializing nfft(5,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 3.39477 s
+  time for nfft_precompute_psi: 0.000107 s
+  init done in 3.51 s
+Running nfft(5,pre=0)...  run 1 done in 15.2 s
+  run 2 done in 14.2 s
+  run 3 done in 14.1 s
+      best of 3 runs took 14.1 s
+(19/27) Initializing nfft(6,pre=0)...  Creating nfft plan (dim=2) & setting nodes: 3.62624 s
+  time for nfft_precompute_psi: 8.5e-05 s
+  init done in 3.73 s
+Running nfft(6,pre=0)...  run 1 done in 15.7 s
+  run 2 done in 14.9 s
+  run 3 done in 14.8 s
+      best of 3 runs took 14.8 s
+(20/27) Initializing nfft(1,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 3.45838 s
+  time for nfft_precompute_psi: 7.94067 s
+  init done in 11.5 s
+Running nfft(1,pre=1)...  run 1 done in 3.61 s
+  run 2 done in 3.15 s
+  run 3 done in 3.26 s
+      best of 3 runs took 3.15 s
+(21/27) Initializing nfft(2,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 3.02897 s
+  time for nfft_precompute_psi: 9.49745 s
+  init done in 12.7 s
+Running nfft(2,pre=1)...  run 1 done in 3.49 s
+  run 2 done in 3.27 s
+  run 3 done in 3.1 s
+      best of 3 runs took 3.1 s
+(22/27) Initializing nfft(3,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 3.48763 s
+  time for nfft_precompute_psi: 10.185 s
+  init done in 13.8 s
+Running nfft(3,pre=1)...  run 1 done in 3.88 s
+  run 2 done in 3.87 s
+  run 3 done in 4.09 s
+      best of 3 runs took 3.87 s
+(23/27) Initializing nfft(4,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 3.44982 s
+  time for nfft_precompute_psi: 10.8559 s
+  init done in 14.4 s
+Running nfft(4,pre=1)...  run 1 done in 4.27 s
+  run 2 done in 3.93 s
+  run 3 done in 3.85 s
+      best of 3 runs took 3.85 s
+(24/27) Initializing nfft(5,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 3.87486 s
+  time for nfft_precompute_psi: 11.399 s
+  init done in 15.4 s
+Running nfft(5,pre=1)...  run 1 done in 4.73 s
+  run 2 done in 4.81 s
+  run 3 done in 4.52 s
+      best of 3 runs took 4.52 s
+(25/27) Initializing nfft(6,pre=1)...  Creating nfft plan (dim=2) & setting nodes: 3.62529 s
+  time for nfft_precompute_psi: 11.6901 s
+  init done in 15.5 s
+Running nfft(6,pre=1)...  run 1 done in 5.11 s
+  run 2 done in 4.66 s
+  run 3 done in 4.73 s
+      best of 3 runs took 4.66 s
+(26/27) Initializing nfft(1,pre=2)...  Creating nfft plan (dim=2) & setting nodes: 3.60374 s
+  time for nfft_precompute_psi: 14.0751 s
+  init done in 17.8 s
+Running nfft(1,pre=2)...  run 1 done in 3.21 s
+  run 2 done in 2.84 s
+  run 3 done in 2.87 s
+      best of 3 runs took 2.84 s
+(27/27) Initializing nfft(2,pre=2)...  Creating nfft plan (dim=2) & setting nodes: 3.44319 s
+  time for nfft_precompute_psi: 21.9166 s
+  init done in 25.5 s
+Running nfft(2,pre=2)...  run 1 done in 3.81 s
+  run 2 done in 3.5 s
+  run 3 done in 3.53 s
+      best of 3 runs took 3.5 s
+
+
+           name    init_time(s)     run_time(s)         rel2err           therr
+     truth(2d2)        0.000484         5.02998               0               0
+  finufft(0.01)        0.000709         2.82318      0.00863496     1.55329e-05
+ finufft(0.001)        0.000147         2.84163      0.00168864     2.53332e-06
+finufft(0.0001)         0.00017         3.00843     8.68588e-05     1.36752e-07
+ finufft(1e-05)        0.000254         3.09296     9.06054e-06     1.43254e-08
+ finufft(1e-06)        0.000197         3.31764     1.13373e-06     1.75853e-09
+ finufft(1e-07)        0.000168         3.32722     1.41985e-07     2.19978e-10
+ finufft(1e-08)        0.000279         3.38741     1.59748e-08     2.47062e-11
+ finufft(1e-09)        0.000112         3.62733     1.62665e-09     2.60494e-12
+ finufft(1e-10)        0.000272         3.73594     1.63277e-10     2.63605e-13
+ finufft(1e-11)        0.000119         3.59207     1.84434e-11     2.75246e-14
+ finufft(1e-12)        0.000218         3.79784     2.29647e-12     3.47858e-15
+nfft(1) - dummy         11.2391         3.05123       0.0177712     2.90583e-05
+  nfft(1,pre=0)         3.52649         10.1918       0.0177712     2.90583e-05
+  nfft(2,pre=0)         3.20907         10.7729     0.000160265      2.5839e-07
+  nfft(3,pre=0)         4.06227         11.9775     1.18884e-06     1.94732e-09
+  nfft(4,pre=0)          3.7123         13.5529     8.25575e-09     1.31452e-11
+  nfft(5,pre=0)         3.51492         14.1188     5.88919e-11     9.03811e-14
+  nfft(6,pre=0)           3.732          14.791      5.4711e-13     1.66573e-15
+  nfft(1,pre=1)         11.5139         3.14685       0.0177712     2.90583e-05
+  nfft(2,pre=1)         12.6716         3.09691     0.000160265      2.5839e-07
+  nfft(3,pre=1)         13.7939         3.87161     1.18884e-06     1.94732e-09
+  nfft(4,pre=1)         14.4299         3.85108     8.25575e-09     1.31452e-11
+  nfft(5,pre=1)         15.4388         4.52378     5.88919e-11     9.03811e-14
+  nfft(6,pre=1)         15.4688         4.66428      5.4711e-13     1.66573e-15
+  nfft(1,pre=2)         17.8403          2.8398       0.0177712     2.90583e-05
+  nfft(2,pre=2)         25.5042         3.50337     0.000160265      2.5839e-07
+>

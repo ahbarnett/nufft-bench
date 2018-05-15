@@ -59,6 +59,7 @@ N1=N; N2=1; N3=1; if dim>1, N2=N; end, if dim>2, N3=N; end  % set up N1,N2,N3
 
 % FFTW opts for everybody...
 fftw_meas=1;   % 0 for ESTIMATE, 1 for MEASURE, in all algs that use FFTW
+%(for 1d set to 0 since otherwise nfft plan for multithread N=1e7 takes 2hrs!)
 
 isign = 1; if ty==2, isign=-1; end   % overall isign in others to match NFFT
 
@@ -92,6 +93,7 @@ ALGS{end+1}=ALG;
 epsilons=10.^(-(2:12));      % range of accuracies
 finufft_algopts.opts.nthreads=nthreads;
 finufft_algopts.opts.spread_sort=2;   % default
+finufft_algopts.opts.chkbnds = 0;     % helps very slightly
 finufft_algopts.opts.fftw=fftw_meas;
 finufft_algopts.isign=isign;
 finufft_algopts.opts.debug=0;
@@ -212,13 +214,13 @@ for j=1:length(ALGS), ALG=ALGS{j};  % ================ main run loop
     tA=tic;
     X = ALG.run(ALG.algopts,x,y,z,data_in,N1,N2,N3,init_data);   % run it!
     runtimelist(r)=toc(tA);
+    fprintf('  run %d done in %.3g s\n',r,runtimelist(r))
   end
   run_times(j)=min(runtimelist);
-  if reps==1
-    fprintf('  run done in %.3g s\n',run_times(j))
-  else
-    fprintf('  best of %d runs took %.3g s\n',reps,run_times(j))
+  if reps>1
+    fprintf('      best of %d runs took %.3g s\n',reps,run_times(j))
   end
+  if floor(ALG.algtype)==2, delete(init_data.plan); end   % NFFT only, since a matlab class obj
   clear init_data             % added in case causes mem leak
   if j==1                     % save properties of the truth
     X0 = X; outputl1 = sum(abs(X0(:))); outputl2 = norm(X0(:));
@@ -319,6 +321,7 @@ ticA=tic;   % set up the plan...
 %plan=nfft(dim,N,M);  % default interface gives 13 digits, uses full kernel width
 %... or use guru options, as commented in nfft-3.3.2/matlab/nfft/test_nfft3d.m :
 n=2^(ceil(log2(max(N)))+1);      % lowest power of 2 that's at least 2N
+% (note should have varying n if rectangular mode request...)
 flags=NFFT_OMP_BLOCKWISE_ADJOINT;         % choose more NFFT flags
 flags=bitor(FFT_OUT_OF_PLACE,flags);
 flags=bitor(bitshift(uint32(1),11),flags); % NFFT_SORT_NODES
@@ -368,7 +371,8 @@ else
     X=init_data.plan.fhat;
 end;
 %nfft_finalize(init_data.plan); % fails w/ Error using nfftmex. nfft: Input argument plan must be a scalar.
-delete(init_data.plan);    % matlab class obj interface seems to work
+% removed for reps>1:
+%delete(init_data.plan);    % matlab class obj interface seems to work
 
 function X=run_nfft(algopts,x,y,z,d,N1,N2,N3,init_data)
 % type 2 ("non-adjoint"), any dim
@@ -377,7 +381,8 @@ M=length(x);
 init_data.plan.fhat=d(:);     % unwrap to single col
 nfft_trafo(init_data.plan);   % type 2
 X=init_data.plan.f;
-delete(init_data.plan);    % since a matlab class obj (see above)
+% removed for reps>1:
+%delete(init_data.plan);    % since a matlab class obj (see above)
 
 
 % bart ---------------------------------------------------------------------

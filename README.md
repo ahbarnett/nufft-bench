@@ -1,28 +1,32 @@
 # nufft-bench
 
-Codes to generate figures and tables
-comparing performance of various NUFFT codes.
+Generate figures and tables which compare performance of various NUFFT
+(non-uniform fast Fourier transform) codes.
 Written in MATLAB/octave.
 
 Alex Barnett and Jeremy Magland; contributions by Joakim Anden.
 
-January-March 2018.
+January-May 2018.
 
 ## Dependencies
 
 Tested on: MATLAB R2016b
 
 Some codes require: https://github.com/ahbarnett/memorygraph
-
+                    as well as `vline` from matlabcentral.
 
 
 ## Installing various NUFFT packages
 
 Here's how to set up the NUFFT codes so that `nufft-bench` works.
-Each package directory should be placed within the parent directory
-of `nufft-bench`, ie alongside `nufft-bench`.
+Each of the below package directories
+should be placed within the parent directory
+of `nufft-bench`, ie a sibling to `nufft-bench`.
 If you want to change this location, edit
 `setuppaths.m`.
+
+First set up your compiler to be GCC 7.3.0 (apart from NFFT for which
+we seem to have to use GCC 6.4.0; see below).
 
 ### Installing NFFT
 
@@ -58,7 +62,7 @@ cc1: internal compiler error: in gimplify_modify_expr, at gimplify.c:5638
 ```
 
 This gcc bug seems to be slated to be fixed in 7.4. Thus we standardized
-to 6.4.0.
+to 6.4.0 for NFFT.
 
 
 ### Installing FINUFFT
@@ -66,6 +70,8 @@ to 6.4.0.
 See https://github.com/ahbarnett/finufft
 
 This is multithreaded.
+To change the compiler cmd create a file `make.inc` in the main directory
+containing `CXX=g++-7`, for instance.
 
 ### Installing CMCL NUFFT
 
@@ -134,6 +140,7 @@ modifications on Dec 13, 2016.
 All MEX files are included; no compilation is needed.
 The precomputation is very expensive in time and RAM (up to 100x slower than
 the apply when limited to one thread).
-The apply appears to be a single-threaded sparse matvec done in MATLAB,
-and very fast.
+The apply appears to be a single-threaded sparse matvec
+followed by fft, both done in native MATLAB, which (amazingly) beats all
+others in terms of speed in 1D and 2D.
 

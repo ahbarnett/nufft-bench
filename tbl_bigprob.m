@@ -1,18 +1,20 @@
 % Compare speed and RAM: finufft vs NFFT, big 3d1 prob, fixed acc, meas RAM.
 % User needs to set paths below.
 % based on tbl_xeon_3d and speedup_vs_density2d1.
+% To run from remote terminal:
+%   nohup matlab -nodesktop -nosplash -r tbl_bigprob > results/xeon/bigprob.log < /dev/null &
 % Barnett 5/14/18
 clear
 
 multi=1;            % multithreaded test
 dim=3;
-N=256; M=5e7;   % data size. N=power of 2, so Nf same in finufft as NFFT
-%N=512; M=5e8;   % data size
+%N=256; M=5e7;   % data size. N=power of 2, so Nf same in finufft as NFFT
+N=256; M=3e8;   % data size (N=512 makes FFT array so big that RAM less obvious)
 nudist=4;              % NU dist
 tol = 1e-6;   % note NFFT m hits even # digits better than if odd.
 
 setuppaths(multi);
-opts.dt=0.1; memorygraph('start',opts);
+opts.dt=0.2; memorygraph('start',opts);
 ti=tic;
 [x y z] = nudata(dim,nudist,M); M=numel(x);  % M may not be exactly as requested
 d = randn(M,1) + 1i*randn(M,1);   % nu pt strengths (rand single-core)
@@ -26,7 +28,7 @@ if multi, nthr = maxthr; else, nthr=1; end
 maxNumCompThreads(nthr);
 
 opts.nthreads=maxthr;  % use all threads for exact
-opts.fftw=0;    % ESTIMATE
+opts.fftw=0;    % ESTIMATE (0, fast) or measure (1, slow)
 opts.chkbnds=0;
 disp('higher-acc finufft (truth)...'); ti=tic;
 [Fe ier] = finufft3d1(x,y,z,d,+1, 1e-2*tol, N,N,N,opts);
@@ -52,8 +54,8 @@ flags=NFFT_OMP_BLOCKWISE_ADJOINT;
 flags=bitor(FFT_OUT_OF_PLACE,flags);
 flags=bitor(bitshift(uint32(1),11),flags); % NFFT_SORT_NODES
 flags=bitor(PRE_PHI_HUT,flags);
-fftw_flag = FFTW_ESTIMATE;         % careful...
-fftw_flag=bitor(FFTW_MEASURE,1);  % FFTW_DESTROY_INPUT
+fftw_plan=FFTW_ESTIMATE;           % estimate (fast) or measure (slow)
+fftw_flag=bitor(fftw_plan,1);      % FFTW_DESTROY_INPUT
 xyz = [x y z]/(2*pi); clear x y z  % since want save RAM; don't count its time
 memorygraph('label','start NFFT no-pre plan');
 ti=tic;
@@ -114,4 +116,4 @@ subplot(2,1,2); plot(t,c/100,'.-'); xlabel('t (s)');
 ylabel('CPU usage (threads)'); axis tight; vline(lt,'r',ls); drawnow
 fprintf('tot matlab mem: %.3g GB\n',total_matlab_memory/1e9) 
 
-clear Fe Fnp; save bigprob.mat
+clear Fe Fnp; save results/xeon/bigprob_N256_M3e8.mat

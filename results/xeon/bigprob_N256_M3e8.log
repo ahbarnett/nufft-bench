@@ -1,0 +1,49 @@
+MATLAB is selecting SOFTWARE OPENGL rendering.
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2016 The MathWorks, Inc.
+                   R2016b (9.1.0.441655) 64-bit (glnxa64)
+                             September 7, 2016
+
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+ 
+
+	Non-Degree Granting Education License -- for use at non-degree granting, nonprofit,
+	educational organizations only.  Not for government, commercial, or other organizational use.
+
+Path setup for irt appears to have succeeded.
+making data: 14.286 s
+higher-acc finufft (truth)...
+  time for truth: 20.697 s
+3d1: (ms,mt,mu)=(256,256,256) (nf1,nf2,nf3)=(512,512,512) nj=300763000 ...
+kernel fser (ns=7):	 0 s
+fftw plan		 0.003 s
+starting spread 3D (dir=1. M=300763000; N1=512,N2=512,N3=512; pir=1), 24 threads
+	sorted (24 threads):	2.01 s
+	zero output array	0.849 s
+	t1 fancy spread: 	6.96 s (30077 subprobs)
+spread (ier=0):		 10.1 s
+fft (24 threads):	 0.815 s
+deconvolve & copy out:	 0.22 s
+freed
+  time for finufft: 14.585 s
+FINUFFT max RAM use above input data = 8.8 GB (29.2 bytes/NUpt)
+nfft (no pre) plan done
+nfft set_x done (it's a method!), in 9.83 s
+nfft set_x max RAM use above input data = 20.9 GB (69.5 bytes/NUpt)
+nfft_precomp done in 10.4 s
+tot time for nfft_adj(no pre): 237.669 s
+NFFT(no pre) max RAM use above input data = 20.9 GB (69.5 bytes/NUpt)
+nfft (pre psi) plan done
+  time for nfft_precompute_psi: 67.3051 s
+  time for nfft_adj(pre psi): 124.605 s
+	rel l2 err 	init t (s) 	run t (s) 	RAM (GB)     bytes/NUpt
+        1.39e-06             NaN            14.6             8.8            29.2
+        4.74e-06            10.4             238            20.9            69.5
+        4.74e-06            67.3             125            67.1             223
+[Warning: MATLAB has disabled some advanced graphics rendering features by
+switching to software OpenGL. For more information, click <a
+href="matlab:opengl('problems')">here</a>.] 
+tot matlab mem: 1.33 GB

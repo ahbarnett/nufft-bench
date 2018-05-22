@@ -1,6 +1,8 @@
 % 2d type1 compare algs: finufft vs NFFT. Simple, with M sweep.
 % User needs to set paths below.
-% Barnett 5/4/18
+% Barnett 5/4/18.
+% Realization that M<=N case of finufft slow mostly since fftw_plan takes 1.5ms!
+% -> need to make a plan interface after all :(
 clear
 
 maxthr = java.lang.Runtime.getRuntime().availableProcessors;
@@ -24,11 +26,12 @@ for i=1:numel(densities), dens = densities(i);   % sweep over M .........
   c = randn(M,1)+1i*randn(M,1);   % strengths (reused for now)
 
   addpath ~/numerics/finufft/matlab
-  o.fftw=1;   % FFTW_MEASURE
+  o.fftw=1;  % 1=FFTW_MEASURE
   isign=+1;  % matches NFFT (-1 for type 2)
   f = finufft2d1(x,y,rand(M,1),+1,tol,n,n,o);   % warms up FFTW
   tic;
   for r=1:reps
+    %o.debug = 2*(r==reps);           % show internal timing for final run
     f = finufft2d1(x,y,c,isign,tol,n,n,o);
   end
   t=toc; fprintf('2d1 finufft\t\t%.3g s   \t(%.3g NUpt/s)\n',t,reps*M/t)

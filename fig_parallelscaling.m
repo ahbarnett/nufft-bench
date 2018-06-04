@@ -26,8 +26,8 @@ for cc=1:2    % cases
     set(gca,'xticklabel',num2cellstr(l.nthrs));
     axis tight;
     title(sprintf('%s scaling: $\\epsilon{=}10^{%d}$, %s',ty,round(log10(l.eps)),Mstr),'interpreter','latex');
-    xlabel('p (number of threads)');
-    ylabel('parallel efficiency');
+    xlabel('$p$ (number of threads)','interpreter','latex');
+    ylabel('$\eta$ (parallel efficiency)','interpreter','latex');
     v = vline(find(l.nthrs==12),'g--'); set(v,'linewidth',2);
     text(find(l.nthrs==12)+0.1,0.98,'# phys','color',[0 0.8 0]);
     text(find(l.nthrs==12)+0.1,0.92,' cores','color',[0 0.8 0]);

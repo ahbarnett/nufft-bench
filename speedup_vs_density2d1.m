@@ -11,7 +11,7 @@ maxNumCompThreads(nthr);
 
 tol = 1e-6;   % note 6 is even, so NFFT m hits it better than if odd.
 
-n=256;    % modes per dim
+n=100; % 256    % modes per dim
 N=n^2;
 densities = 10.^(-3:2);   % set of ratios M/N
 
@@ -28,10 +28,11 @@ for i=1:numel(densities), dens = densities(i);   % sweep over M .........
   addpath ~/numerics/finufft/matlab
   o.fftw=1;  % 1=FFTW_MEASURE
   isign=+1;  % matches NFFT (-1 for type 2)
+  o.debug=0;
   f = finufft2d1(x,y,rand(M,1),+1,tol,n,n,o);   % warms up FFTW
   tic;
   for r=1:reps
-    %o.debug = 2*(r==reps);           % show internal timing for final run
+    o.debug = 2*(r==reps);           % show internal timing for final run
     f = finufft2d1(x,y,c,isign,tol,n,n,o);
   end
   t=toc; fprintf('2d1 finufft\t\t%.3g s   \t(%.3g NUpt/s)\n',t,reps*M/t)

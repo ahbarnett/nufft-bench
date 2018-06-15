@@ -56,9 +56,9 @@ for n = 1:numel(Ms)                        % ....... loop over cases
     semilogx(rel2err(jb),run_times(jb),'c*-','markersize',ms);
   end
   if ~isempty(jm)
-    legcel={legcel{:},'Fessler pre'};
+    legcel={legcel{:},'MIRT pre'};
     semilogx(rel2err(jm),run_times(jm),'bd-','markersize',ms);
-    %legcel={legcel{:},'Fessler pre (init)'};  % very long!
+    %legcel={legcel{:},'MIRT pre (init)'};  % very long! (100x longer)
     %semilogx(rel2err(jm),init_times(jm),'mo:','markersize',ms);
   end
   set(gca,'ysc','log'); axis tight; v=axis; axis([6e-13 1e-1 v(3:4)]);
